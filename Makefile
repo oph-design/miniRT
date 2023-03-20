@@ -1,7 +1,7 @@
 
 NAME		= miniRT
 CC			= cc
-LIBFT		= lib/libft/libft.a
+LIBFT		= libft/libft.a
 MLX42 		= ./MLX42/build/libmlx42.a
 MLXFLAGS	= -lglfw -L "$(HOME)/.brew/opt/glfw/lib"
 RL_VERSION	= readline-8.1.2
@@ -16,7 +16,7 @@ SRC_DIR			= src/
 SRC_FILES		= main
 SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ_DIR			= obj/
-OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
 all:		$(NAME)
 
@@ -44,7 +44,7 @@ $(OBJ_DIR):
 $(LIBFT):
 			@git submodule init libft
 			@git submodule update libft
-			@make -C lib/libft
+			@make -C libft
 
 $(MLX42):
 			@git submodule init MLX42
