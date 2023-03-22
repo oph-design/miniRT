@@ -6,18 +6,25 @@ BREW		= $(shell which brew | cut -f 4 -d '/')
 MLX42 		= ./MLX42/build/libmlx42.a
 MLXFLAGS	= -lglfw -L "$(HOME)/$(BREW)/opt/glfw/lib"
 RL_VERSION	= readline-8.1.2
-INCLUDE		= -I include/
+INCLUDE		= -I libft/ -I MLX42/include/MLX42/ -I include/
 CFLAGS		= -g -Wall -Werror -Wextra
 
 GREEN		= \033[0;32m
 CYAN		= \033[0;36m
 WHITE		= \033[0m
 
+GRAPHICS_DIR	= src/graphics/
+GRAPHICS_SRC	= window
+GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
+
+MAIN_DIR		= src/
+MAIN_SRC		= main
+MAIN			= $(addprefix $(MAIN_DIR), $(addsuffix .c, $(MAIN_SRC)))
+
 SRC_DIR			= src/
-SRC_FILES		= main window
-SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ_DIR			= obj/
-OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+SRC				= $(MAIN) $(GRAPHICS)
+OBJ				= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
 
 all:		$(NAME)
 
@@ -40,7 +47,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 			@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(OBJ_DIR):
-			@mkdir -p obj
+			@mkdir -p $(dir $(OBJ))
 
 $(LIBFT):
 			@git submodule init libft

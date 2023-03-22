@@ -3,7 +3,7 @@
 
 # include "minirt.h"
 
-# define WIDTH 1024
-# define HEIGHT 768
+# define WIDTH 1920
+# define HEIGHT 1080
 
 #endif
