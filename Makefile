@@ -2,8 +2,9 @@
 NAME		= miniRT
 CC			= cc
 LIBFT		= libft/libft.a
+BREW		= $(shell which brew | cut -f 4 -d '/')
 MLX42 		= ./MLX42/build/libmlx42.a
-MLXFLAGS	= -lglfw -L "$(HOME)/.brew/opt/glfw/lib"
+MLXFLAGS	= -lglfw -L "$(HOME)/$(BREW)/opt/glfw/lib"
 RL_VERSION	= readline-8.1.2
 INCLUDE		= -I include/
 CFLAGS		= -g -Wall -Werror -Wextra
@@ -13,7 +14,7 @@ CYAN		= \033[0;36m
 WHITE		= \033[0m
 
 SRC_DIR			= src/
-SRC_FILES		= main
+SRC_FILES		= main window
 SRC				= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ_DIR			= obj/
 OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))

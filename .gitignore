@@ -2,6 +2,8 @@
 *.d
 miniRT
 LeakSanitizer/
+.ccls-cache
+.ccls
 
 # Object files
 *.o

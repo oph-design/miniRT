@@ -2,5 +2,6 @@
 
 int	main(void)
 {
-	return (0);
+	setup_window();
+	return (EXIT_SUCCESS);
 }
