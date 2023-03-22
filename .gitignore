@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 miniRT
+LeakSanitizer/
 
 # Object files
 *.o
