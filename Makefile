@@ -21,7 +21,7 @@ OBJ				= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 all:		$(NAME)
 
 $(NAME):	$(MLX42) $(LIBFT) $(OBJ_DIR) $(OBJ)
-			@$(CC) $(LIBFT) $(MLX42) $(OBJ) $(MLXFLAGS) -o $(NAME)
+			@$(CC) $(LIBFT) $(MLX42) $(LINK_FLAGS) $(OBJ) $(MLXFLAGS) -o $(NAME)
 			@echo "$(GREEN)miniRT compiled!$(WHITE)"
 
 LSANLIB = /LeakSanitizer/liblsan.a
