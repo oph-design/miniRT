@@ -25,7 +25,7 @@ char	**get_file(char	*name)
 
 	fd = open(name, 0);
 	file = get_next_line(fd);
-	while (file[ft_strlen(file) - 1] == '\n')
+	while (file && file[0] && file[ft_strlen(file) - 1] == '\n')
 	{
 		nl = get_next_line(fd);
 		if (nl == NULL)
