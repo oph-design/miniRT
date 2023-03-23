@@ -59,5 +59,6 @@ typedef struct s_map
 char	*stra_iteri(char **arr, char *set);
 size_t	ft_stra_len(char **arr);
 double	ft_strtod(char *str);
+int		is_number(char *str);
 
 #endif

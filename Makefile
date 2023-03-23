@@ -18,7 +18,7 @@ GRAPHICS_SRC	= window
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
-PARSER_SRC		= handle_input
+PARSER_SRC		= handle_input get_map utils
 PARSER			= $(addprefix $(PARSER_DIR), $(addsuffix .c, $(PARSER_SRC)))
 
 MAIN_DIR		= src/

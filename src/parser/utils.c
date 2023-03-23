@@ -54,3 +54,28 @@ double	ft_strtod(char *str)
 	printf("%f\n", c);
 	return (n + c);
 }
+
+int	is_number(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	ft_free_stra(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != NULL)
+		free(str[i++]);
+	free(str);
+	str = NULL;
+}
