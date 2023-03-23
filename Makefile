@@ -17,13 +17,17 @@ GRAPHICS_DIR	= src/graphics/
 GRAPHICS_SRC	= window
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
+PARSER_DIR		= src/parser/
+PARSER_SRC		= handle_input
+PARSER			= $(addprefix $(PARSER_DIR), $(addsuffix .c, $(PARSER_SRC)))
+
 MAIN_DIR		= src/
 MAIN_SRC		= main
 MAIN			= $(addprefix $(MAIN_DIR), $(addsuffix .c, $(MAIN_SRC)))
 
 SRC_DIR			= src/
 OBJ_DIR			= obj/
-SRC				= $(MAIN) $(GRAPHICS)
+SRC				= $(MAIN) $(GRAPHICS) $(PARSER)
 OBJ				= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
 
 all:		$(NAME)
