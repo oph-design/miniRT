@@ -9,7 +9,6 @@ int	check_input(int argc, char **argv)
 	if (argc > 2)
 		return (ft_putendl_fd("miniRT: too many arguments", 2), 1);
 	extension = ft_strrchr(argv[1], '.');
-	ft_printf("%s\n", extension);
 	if (!extension)
 		return (ft_putendl_fd("miniRT: wrong extension", 2), 1);
 	if(ft_strncmp(extension, ".rt", 4))
