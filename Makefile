@@ -13,6 +13,10 @@ GREEN		= \033[0;32m
 CYAN		= \033[0;36m
 WHITE		= \033[0m
 
+MATH_DIR	= src/math/
+MATH_SRC	= vector
+MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
+
 GRAPHICS_DIR	= src/graphics/
 GRAPHICS_SRC	= window
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
@@ -23,7 +27,7 @@ MAIN			= $(addprefix $(MAIN_DIR), $(addsuffix .c, $(MAIN_SRC)))
 
 SRC_DIR			= src/
 OBJ_DIR			= obj/
-SRC				= $(MAIN) $(GRAPHICS)
+SRC				= $(MAIN) $(GRAPHICS) $(MATH)
 OBJ				= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
 
 all:		$(NAME)

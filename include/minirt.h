@@ -3,7 +3,7 @@
 
 # include "libft.h"
 # include "MLX42.h"
-
-void	setup_window(void);
+# include "graphics.h"
+# include "mathematic.h"
 
 #endif
