@@ -1,37 +1,40 @@
 #include "graphics.h"
 
-static void	window_panic(mlx_t *mlx)
+static void	window_panic(t_window *window)
 {
-	mlx_terminate(mlx);
+	mlx_terminate(window->mlx);
+	free(window);
 	exit(EXIT_FAILURE);
 }
 
 static void	input(void *param)
 {
-	mlx_t	*mlx;
+	t_window	*window;
 
-	mlx = param;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+	window = param;
+	if (mlx_is_key_down(window->mlx, MLX_KEY_ESCAPE))
 	{
-		mlx_terminate(mlx);
+		mlx_terminate(window->mlx);
+		free(window);
 		exit(EXIT_SUCCESS);
 	}
 }
 
 void	setup_window(void)
 {
-	mlx_t		*mlx;
-	mlx_image_t	*image;
+	t_window	*window;
 
-	mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
-	if (!mlx)
-		exit(EXIT_FAILURE);
-	image = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!image)
-		window_panic(mlx);
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
-		window_panic(mlx);
-	mlx_loop_hook(mlx, input, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	window = malloc(sizeof(t_window));
+	window->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
+	if (!window->mlx)
+		window_panic(window);
+	window->image = mlx_new_image(window->mlx, WIDTH, HEIGHT);
+	if (!window->image)
+		window_panic(window);
+	if (mlx_image_to_window(window->mlx, window->image, 0, 0) == -1)
+		window_panic(window);
+	mlx_loop_hook(window->mlx, input, window);
+	mlx_loop(window->mlx);
+	mlx_terminate(window->mlx);
+	free(window);
 }
