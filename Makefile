@@ -14,11 +14,11 @@ CYAN		= \033[0;36m
 WHITE		= \033[0m
 
 MATH_DIR	= src/math/
-MATH_SRC	= vector
+MATH_SRC	= vector ray vec_util vec_operations
 MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
 
 GRAPHICS_DIR	= src/graphics/
-GRAPHICS_SRC	= window
+GRAPHICS_SRC	= window draw
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 MAIN_DIR		= src/
