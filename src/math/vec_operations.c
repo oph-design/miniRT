@@ -16,10 +16,10 @@ t_vector	subtract_vec(t_vector vec, t_vector sub)
 	return (vec);
 }
 
-t_vector	*multiply_vec(t_vector *vec, t_vector *m)
+t_vector	multiply_vec(t_vector vec, t_vector m)
 {
-	vec->x *= m->x;
-	vec->y *= m->y;
-	vec->z *= m->z;
+	vec.x *= m.x;
+	vec.y *= m.y;
+	vec.z *= m.z;
 	return (vec);
 }

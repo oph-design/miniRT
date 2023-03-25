@@ -6,6 +6,4 @@
 # include "mathematic.h"
 # include "graphics.h"
 
-t_vector	mult_double_vec(double d, t_vector vec);
-
 #endif

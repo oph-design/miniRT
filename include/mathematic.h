@@ -22,7 +22,11 @@ t_vector		normalize(t_vector	vec);
 
 t_vector		add_to_vec(t_vector vec, t_vector add);
 t_vector		subtract_vec(t_vector vec, t_vector sub);
-t_vector		*multiply_vec(t_vector *vec, t_vector *m);
+t_vector		multiply_vec(t_vector vec, t_vector m);
+
+t_vector		mult_double_vec(double d, t_vector vec);
+t_vector		add_double_vec(double d, t_vector vec);
+t_vector		sub_double_vec(double d, t_vector vec);
 
 t_vector		*new_vec(double x, double y, double z);
 void			print_vec(t_vector vec);

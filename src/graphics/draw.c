@@ -6,17 +6,29 @@ void	draw_pixel(t_window *window, int x, int y, uint32_t color)
 		mlx_put_pixel(window->image, x, y, color);
 }
 
-uint32_t	pixel(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
+uint32_t	color(double r, double g, double b, double a)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	int	ir;
+	int	ig;
+	int	ib;
+	int	ia;
+
+	ir = r * 255.999;
+	ig = g * 255.999;
+	ib = b * 255.999;
+	ia = a * 255.999;
+	return (ir << 24 | ig << 16 | ib << 8 | ia);
 }
 
-t_vector	mult_double_vec(double d, t_vector vec)
+t_ray	*background(t_camera *camera, double x, double y)
 {
-	vec.x *= d;
-	vec.y *= d;
-	vec.z *= d;
-	return (vec);
+	t_vector	dest;
+
+	dest = subtract_vec(add_to_vec(
+				add_to_vec(*camera->orientation, mult_double_vec(
+						x, *camera->horizontal)),
+				mult_double_vec(y, *camera->vertical)), *camera->pos);
+	return (new_ray(*camera->pos, dest));
 }
 
 void	draw(t_window *window)
@@ -25,27 +37,22 @@ void	draw(t_window *window)
 	int			j;
 	double		x;
 	double		y;
-	uint32_t	color;
+	t_ray		*ray;
 
-	i = 0;
+	i = WIDTH - 1;
 	j = 0;
 	ft_bzero(window->image->pixels, WIDTH * HEIGHT * sizeof(int));
-	while (i < WIDTH)
+	while (i > 0)
 	{
 		while (j < HEIGHT)
 		{
 			x = (double)i / (WIDTH - 1);
 			y = (double)j / (HEIGHT - 1);
-			color = pixel(i / 8 % 0xFF, j / 8 % 0xFF, 0x3B, 0xFF);
-			draw_pixel(window, i, j, color);
+			ray = background(window->camera, x, y);
+			draw_pixel(window, i, j, ray_color(ray));
 			j++;
 		}
 		j = 0;
-		i++;
+		i--;
 	}
 }
-// ray = new_ray(*window->camera->pos, 
-// subtract_vec(add_to_vec(add_to_vec(*window->camera->orientation, 
-// mult_double_vec(x, *window->camera->horizontal)), mult_double_vec(y, 
-// *window->camera->vertical)), *window->camera->pos));
-// color = ray_color(ray);
