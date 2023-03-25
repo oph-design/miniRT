@@ -39,10 +39,10 @@ void	draw(t_window *window)
 	double		y;
 	t_ray		*ray;
 
-	i = WIDTH - 1;
+	i = 0;
 	j = 0;
 	ft_bzero(window->image->pixels, WIDTH * HEIGHT * sizeof(int));
-	while (i > 0)
+	while (i < WIDTH)
 	{
 		while (j < HEIGHT)
 		{
@@ -50,9 +50,10 @@ void	draw(t_window *window)
 			y = (double)j / (HEIGHT - 1);
 			ray = background(window->camera, x, y);
 			draw_pixel(window, i, j, ray_color(ray));
+			free(ray);
 			j++;
 		}
 		j = 0;
-		i--;
+		i++;
 	}
 }
