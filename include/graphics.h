@@ -44,6 +44,6 @@ typedef struct s_plane
 void		draw(t_window *window);
 void		draw_pixel(t_window *window, int x, int y, uint32_t color);
 void		setup_window(void);
-uint32_t	pixel(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
+uint32_t	color(double r, double g, double b, double a);
 
 #endif
