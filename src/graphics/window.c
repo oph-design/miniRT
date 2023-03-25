@@ -1,9 +1,19 @@
 #include "minirt.h"
 
+static void	free_window(t_window *window)
+{
+	free(window->camera->horizontal);
+	free(window->camera->vertical);
+	free(window->camera->orientation);
+	free(window->camera->pos);
+	free(window->camera);
+	free(window);
+}
+
 static void	window_panic(t_window *window)
 {
 	mlx_terminate(window->mlx);
-	free(window);
+	free_window(window);
 	exit(EXIT_FAILURE);
 }
 
@@ -16,7 +26,7 @@ static void	input(void *param)
 	{
 		mlx_delete_image(window->mlx, window->image);
 		mlx_terminate(window->mlx);
-		free(window);
+		free_window(window);
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -59,5 +69,5 @@ void	setup_window(void)
 	mlx_loop(window->mlx);
 	mlx_delete_image(window->mlx, window->image);
 	mlx_terminate(window->mlx);
-	free(window);
+	free_window(window);
 }

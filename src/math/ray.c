@@ -24,5 +24,7 @@ uint32_t	ray_color(t_ray	*ray)
 	t = 0.5 * ray->direction->y + 1.0;
 	col = add_to_vec(mult_double_vec(1.0 - t, *co1),
 			mult_double_vec(t, *co2));
+	free(co1);
+	free(co2);
 	return (color(col.x, col.y, col.z, 1.0));
 }
