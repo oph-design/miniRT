@@ -26,7 +26,6 @@ void	draw(t_window *window)
 	double		x;
 	double		y;
 	uint32_t	color;
-	// t_ray		*ray;
 
 	i = 0;
 	j = 0;
@@ -38,8 +37,6 @@ void	draw(t_window *window)
 			x = (double)i / (WIDTH - 1);
 			y = (double)j / (HEIGHT - 1);
 			color = pixel(i / 8 % 0xFF, j / 8 % 0xFF, 0x3B, 0xFF);
-			// ray = new_ray(*window->camera->pos, subtract_vec(add_to_vec(add_to_vec(*window->camera->orientation, mult_double_vec(x, *window->camera->horizontal)), mult_double_vec(y, *window->camera->vertical)), *window->camera->pos));
-			// color = ray_color(ray);
 			draw_pixel(window, i, j, color);
 			j++;
 		}
@@ -47,3 +44,8 @@ void	draw(t_window *window)
 		i++;
 	}
 }
+// ray = new_ray(*window->camera->pos, 
+// subtract_vec(add_to_vec(add_to_vec(*window->camera->orientation, 
+// mult_double_vec(x, *window->camera->horizontal)), mult_double_vec(y, 
+// *window->camera->vertical)), *window->camera->pos));
+// color = ray_color(ray);
