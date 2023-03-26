@@ -3,10 +3,7 @@
 
 # include "libft.h"
 # include "MLX42.h"
-# include <fcntl.h>
-
-void	setup_window(void);
-int		check_input(int argc, char **argv);
-char	**get_file(char	*name);
+# include "mathematic.h"
+# include "graphics.h"
 
 #endif

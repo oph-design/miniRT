@@ -13,8 +13,12 @@ GREEN		= \033[0;32m
 CYAN		= \033[0;36m
 WHITE		= \033[0m
 
+MATH_DIR	= src/math/
+MATH_SRC	= vector ray vec_util vec_operations vec_double_operations
+MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
+
 GRAPHICS_DIR	= src/graphics/
-GRAPHICS_SRC	= window
+GRAPHICS_SRC	= window draw sphere
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
@@ -27,7 +31,7 @@ MAIN			= $(addprefix $(MAIN_DIR), $(addsuffix .c, $(MAIN_SRC)))
 
 SRC_DIR			= src/
 OBJ_DIR			= obj/
-SRC				= $(MAIN) $(GRAPHICS) $(PARSER)
+SRC				= $(MAIN) $(GRAPHICS) $(PARSER)  $(MATH)
 OBJ				= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
 
 all:		$(NAME)
