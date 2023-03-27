@@ -54,3 +54,20 @@ t_vector	*get_vector(char *str, int *exit_code)
 	z = get_ratio(split[2], exit_code);
 	return (new_vec(x, y, z));
 }
+
+void	get_object(t_list *new, char **f, char *s, void *(*get)(char *, int *))
+{
+	char		*check;
+	int			ecode;
+	static int	i = 3;
+
+	check = stra_iteri(f, s, i);
+	while (check != NULL)
+	{
+		ft_lstadd_back(&new, get(check, &ecode));
+		if (ecode)
+			ft_lstdelone(ft_lstlast(new), free);
+		check = stra_iteri(f, s, i);
+	}
+	i++;
+}

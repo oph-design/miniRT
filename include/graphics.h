@@ -11,7 +11,6 @@ typedef struct s_vector	t_vector;
 typedef struct s_ray	t_ray;
 typedef struct s_camera	t_camera;
 
-
 typedef struct s_window
 {
 	mlx_t		*mlx;
