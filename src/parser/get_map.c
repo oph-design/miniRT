@@ -15,8 +15,44 @@ t_map	*get_map(char **file)
 int	set_lighting(char **file, t_map *map)
 {
 	t_lighting	*light;
+
+	exit_code = 0;
+	light = malloc(sizeof(t_lighting));
+	if (!light)
+		return (EXIT_FAILURE);
+	if (get_amlight(file, light))
+		return (EXIT_FAILURE);
+	if (get_lighting(file, light))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	get_lighting(char **file, t_lighting *light)
+{
 	char		*input;
 	char		**args;
+	int			ecode;
+
+	input = stra_iteri(file, "L");
+	if (!input)
+		return (EXIT_FAILURE);
+	args = ft_split(input, ' ');
+	if (ft_stra_len != 4)
+		return (EXIT_FAILURE);
+	set_lighting(get_ratio(input[2], &ecode), get_color(input[3], &ecode),
+		get_vector(input[1], &ecode))
+	if (light->a_ratio < 0.0 || light->a_ratio > 1.0)
+		return (EXIT_FAILURE);
+	input = stra_iteri(file, "L");
+	if (input || ecode)
+		return (EXIT_FAILURE);
+}
+
+int	get_amlight(char **file, t_lighting *light)
+{
+	char		*input;
+	char		**args;
+	int			ecode;
 
 	input = stra_iteri(file, "A");
 	if (!input)
@@ -24,45 +60,11 @@ int	set_lighting(char **file, t_map *map)
 	args = ft_split(input, ' ');
 	if (ft_stra_len != 3)
 		return (EXIT_FAILURE);
-	light = malloc(sizeof(t_lighting));
-	light->a_ratio = normilized(input[0]);
-	light->a_color =
-
-}
-
-double	normilized(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (ft_isdigit(str[i]) || str[i] == '.')
-		i++;
-	if (!ft_digit(str[i]) || str[i + 1])
-		return (2.0);
-	return (ft_strtod(str));
-}
-
-u_int32_t	get_color(char *str)
-{
-	char			**split;
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
-	u_int32_t		res;
-
-	split = ft_split(str, ',');
-	if (ft_stra_len(split) != 3)
-		return (0);
-	if (is_number(str[0]) || is_number(str[1]) || is_number(str[2]))
-		return (0);
-	r = ft_atoi(split[0]);
-	g = ft_atoi(split[1]);
-	b = ft_atoi(split[2]);
-	if (r > 255 || g > 255 || b > 255)
-		return (0);
-	res = r << 16;
-	res += g << 8;
-	res += b;
-	ft_free_stra(split);
-	return (res);
+	set_amlight(get_ratio(input[1], &ecode), get_color(input[2], &ecode))
+	if (light->a_ratio < 0.0 || light->a_ratio > 1.0)
+		return (EXIT_FAILURE);
+	input = stra_iteri(file, "A");
+	if (input || ecode)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

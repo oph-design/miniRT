@@ -31,7 +31,7 @@ MAIN			= $(addprefix $(MAIN_DIR), $(addsuffix .c, $(MAIN_SRC)))
 
 SRC_DIR			= src/
 OBJ_DIR			= obj/
-SRC				= $(MAIN) $(GRAPHICS) $(PARSER)  $(MATH)
+SRC				= $(MAIN) $(GRAPHICS) $(MATH)
 OBJ				= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
 
 all:		$(NAME)

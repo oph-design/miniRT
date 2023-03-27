@@ -2,21 +2,13 @@
 # define GRAPHICS_H
 
 # include "MLX42.h"
+# include "objects.h"
 
 # define WIDTH 1920
 # define HEIGHT 1080
 
 typedef struct s_vector	t_vector;
 typedef struct s_ray	t_ray;
-
-typedef struct s_camera
-{
-	t_vector	*pos;
-	t_vector	*orientation;
-	t_vector	*horizontal;
-	t_vector	*vertical;
-	int			fov;
-}	t_camera;
 
 typedef struct s_window
 {
@@ -27,28 +19,9 @@ typedef struct s_window
 	int			height;
 }	t_window;
 
-typedef struct s_sphere
-{
-	t_vector	*center;
-	double		radius;
-}	t_sphere;
-
-typedef struct s_plane
-{
-	t_vector	*pos;
-	t_vector	*orientation;
-	int			r;
-	int			g;
-	int			b;
-}	t_plane;
-
 void		draw(t_window *window);
 void		draw_pixel(t_window *window, int x, int y, uint32_t color);
 void		setup_window(void);
 uint32_t	color(double r, double g, double b, double a);
-
-double		hit_sphere(t_sphere *sp, t_ray *ray);
-t_sphere	*new_sphere(t_vector *pos, double r);
-void		free_sphere(t_sphere *sp);
 
 #endif

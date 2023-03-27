@@ -2,63 +2,15 @@
 # define PARSER_H
 
 # include "minirt.h"
+# include "objects.h"
 
-typedef enum e_type
-{
-	sphere,
-	plain,
-	zylinder
-}			t_type;
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-	double	z;
-}			t_vector;
-
-typedef struct s_lighting
-{
-	double		a_ratio;
-	u_int32_t	a_color;
-	double		l_ratio;
-	u_int32_t	l_color;
-	int			x;
-	int			y;
-	int			z;
-}				t_lighting;
-
-typedef struct s_camera
-{
-	unsigned int	range;
-	t_vector		*vector;
-	int				x;
-	int				y;
-	int				z;
-}					t_camera;
-
-typedef struct s_object
-{
-	t_type			type;
-	t_vector		*vector;
-	unsigned int	color;
-	double			diameter;
-	double			height;
-	int				x;
-	int				y;
-	int				z;
-}					t_object;
-
-typedef struct s_map
-{
-	t_lighting	*lighting;
-	t_camera	*camera;
-	t_object	*objects;
-}				t_map;
-
-char	*stra_iteri(char **arr, char *set);
-size_t	ft_stra_len(char **arr);
-double	ft_strtod(char *str);
-int		is_number(char *str);
+char		*stra_iteri(char **arr, char *set);
+size_t		ft_stra_len(char **arr);
+double		ft_strtod(char *str);
+int			is_number(char *str);
+void		set_light(t_lighting *l, double ratio, u_int32_t color, t_vector *c);
+void		set_amblight(t_lighting *light, double ratio, u_int32_t color);
+t_vector	*get_vector(char *src, int *exit_code);
+u_int32_t	get_color(char *str, int *exit_code);
 
 #endif
