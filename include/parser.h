@@ -2,10 +2,12 @@
 # define PARSER_H
 
 # include "minirt.h"
+# include <fcntl.h>
 # include "objects.h"
 
 char		*stra_iteri(char **arr, char *set);
 size_t		ft_stra_len(char **arr);
+void		ft_free_stra(char **str);
 double		ft_strtod(char *str);
 int			is_number(char *str);
 void		set_light(t_lighting *l, double ratio, u_int32_t color, t_vector *c);

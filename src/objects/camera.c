@@ -1,3 +1,5 @@
+#include "objects.h"
+
 t_camera	*new_camera(t_vector *pos)
 {
 	double		viewport_height;

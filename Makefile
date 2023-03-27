@@ -14,16 +14,20 @@ CYAN		= \033[0;36m
 WHITE		= \033[0m
 
 MATH_DIR	= src/math/
-MATH_SRC	= vector ray vec_util vec_operations vec_double_operations
+MATH_SRC	= ray vec_util vec_operations vec_double_operations
 MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
 
 GRAPHICS_DIR	= src/graphics/
-GRAPHICS_SRC	= window draw sphere
+GRAPHICS_SRC	= window draw
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
-PARSER_SRC		= handle_input get_map utils
+PARSER_SRC		= handle_input get_map utils getter
 PARSER			= $(addprefix $(PARSER_DIR), $(addsuffix .c, $(PARSER_SRC)))
+
+OBJECTS_DIR		= src/objects/
+OBJECTS_SRC		= camera lighting sphere vector
+OBJECTS			= $(addprefix $(OBJECTS_DIR), $(addsuffix .c, $(OBJECTS_SRC)))
 
 MAIN_DIR		= src/
 MAIN_SRC		= main
@@ -31,7 +35,7 @@ MAIN			= $(addprefix $(MAIN_DIR), $(addsuffix .c, $(MAIN_SRC)))
 
 SRC_DIR			= src/
 OBJ_DIR			= obj/
-SRC				= $(MAIN) $(GRAPHICS) $(MATH)
+SRC				= $(MAIN) $(GRAPHICS) $(MATH) $(PARSER) $(OBJECTS)
 OBJ				= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
 
 all:		$(NAME)

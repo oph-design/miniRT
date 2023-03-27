@@ -1,11 +1,12 @@
 #ifndef MATHEMATIC_H
 # define MATHEMATIC_H
 
-# include <math.h>
 # include "objects.h"
+# include <math.h>
 # include "MLX42.h"
 
 typedef struct s_sphere	t_sphere;
+typedef struct s_vector	t_vector;
 
 typedef struct s_ray
 {

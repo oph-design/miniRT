@@ -1,3 +1,5 @@
+#include "parser.h"
+
 double	get_ratio(char *str, int *exit_code)
 {
 	size_t	i;
@@ -5,7 +7,7 @@ double	get_ratio(char *str, int *exit_code)
 	i = 0;
 	while (ft_isdigit(str[i]) || str[i] == '.')
 		i++;
-	if (!ft_digit(str[i]) || str[i + 1])
+	if (!ft_isdigit(str[i]) || str[i + 1])
 		*exit_code = 1;
 	return (ft_strtod(str));
 }
@@ -21,7 +23,7 @@ u_int32_t	get_color(char *str, int *exit_code)
 	split = ft_split(str, ',');
 	if (ft_stra_len(split) != 3)
 		*exit_code = 1;
-	if (is_number(str[0]) || is_number(str[1]) || is_number(str[2]))
+	if (is_number(split[0]) || is_number(split[1]) || is_number(split[2]))
 		*exit_code = 1;
 	r = ft_atoi(split[0]);
 	g = ft_atoi(split[1]);
@@ -36,7 +38,7 @@ u_int32_t	get_color(char *str, int *exit_code)
 	return (res);
 }
 
-t_vector	*get_vector(char *src, int *exit_code)
+t_vector	*get_vector(char *str, int *exit_code)
 {
 	char	**split;
 	double	x;

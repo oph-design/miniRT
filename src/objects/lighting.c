@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "objects.h"
 
 void	set_amblight(t_lighting *light, double ratio, u_int32_t color)
 {

@@ -11,7 +11,7 @@ char	*stra_iteri(char **arr, char *set)
 	{
 		while (arr[i][j] == 32 || (arr[i][j] > 9 && arr[i][j] < 13))
 			j++;
-		if (!strncmp(arr[i] + j, set, ft_strlen(set) + 1))
+		if (!ft_strncmp(arr[i] + j, set, ft_strlen(set) + 1))
 			return (arr[i]);
 		j = 0;
 		i++;
@@ -51,7 +51,6 @@ double	ft_strtod(char *str)
 		c = c * (0.1) + ((str[i] - '0') * 0.1);
 		i--;
 	}
-	printf("%f\n", c);
 	return (n + c);
 }
 
@@ -62,7 +61,7 @@ int	is_number(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str))
+		if (!ft_isdigit(str[i]))
 			return (1);
 		i++;
 	}
