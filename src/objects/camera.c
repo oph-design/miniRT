@@ -18,3 +18,14 @@ t_camera	*new_camera(t_vector *pos)
 			0.0 - (viewport_height / 2), 0.0 - focal_length);
 	return (new);
 }
+
+t_camera	*new_cam(t_vector *vec, t_vector *pos, int fov)
+{
+	t_camera	*new;
+
+	new = malloc(sizeof(t_camera));
+	new->orientation = vec;
+	new->pos = pos;
+	new->fov = fov;
+	return (new);
+}

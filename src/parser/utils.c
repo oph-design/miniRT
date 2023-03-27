@@ -11,7 +11,7 @@ char	*stra_iteri(char **arr, char *set)
 	{
 		while (arr[i][j] == 32 || (arr[i][j] > 9 && arr[i][j] < 13))
 			j++;
-		if (!ft_strncmp(arr[i] + j, set, ft_strlen(set) + 1))
+		if (!ft_strncmp(arr[i] + j, set, ft_strlen(set)))
 			return (arr[i]);
 		j = 0;
 		i++;

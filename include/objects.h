@@ -58,6 +58,7 @@ t_sphere	*new_sphere(t_vector *pos, double r);
 void		free_sphere(t_sphere *sp);
 t_vector	*new_vec(double x, double y, double z);
 double		get_ratio(char *str, int *exit_code);
+t_camera	*new_cam(t_vector *vec, t_vector *pos, int fov);
 
 
 #endif
