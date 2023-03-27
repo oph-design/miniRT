@@ -45,9 +45,9 @@ typedef struct s_plane
 void		draw(t_window *window);
 void		draw_pixel(t_window *window, int x, int y, uint32_t color);
 void		setup_window(void);
-uint32_t	color(double r, double g, double b, double a);
+uint32_t	color(int r, int g, int b, int a);
 
-double		hit_sphere(t_sphere *sp, t_ray *ray);
+int			hit_sphere(t_sphere *sp, t_ray *ray);
 t_sphere	*new_sphere(t_vector *pos, double r);
 void		free_sphere(t_sphere *sp);
 

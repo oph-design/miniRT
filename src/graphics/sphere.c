@@ -1,7 +1,6 @@
 #include "minirt.h"
-#include <stdio.h>
 
-double	hit_sphere(t_sphere *sp, t_ray *ray)
+int	hit_sphere(t_sphere *sp, t_ray *ray)
 {
 	double		a;
 	double		b;
@@ -10,15 +9,21 @@ double	hit_sphere(t_sphere *sp, t_ray *ray)
 	t_vector	p;
 
 	p = subtract_vec(*ray->origin, *sp->center);
-	a = dot(*ray->direction, *ray->direction);
-	b = 2.0 * dot(p, *ray->direction);
-	c = dot(p, p) - (sp->radius * sp->radius);
-	disc = (b * b) - (4 * a * c);
-	if (disc > 0)
-		return (-1.0);
+	a = vec_length_squared(p);
+	b = 2 * p.x * (ray->origin->x - sp->center->x)
+		+ 2 * p.y *(ray->origin->y - sp->center->y)
+		+ 2 * p.z *(ray->origin->z - sp->center->z);
+	c = vec_length_squared(*sp->center) + vec_length_squared(*ray->origin)
+		+ -2 * (sp->center->x * ray->origin->x + sp->center->y * ray->origin->y
+			+ sp->center->z * ray->origin->z)
+		- (sp->radius * sp->radius);
+	disc = b * 2 - 4 * a * c;
+	if (disc < 0)
+		return (0);
 	else
-		return (((-1 * b) - sqrt(disc)) / (2.0 * a));
+		return (1);
 }
+// disc = -b - sqrt(b * b - 4 * a * c) / (2 * a);
 
 t_sphere	*new_sphere(t_vector *pos, double r)
 {
