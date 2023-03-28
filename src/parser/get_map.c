@@ -1,5 +1,4 @@
 #include "parser.h"
-#include <stdio.h>
 
 int	set_lighting(char **file, t_map *map);
 int	get_lighting(char **file, t_lighting *light);
@@ -108,7 +107,7 @@ int	get_obj_arr(char **file, t_map *map)
 	prev = size;
 	objects = join_objs(objects, get_objects(file, &size, "pl", parse_plane), prev, size);
 	prev = size;
-	objects = join_objs(objects, get_objects(file, &size, "zy", parse_zylinder), prev, size);
+	objects = join_objs(objects, get_objects(file, &size, "cy", parse_cylinder), prev, size);
 	map->objects = objects;
 	map->obj_count = size;
 	return (EXIT_SUCCESS);

@@ -1,6 +1,6 @@
 #include "objects.h"
 
-t_object	new_sphere(t_vector *pos, double r, u_int32_t color)
+t_object	new_sphere(t_vector *pos, double r, t_vector *color)
 {
 	t_object	new;
 
@@ -13,8 +13,8 @@ t_object	new_sphere(t_vector *pos, double r, u_int32_t color)
 	return (new);
 }
 
-t_object	new_zylinder(t_vector *pos, t_vector *orientation,
-	double *size, u_int32_t color)
+t_object	new_cylinder(t_vector *pos, t_vector *orientation,
+	double *size, t_vector *color)
 {
 	t_object	new;
 
@@ -27,7 +27,7 @@ t_object	new_zylinder(t_vector *pos, t_vector *orientation,
 	return (new);
 }
 
-t_object	new_plane(t_vector *pos, t_vector *orientation, u_int32_t color)
+t_object	new_plane(t_vector *pos, t_vector *orientation, t_vector *color)
 {
 	t_object	new;
 

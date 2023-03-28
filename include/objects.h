@@ -20,9 +20,9 @@ typedef struct s_vector
 typedef struct s_lighting
 {
 	double		a_ratio;
-	u_int32_t	a_color;
+	t_vector	*a_color;
 	double		l_ratio;
-	u_int32_t	l_color;
+	t_vector	*l_color;
 	t_vector	*cords;
 }				t_lighting;
 
@@ -42,7 +42,7 @@ typedef struct s_object
 	t_vector	*orientation;
 	double		radius;
 	double		height;
-	u_int32_t	color;
+	t_vector	*color;
 }	t_object;
 
 typedef struct s_map
@@ -56,12 +56,12 @@ typedef struct s_map
 void		free_object_arr(t_object *obj, size_t size);
 t_camera	*new_camera(t_vector *pos);
 t_vector	*new_vec(double x, double y, double z);;
-t_object	new_sphere(t_vector *pos, double r, u_int32_t color);
+t_object	new_sphere(t_vector *pos, double r, t_vector *color);
 t_camera	*new_cam(t_vector *vec, t_vector *pos, int fov);
-t_object	new_plane(t_vector *pos, t_vector *orientation, u_int32_t color);
-t_object	new_zylinder(t_vector *pos, t_vector *orientation,
-	double *size, u_int32_t color);
-void		set_amblight(t_lighting *light, double ratio, u_int32_t color);
-void		set_light(t_lighting *light, double ratio, u_int32_t color, t_vector *c);
+t_object	new_plane(t_vector *pos, t_vector *orientation, t_vector *color);
+t_object	new_cylinder(t_vector *pos, t_vector *orientation,
+	double *size, t_vector *color);
+void		set_amblight(t_lighting *light, double ratio, t_vector *color);
+void		set_light(t_lighting *light, double ratio, t_vector *color, t_vector *c);
 
 #endif

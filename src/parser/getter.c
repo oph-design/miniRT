@@ -1,7 +1,6 @@
 #include "parser.h"
-#include <stdio.h>
 
-size_t	get_size(char **file, char *set);
+size_t		get_size(char **file, char *set);
 t_object	*realloc_arr(size_t size, t_object *src);
 
 double	get_ratio(char *str, int *exit_code)
@@ -17,30 +16,25 @@ double	get_ratio(char *str, int *exit_code)
 	return (ft_strtod(str));
 }
 
-u_int32_t	get_color(char *str, int *exit_code)
+t_vector	*get_color(char *str, int *exit_code)
 {
 	char			**split;
 	unsigned int	r;
 	unsigned int	g;
 	unsigned int	b;
-	u_int32_t		res;
 
 	split = ft_split(str, ',');
 	if (ft_stra_len(split) != 3)
-		return (*exit_code = 1, 0);
+		return (*exit_code = 1, NULL);
 	if (is_number(split[0]) || is_number(split[1]) || is_number(split[2]))
 		*exit_code = 1;
 	r = ft_atoi(split[0]);
 	g = ft_atoi(split[1]);
 	b = ft_atoi(split[2]);
 	if (r > 255 || g > 255 || b > 255)
-		return (*exit_code = 1, 0);
-	res = r << 24;
-	res += g << 16;
-	res += b << 8;
-	res += 255;
+		return (*exit_code = 1, NULL);
 	ft_free_stra(split);
-	return (res);
+	return (new_vec((double)r, (double)g, (double)b));
 }
 
 t_vector	*get_vector(char *str, int *exit_code)
@@ -65,7 +59,7 @@ t_object	*get_objects(char **file, size_t *size, char *set,
 	char			*check;
 	t_object		*res;
 	size_t			i;
-	static size_t	id = 3;
+	static int		id = 3;
 	int				ecode;
 
 	i = 0;
