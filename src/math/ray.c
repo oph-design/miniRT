@@ -22,7 +22,7 @@ t_ray	*get_ray(t_camera *camera, double x, double y)
 	ny = mult_double_vec(y, *camera->vertical);
 	dest = subtract_vec(add_to_vec(add_to_vec(*camera->orientation, nx), ny),
 			*camera->pos);
-	return (new_ray(*camera->pos, new_vec_stack(x, y, 0)));
+	return (new_ray(*camera->pos, dest));
 }
 
 t_vector	at(t_ray *ray, double t)
@@ -39,9 +39,7 @@ uint32_t	ray_color(t_ray	*ray, t_sphere *sp)
 	double		t;
 
 	if (hit_sphere(sp, ray))
-	{
-		return (color(255, 0, 0, 255));
-	}
+		return (color(255, 150, 150, 255));
 	t = 0.5 * ray->direction->y + 1.0;
 	col = add_to_vec(mult_double_vec(1.0 - t, new_vec_stack(255, 255, 255)),
 			mult_double_vec(t, new_vec_stack(127, 200, 255)));
