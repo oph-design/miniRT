@@ -40,7 +40,6 @@ t_object	new_plane(t_vector *pos, t_vector *orientation, t_vector *color)
 	return (new);
 }
 
-
 void	free_object_arr(t_object *obj, size_t size)
 {
 	size_t	i;

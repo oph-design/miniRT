@@ -10,5 +10,5 @@ void	set_light(t_lighting *light, double ratio, t_vector *color, t_vector *c)
 {
 	light->l_ratio = ratio;
 	light->l_color = color;
-	light->cords = c;
+	light->pos = c;
 }

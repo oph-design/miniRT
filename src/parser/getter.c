@@ -1,7 +1,6 @@
 #include "parser.h"
 
-size_t		get_size(char **file, char *set);
-t_object	*realloc_arr(size_t size, t_object *src);
+static t_object	*realloc_arr(size_t size, t_object *src);
 
 double	get_ratio(char *str, int *exit_code)
 {
@@ -50,7 +49,7 @@ t_vector	*get_vector(char *str, int *exit_code)
 	x = get_ratio(split[0], exit_code);
 	y = get_ratio(split[1], exit_code);
 	z = get_ratio(split[2], exit_code);
-	return (new_vec(x, y, z));
+	return (ft_free_stra(split), new_vec(x, y, z));
 }
 
 t_object	*get_objects(char **file, size_t *size, char *set,
@@ -83,24 +82,18 @@ t_object	*get_objects(char **file, size_t *size, char *set,
 	return (realloc_arr(i, res));
 }
 
-t_object	*join_objs(t_object *dst, t_object *src, size_t prev, size_t len)
+static t_object	*realloc_arr(size_t size, t_object *src)
 {
 	size_t		i;
 	t_object	*res;
 
 	i = 0;
-	res = malloc(sizeof(t_object) * len);
-	while (i < prev)
+	res = malloc(size * sizeof(t_object));
+	while (i < size)
 	{
-		res[i] = dst[i];
+		res[i] = src[i];
 		i++;
 	}
-	while (i < len)
-	{
-		res[i] = src[i - prev];
-		i++;
-	}
-	free(dst);
 	free(src);
 	return (res);
 }

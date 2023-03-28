@@ -1,24 +1,7 @@
 #include "parser.h"
 
-int	set_lighting(char **file, t_map *map);
-int	get_lighting(char **file, t_lighting *light);
-int	get_amlight(char **file, t_lighting *light);
-int	set_camera(char **file, t_map *map);
-int	get_obj_arr(char **file, t_map *map);
-
-t_map	*get_map(char **file)
-{
-	t_map	*map;
-
-	map = malloc(sizeof(map));
-	if (set_lighting(file, map))
-		return (free(map), NULL);
-	if (set_camera(file, map))
-		return (free(map), NULL);
-	if (get_obj_arr(file, map))
-		return (free(map), NULL);
-	return (map);
-}
+static int	get_lighting(char **file, t_lighting *light);
+static int	get_amlight(char **file, t_lighting *light);
 
 int	set_lighting(char **file, t_map *map)
 {
@@ -35,7 +18,7 @@ int	set_lighting(char **file, t_map *map)
 	return (EXIT_SUCCESS);
 }
 
-int	get_lighting(char **file, t_lighting *light)
+static int	get_lighting(char **file, t_lighting *light)
 {
 	char		*input;
 	char		**args;
@@ -46,17 +29,17 @@ int	get_lighting(char **file, t_lighting *light)
 		return (EXIT_FAILURE);
 	args = ft_split(input, '\t');
 	if (ft_stra_len(args) != 4)
-		return (EXIT_FAILURE);
+		return (ft_free_stra(args), EXIT_FAILURE);
 	set_light(light, get_ratio(args[2], &ecode), get_color(args[3], &ecode),
 		get_vector(args[1], &ecode));
 	if (light->a_ratio < 0.0 || light->a_ratio > 1.0)
-		return (EXIT_FAILURE);
+		return (ft_free_stra(args), EXIT_FAILURE);
 	if (ecode)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		return (ft_free_stra(args), EXIT_FAILURE);
+	return (ft_free_stra(args), EXIT_SUCCESS);
 }
 
-int	get_amlight(char **file, t_lighting *light)
+static int	get_amlight(char **file, t_lighting *light)
 {
 	char		*input;
 	char		**args;
@@ -67,13 +50,13 @@ int	get_amlight(char **file, t_lighting *light)
 		return (EXIT_FAILURE);
 	args = ft_split(input, '\t');
 	if (ft_stra_len(args) != 3)
-		return (EXIT_FAILURE);
+		return (ft_free_stra(args), EXIT_FAILURE);
 	set_amblight(light, get_ratio(args[1], &ecode), get_color(args[2], &ecode));
 	if (light->a_ratio < 0.0 || light->a_ratio > 1.0)
-		return (EXIT_FAILURE);
+		return (ft_free_stra(args), EXIT_FAILURE);
 	if (ecode)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		return (ft_free_stra(args), EXIT_FAILURE);
+	return (ft_free_stra(args), EXIT_SUCCESS);
 }
 
 int	set_camera(char **file, t_map *map)
@@ -88,12 +71,12 @@ int	set_camera(char **file, t_map *map)
 		return (EXIT_FAILURE);
 	args = ft_split(input, '\t');
 	if (ft_stra_len(args) != 4)
-		return (EXIT_FAILURE);
+		return (ft_free_stra(args), EXIT_FAILURE);
 	map->camera = new_cam(get_vector(args[2], &ecode),
 			get_vector(args[1], &ecode), ft_atoi(args[3]));
 	if (ecode)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		return (ft_free_stra(args), EXIT_FAILURE);
+	return (ft_free_stra(args), EXIT_SUCCESS);
 }
 
 int	get_obj_arr(char **file, t_map *map)
@@ -105,12 +88,12 @@ int	get_obj_arr(char **file, t_map *map)
 	size = 0;
 	objects = get_objects(file, &size, "sp", parse_sphere);
 	prev = size;
-	objects = join_objs(objects, get_objects(file, &size, "pl", parse_plane), prev, size);
+	objects = join_objs(objects,
+			get_objects(file, &size, "pl", parse_plane), prev, size);
 	prev = size;
-	objects = join_objs(objects, get_objects(file, &size, "cy", parse_cylinder), prev, size);
+	objects = join_objs(objects,
+			get_objects(file, &size, "cy", parse_cylinder), prev, size);
 	map->objects = objects;
 	map->obj_count = size;
 	return (EXIT_SUCCESS);
 }
-
-

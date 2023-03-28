@@ -1,21 +1,5 @@
 #include "parser.h"
 
-t_object	*realloc_arr(size_t size, t_object *src)
-{
-	size_t		i;
-	t_object	*res;
-
-	i = 0;
-	res = malloc(size * sizeof(t_object));
-	while (i < size)
-	{
-		res[i] = src[i];
-		i++;
-	}
-	free(src);
-	return (res);
-}
-
 size_t	get_size(char **file, char *set)
 {
 	size_t		i;
@@ -72,4 +56,26 @@ t_object	parse_plane(char *str, int *ecode)
 	plane = new_plane(get_vector(args[1], ecode),
 			get_vector(args[2], ecode), get_color(args[3], ecode));
 	return (plane);
+}
+
+t_object	*join_objs(t_object *dst, t_object *src, size_t prev, size_t len)
+{
+	size_t		i;
+	t_object	*res;
+
+	i = 0;
+	res = malloc(sizeof(t_object) * len);
+	while (i < prev)
+	{
+		res[i] = dst[i];
+		i++;
+	}
+	while (i < len)
+	{
+		res[i] = src[i - prev];
+		i++;
+	}
+	free(dst);
+	free(src);
+	return (res);
 }

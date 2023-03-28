@@ -23,7 +23,7 @@ typedef struct s_lighting
 	t_vector	*a_color;
 	double		l_ratio;
 	t_vector	*l_color;
-	t_vector	*cords;
+	t_vector	*pos;
 }				t_lighting;
 
 typedef struct s_camera
@@ -60,8 +60,9 @@ t_object	new_sphere(t_vector *pos, double r, t_vector *color);
 t_camera	*new_cam(t_vector *vec, t_vector *pos, int fov);
 t_object	new_plane(t_vector *pos, t_vector *orientation, t_vector *color);
 t_object	new_cylinder(t_vector *pos, t_vector *orientation,
-	double *size, t_vector *color);
+				double *size, t_vector *color);
 void		set_amblight(t_lighting *light, double ratio, t_vector *color);
-void		set_light(t_lighting *light, double ratio, t_vector *color, t_vector *c);
+void		set_light(t_lighting *light, double ratio,	t_vector *color,
+				t_vector *cords);
 
 #endif
