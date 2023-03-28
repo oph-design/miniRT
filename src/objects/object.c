@@ -40,6 +40,21 @@ t_object	new_plane(t_vector *pos, t_vector *orientation, t_vector *color)
 	return (new);
 }
 
+// exits just to not break the existing graphic code
+t_object	*new_sphere_alloc(t_vector *pos, double r, t_vector *color)
+{
+	t_object	*new;
+
+	new = malloc(sizeof(t_object));
+	new->type = sphere;
+	new->pos = pos;
+	new->radius = r;
+	new->height = 0;
+	new->orientation = NULL;
+	new->color = color;
+	return (new);
+}
+
 void	free_object_arr(t_object *obj, size_t size)
 {
 	size_t	i;
@@ -49,6 +64,7 @@ void	free_object_arr(t_object *obj, size_t size)
 	{
 		free(obj[i].pos);
 		free(obj[i].orientation);
+		free(obj[i]. color);
 		i++;
 	}
 	free(obj);

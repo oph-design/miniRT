@@ -64,5 +64,6 @@ t_object	new_cylinder(t_vector *pos, t_vector *orientation,
 void		set_amblight(t_lighting *light, double ratio, t_vector *color);
 void		set_light(t_lighting *light, double ratio,	t_vector *color,
 				t_vector *cords);
+t_object	*new_sphere_alloc(t_vector *pos, double r, t_vector *color);
 
 #endif

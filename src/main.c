@@ -11,6 +11,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	file = get_file(argv[1]);
 	map = get_map(file);
-	//setup_window();
+	free_map(map);
+	setup_window();
 	return (EXIT_SUCCESS);
 }

@@ -58,11 +58,11 @@ void	draw(t_window *window)
 	int			j;
 	double		x;
 	double		y;
-	t_object	sp;
+	t_object	*sp;
 
 	i = 0;
 	j = 0;
-	sp = new_sphere(new_vec(0.0, 0.0, -1.0), 0.5, 0);
+	sp = new_sphere_alloc(new_vec(0.0, 0.0, -1.0), 0.5, NULL);
 	ft_bzero(window->image->pixels, WIDTH * HEIGHT * sizeof(int));
 	while (i < WIDTH)
 	{
@@ -71,11 +71,11 @@ void	draw(t_window *window)
 			x = (double)i / (WIDTH - 1);
 			y = (double)j / (HEIGHT - 1);
 			draw_pixel(window, i, j,
-				ray_color(ray_cast(window->camera, x, y), &sp));
+				ray_color(ray_cast(window->camera, x, y), sp));
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	free_object_arr(&sp, 1);
+	free_object_arr(sp, 1);
 }
