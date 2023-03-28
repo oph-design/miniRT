@@ -33,7 +33,7 @@ t_ray	*ray_cast(t_camera *camera, double x, double y)
 	return (new_ray(*camera->pos, dest));
 }
 
-double	hit_sphere(t_sphere *sp, t_ray *ray)
+double	hit_sphere(t_object *sp, t_ray *ray)
 {
 	double		a;
 	double		b;
@@ -41,7 +41,7 @@ double	hit_sphere(t_sphere *sp, t_ray *ray)
 	double		disc;
 	t_vector	p;
 
-	p = subtract_vec(*ray->origin, *sp->center);
+	p = subtract_vec(*ray->origin, *sp->pos);
 	a = dot(*ray->direction, *ray->direction);
 	b = 2.0 * dot(p, *ray->direction);
 	c = dot(p, p) - (sp->radius * sp->radius);
@@ -58,7 +58,7 @@ void	draw(t_window *window)
 	int			j;
 	double		x;
 	double		y;
-	t_sphere	*sp;
+	t_object	sp;
 
 	i = 0;
 	j = 0;
@@ -71,11 +71,11 @@ void	draw(t_window *window)
 			x = (double)i / (WIDTH - 1);
 			y = (double)j / (HEIGHT - 1);
 			draw_pixel(window, i, j,
-				ray_color(ray_cast(window->camera, x, y), sp));
+				ray_color(ray_cast(window->camera, x, y), &sp));
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	free_sphere(sp);
+	free_object(&sp);
 }

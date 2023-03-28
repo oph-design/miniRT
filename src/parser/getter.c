@@ -1,6 +1,9 @@
 #include "parser.h"
 #include <stdio.h>
 
+size_t	get_size(char **file, char *set);
+t_object	*realloc_arr(size_t size, t_object *src);
+
 double	get_ratio(char *str, int *exit_code)
 {
 	size_t	i;
@@ -56,63 +59,29 @@ t_vector	*get_vector(char *str, int *exit_code)
 	return (new_vec(x, y, z));
 }
 
-void	get_sphere(t_list **new, char **file)
+t_object	*get_sphere(char **file, size_t *size)
 {
 	char		*check;
+	t_object	*res;
+	size_t		i;
 	int			ecode;
 
+	i = 0;
 	ecode = 0;
+	res = malloc(sizeof(t_object) * get_size(file, "sp"));
 	check = stra_iteri(file, "sp", 2);
 	while (check != NULL)
 	{
-		ft_lstadd_back(new, ft_lstnew(parse_sphere(check, &ecode)));
+		res[i] = parse_sphere(check, &ecode);
 		if (ecode)
-			ft_lstdelone(ft_lstlast(*new), free);
+		{
+			free(res[i].orientation);
+			free(res[i].pos);
+		}
+		else
+			i++;
 		check = stra_iteri(file, "sp", 2);
 	}
-}
-
-// void	get_plane(t_list *new, char **file)
-// {
-// 	char	*check;
-// 	int		ecode;
-
-// 	check = stra_iteri(file, "pl", 3);
-// 	while (check != NULL)
-// 	{
-// 		ft_lstadd_back(&new, get(check, &ecode));
-// 		if (ecode)
-// 			ft_lstdelone(ft_lstlast(new), free_sphere);
-// 		check = stra_iteri(file, "pl", 3);
-// 	}
-// 	i++;
-// }
-
-// void	get_zylinder(t_list *new, char **file)
-// {
-// 	char	*check;
-// 	int		ecode;
-
-// 	check = stra_iteri(file, "zy", 4);
-// 	while (check != NULL)
-// 	{
-// 		ft_lstadd_back(&new, get(check, &ecode));
-// 		if (ecode)
-// 			ft_lstdelone(ft_lstlast(new), free_sphere);
-// 		check = stra_iteri(file, "zy", 4);
-// 	}
-// 	i++;
-// }
-
-t_sphere	*parse_sphere(char *str, int *ecode)
-{
-	char		**args;
-	t_sphere	*sphere;
-
-	args = ft_split(str, '\t');
-	if (ft_stra_len(args) != 4)
-		return (*ecode = 1, new_sphere(NULL, 0, 0));
-	sphere = new_sphere(get_vector(args[1], ecode),
-			get_ratio(args[2], ecode), get_color(args[3], ecode));
-	return (sphere);
+	*size += i;
+	return (realloc_arr(i, res));
 }

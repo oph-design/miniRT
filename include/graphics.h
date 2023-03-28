@@ -24,6 +24,6 @@ void		draw(t_window *window);
 void		draw_pixel(t_window *window, int x, int y, uint32_t color);
 void		setup_window(void);
 uint32_t	color(double r, double g, double b, double a);
-double		hit_sphere(t_sphere *sp, t_ray *ray);
+double		hit_sphere(t_object *sp, t_ray *ray);
 
 #endif

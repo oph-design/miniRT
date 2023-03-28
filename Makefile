@@ -22,11 +22,11 @@ GRAPHICS_SRC	= window draw
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
-PARSER_SRC		= handle_input get_map utils getter
+PARSER_SRC		= handle_input get_map parse_utils getter get_utils
 PARSER			= $(addprefix $(PARSER_DIR), $(addsuffix .c, $(PARSER_SRC)))
 
 OBJECTS_DIR		= src/objects/
-OBJECTS_SRC		= camera lighting sphere vector
+OBJECTS_SRC		= camera lighting object vector
 OBJECTS			= $(addprefix $(OBJECTS_DIR), $(addsuffix .c, $(OBJECTS_SRC)))
 
 MAIN_DIR		= src/

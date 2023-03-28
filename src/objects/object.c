@@ -12,3 +12,10 @@ t_object	new_sphere(t_vector *pos, double r, u_int32_t color)
 	new.color = color;
 	return (new);
 }
+
+void	free_object(t_object *obj)
+{
+	free(obj->pos);
+	free(obj->orientation);
+	free(obj);
+}

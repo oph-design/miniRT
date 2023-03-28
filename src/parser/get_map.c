@@ -99,16 +99,14 @@ int	set_camera(char **file, t_map *map)
 
 int	get_objects(char **file, t_map *map)
 {
-	t_list	*new;
-	t_list	*del;
+	t_object	*spheres;
+	size_t		size;
 
-	new = ft_lstnew(NULL);
-	get_sphere(&new, file);
+	size = 0;
+	spheres = get_sphere(file, &size);
 	// get_plane(new, file);
 	// get_zylinder(new, file);
-	del = new;
-	new = new->next;
-	ft_lstdelone(del, free);
-	map->objects = new;
+	map->objects = spheres;
+	map->obj_count = size;
 	return (EXIT_SUCCESS);
 }
