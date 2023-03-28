@@ -5,7 +5,7 @@ int	set_lighting(char **file, t_map *map);
 int	get_lighting(char **file, t_lighting *light);
 int	get_amlight(char **file, t_lighting *light);
 int	set_camera(char **file, t_map *map);
-int	get_objects(char **file, t_map *map);
+int	get_obj_arr(char **file, t_map *map);
 
 t_map	*get_map(char **file)
 {
@@ -16,7 +16,7 @@ t_map	*get_map(char **file)
 		return (free(map), NULL);
 	if (set_camera(file, map))
 		return (free(map), NULL);
-	if (get_objects(file, map))
+	if (get_obj_arr(file, map))
 		return (free(map), NULL);
 	return (map);
 }
@@ -97,16 +97,21 @@ int	set_camera(char **file, t_map *map)
 	return (EXIT_SUCCESS);
 }
 
-int	get_objects(char **file, t_map *map)
+int	get_obj_arr(char **file, t_map *map)
 {
-	t_object	*spheres;
+	t_object	*objects;
 	size_t		size;
+	size_t		prev;
 
 	size = 0;
-	spheres = get_sphere(file, &size);
-	// get_plane(new, file);
-	// get_zylinder(new, file);
-	map->objects = spheres;
+	objects = get_objects(file, &size, "sp", parse_sphere);
+	prev = size;
+	objects = join_objs(objects, get_objects(file, &size, "pl", parse_plane), prev, size);
+	prev = size;
+	objects = join_objs(objects, get_objects(file, &size, "zy", parse_zylinder), prev, size);
+	map->objects = objects;
 	map->obj_count = size;
 	return (EXIT_SUCCESS);
 }
+
+

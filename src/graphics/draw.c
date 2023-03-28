@@ -77,5 +77,5 @@ void	draw(t_window *window)
 		j = 0;
 		i++;
 	}
-	free_object(&sp);
+	free_object_arr(&sp, 1);
 }

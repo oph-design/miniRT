@@ -10,10 +10,10 @@ double	get_ratio(char *str, int *exit_code)
 
 	i = 0;
 	(void)(exit_code);
-	while (ft_isdigit(str[i]) || str[i] == '.')
+	while (ft_isdigit(str[i]) || str[i] == '.' || str[i] == '-')
 		i++;
-	// if (str[i] && !ft_isdigit(str[i]))
-	// 	return (*exit_code = 1, 0);
+	if (str[i] && !ft_isdigit(str[i]))
+		return (*exit_code = 1, 0);
 	return (ft_strtod(str));
 }
 
@@ -59,20 +59,22 @@ t_vector	*get_vector(char *str, int *exit_code)
 	return (new_vec(x, y, z));
 }
 
-t_object	*get_sphere(char **file, size_t *size)
+t_object	*get_objects(char **file, size_t *size, char *set,
+	t_object (parse)(char *, int *))
 {
-	char		*check;
-	t_object	*res;
-	size_t		i;
-	int			ecode;
+	char			*check;
+	t_object		*res;
+	size_t			i;
+	static size_t	id = 3;
+	int				ecode;
 
 	i = 0;
 	ecode = 0;
-	res = malloc(sizeof(t_object) * get_size(file, "sp"));
-	check = stra_iteri(file, "sp", 2);
+	res = malloc(sizeof(t_object) * get_size(file, set));
+	check = stra_iteri(file, set, id);
 	while (check != NULL)
 	{
-		res[i] = parse_sphere(check, &ecode);
+		res[i] = parse(check, &ecode);
 		if (ecode)
 		{
 			free(res[i].orientation);
@@ -80,8 +82,31 @@ t_object	*get_sphere(char **file, size_t *size)
 		}
 		else
 			i++;
-		check = stra_iteri(file, "sp", 2);
+		check = stra_iteri(file, set, id);
 	}
 	*size += i;
+	id++;
 	return (realloc_arr(i, res));
+}
+
+t_object	*join_objs(t_object *dst, t_object *src, size_t prev, size_t len)
+{
+	size_t		i;
+	t_object	*res;
+
+	i = 0;
+	res = malloc(sizeof(t_object) * len);
+	while (i < prev)
+	{
+		res[i] = dst[i];
+		i++;
+	}
+	while (i < len)
+	{
+		res[i] = src[i - prev];
+		i++;
+	}
+	free(dst);
+	free(src);
+	return (res);
 }

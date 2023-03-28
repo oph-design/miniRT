@@ -44,3 +44,32 @@ t_object	parse_sphere(char *str, int *ecode)
 			get_ratio(args[2], ecode), get_color(args[3], ecode));
 	return (sphere);
 }
+
+t_object	parse_zylinder(char *str, int *ecode)
+{
+	char		**args;
+	double		size[2];
+	t_object	zylinder;
+
+	args = ft_split(str, '\t');
+	if (ft_stra_len(args) != 6)
+		return (*ecode = 1, new_zylinder(NULL, NULL, size, 0));
+	size[0] = get_ratio(args[3], ecode);
+	size[1] = get_ratio(args[4], ecode);
+	zylinder = new_zylinder(get_vector(args[1], ecode),
+			get_vector(args[2], ecode), size, get_color(args[5], ecode));
+	return (zylinder);
+}
+
+t_object	parse_plane(char *str, int *ecode)
+{
+	char		**args;
+	t_object	plane;
+
+	args = ft_split(str, '\t');
+	if (ft_stra_len(args) != 4)
+		return (*ecode = 1, new_plane(NULL, NULL, 0));
+	plane = new_plane(get_vector(args[1], ecode),
+			get_vector(args[2], ecode), get_color(args[3], ecode));
+	return (plane);
+}
