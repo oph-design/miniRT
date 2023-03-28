@@ -5,6 +5,7 @@ int	set_lighting(char **file, t_map *map);
 int	get_lighting(char **file, t_lighting *light);
 int	get_amlight(char **file, t_lighting *light);
 int	set_camera(char **file, t_map *map);
+int	get_objects(char **file, t_map *map);
 
 t_map	*get_map(char **file)
 {
@@ -15,7 +16,8 @@ t_map	*get_map(char **file)
 		return (free(map), NULL);
 	if (set_camera(file, map))
 		return (free(map), NULL);
-	printf("%d\n", map->camera->fov);
+	if (get_objects(file, map))
+		return (free(map), NULL);
 	return (map);
 }
 
@@ -100,11 +102,10 @@ int	get_objects(char **file, t_map *map)
 	t_list	*new;
 	t_list	*del;
 
-	(void)(file);
 	new = ft_lstnew(NULL);
-	// get_object(new, file, "sp", new_sphere);
-	// get_object(new, file, "pl", new_sphere);
-	// get_object(new, file, "cy", new_sphere);
+	get_sphere(&new, file);
+	// get_plane(new, file);
+	// get_zylinder(new, file);
 	del = new;
 	new = new->next;
 	ft_lstdelone(del, free);

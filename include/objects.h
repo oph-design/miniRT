@@ -32,6 +32,7 @@ typedef struct s_sphere
 {
 	t_vector	*center;
 	double		radius;
+	u_int32_t	color;
 }	t_sphere;
 
 typedef struct s_plane
@@ -53,8 +54,7 @@ typedef struct s_map
 t_camera	*new_camera(t_vector *pos);
 void		set_light(t_lighting *l, double r, u_int32_t color, t_vector *c);
 void		set_amblight(t_lighting *light, double ratio, u_int32_t color);
-t_sphere	*new_sphere(t_vector *pos, double r);
-t_sphere	*new_sphere(t_vector *pos, double r);
+t_sphere	*new_sphere(t_vector *pos, double r, u_int32_t color);
 void		free_sphere(t_sphere *sp);
 t_vector	*new_vec(double x, double y, double z);
 double		get_ratio(char *str, int *exit_code);
