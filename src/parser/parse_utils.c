@@ -32,25 +32,18 @@ size_t	ft_stra_len(char **arr)
 
 double	ft_strtod(char *str)
 {
-	size_t	i;
-	double	n;
-	double	c;
+	char	**split;
+	double	pre;
+	double	post;
+	double	res;
 
-	n = 0;
-	c = 0;
-	i = 0;
-	while (ft_isdigit(str[i]))
-	{
-		n = 10 * n + (str[i] - '0');
-		i++;
-	}
-	i = ft_strlen(str) - 1;
-	while (ft_isdigit(str[i]))
-	{
-		c = c * (0.1) + ((str[i] - '0') * 0.1);
-		i--;
-	}
-	return (n + c);
+	if (!ft_strchr(str, '.'))
+		return ((double)ft_atoi(str));
+	split = ft_split(str, '.');
+	pre = (double)ft_atoi(split[0]);
+	post = (double)ft_atoi(split[1]);
+	res = pre + ((double)(1 / (10 * (ft_strlen(split[1])))) *post);
+	return (res);
 }
 
 int	is_number(char *str)

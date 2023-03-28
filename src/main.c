@@ -1,12 +1,11 @@
 #include "minirt.h"
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
 	char	**file;
-	size_t	i;
 	t_map	*map;
 
-	i = 0;
 	if (check_input(argc, argv))
 		return (EXIT_FAILURE);
 	file = get_file(argv[1]);
