@@ -7,10 +7,6 @@
 # include "objects.h"
 
 char		*stra_iteri(char **arr, char *set, int id);
-size_t		ft_stra_len(char **arr);
-void		ft_free_stra(char **str);
-double		ft_strtod(char *str);
-int			is_number(char *str);
 double		get_ratio(char *str, int *exit_code);
 t_vector	*get_color(char *str, int *exit_code);
 t_vector	*get_vector(char *src, int *exit_code);
