@@ -71,7 +71,7 @@ void	draw(t_window *window)
 			x = (double)i / (WIDTH - 1);
 			y = (double)j / (HEIGHT - 1);
 			draw_pixel(window, i, j,
-				ray_color(ray_cast(window->camera, x, y), sp));
+				ray_color(get_ray(window->camera, x, y), sp));
 			j++;
 		}
 		j = 0;
