@@ -6,7 +6,7 @@ void	draw_pixel(t_window *window, int x, int y, uint32_t color)
 		mlx_put_pixel(window->image, x, y, color);
 }
 
-uint32_t	color(int r, int g, int b, int a)
+uint32_t	color(double r, double g, double b, double a)
 {
 	int	ir;
 	int	ig;

@@ -14,13 +14,6 @@ typedef struct s_ray
 	t_vector	*direction;
 }	t_ray;
 
-typedef struct s_hitp
-{
-	t_vector	p;
-	t_vector	normal;
-	double		t;
-}	t_hitp;
-
 double			dot(t_vector a, t_vector b);
 double			vec_length_squared(t_vector vec);
 t_vector		normalize(t_vector	vec);
