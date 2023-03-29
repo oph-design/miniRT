@@ -13,10 +13,10 @@ uint32_t	color(double r, double g, double b, double a)
 	int	ib;
 	int	ia;
 
-	ir = r * 255.999;
-	ig = g * 255.999;
-	ib = b * 255.999;
-	ia = a * 255.999;
+	ir = r * 0.999;
+	ig = g * 0.999;
+	ib = b * 0.999;
+	ia = a * 0.999;
 	return (ir << 24 | ig << 16 | ib << 8 | ia);
 }
 
