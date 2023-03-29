@@ -42,7 +42,7 @@ double	ft_strtod(char *str)
 	split = ft_split(str, '.');
 	pre = (double)ft_atoi(split[0]);
 	post = (double)ft_atoi(split[1]);
-	res = pre + ((double)(1 / (10 * (ft_strlen(split[1])))) *post);
+	res = pre + (post / __exp10(ft_strlen(split[1])));
 	return (res);
 }
 
