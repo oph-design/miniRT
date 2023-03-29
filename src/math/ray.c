@@ -33,7 +33,7 @@ t_vector	at(t_ray *ray, double t)
 	return (add_to_vec(*ray->origin, dt));
 }
 
-uint32_t	ray_color(t_ray	*ray, t_sphere *sp)
+uint32_t	ray_color(t_ray	*ray, t_object *sp)
 {
 	t_vector	col;
 	double		t;
