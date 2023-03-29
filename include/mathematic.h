@@ -1,17 +1,12 @@
 #ifndef MATHEMATIC_H
 # define MATHEMATIC_H
 
+# include "objects.h"
 # include <math.h>
 # include "MLX42.h"
 
-typedef struct s_sphere	t_sphere;
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vector;
+typedef struct s_object	t_object;
+typedef struct s_vector	t_vector;
 
 typedef struct s_ray
 {
@@ -30,10 +25,7 @@ t_vector		mult_double_vec(double d, t_vector vec);
 t_vector		add_double_vec(double d, t_vector vec);
 t_vector		sub_double_vec(double d, t_vector vec);
 
-t_vector		*new_vec(double x, double y, double z);
-void			print_vec(t_vector vec);
-
 t_ray			*new_ray(t_vector origin, t_vector direction);
-uint32_t		ray_color(t_ray	*ray, t_sphere *sp);
+uint32_t		ray_color(t_ray	*ray, t_object *sp);
 
 #endif

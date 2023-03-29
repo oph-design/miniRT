@@ -20,7 +20,7 @@ t_vector	at(t_ray *ray, double t)
 	return (add_to_vec(*ray->origin, dt));
 }
 
-uint32_t	ray_color(t_ray	*ray, t_sphere *sp)
+uint32_t	ray_color(t_ray	*ray, t_object *sp)
 {
 	double		t;
 	t_vector	*co1;
@@ -31,7 +31,7 @@ uint32_t	ray_color(t_ray	*ray, t_sphere *sp)
 	t = hit_sphere(sp, ray);
 	if (t < 0.0)
 	{
-		n = normalize(subtract_vec(at(ray, t), *sp->center));
+		n = normalize(subtract_vec(at(ray, t), *sp->pos));
 		free(ray);
 		return (color(0.5 * (n.x + 1), 0.5 * (n.y + 1), (n.z + 1), 1.0));
 	}
