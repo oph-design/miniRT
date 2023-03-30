@@ -17,7 +17,7 @@ t_object	parse_cylinder(char *str, t_errors *ecode);
 t_object	parse_plane(char *str, t_errors *ecode);
 t_object	*join_objs(t_object *dst, t_object *src, size_t prev, size_t len);
 t_errors	set_camera(char **file, t_map *map);
-int			get_obj_arr(char **file, t_map *map);
+t_errors	get_obj_arr(char **file, t_map *map);
 t_errors	set_lighting(char **file, t_map *map);
 size_t		get_size(char **file, char *set);
 
