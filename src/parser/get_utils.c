@@ -66,6 +66,8 @@ t_object	*join_objs(t_object *dst, t_object *src, size_t prev, size_t len)
 	t_object	*res;
 
 	i = 0;
+	if (dst == NULL || src == NULL)
+		return (free(dst), free(src), NULL);
 	res = malloc(sizeof(t_object) * len);
 	while (i < prev)
 	{

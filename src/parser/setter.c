@@ -86,6 +86,8 @@ t_errors	set_camera(char **file, t_map *map)
 		return (ft_free_stra(args), ARG_NUM);
 	map->camera = new_cam(get_vector(args[1], &ecode, 1),
 			get_vector(args[2], &ecode, 0), ft_atoi(args[3]));
+	if (map->camera->fov > 180 || map->camera->fov < 0)
+		return (VAL_RANGE);
 	if (ecode)
 		return (ft_free_stra(args), ecode);
 	input = stra_iteri(file, "C\t", 2);
@@ -94,7 +96,7 @@ t_errors	set_camera(char **file, t_map *map)
 	return (ft_free_stra(args), SUCCESS);
 }
 
-int	get_obj_arr(char **file, t_map *map)
+t_errors	get_obj_arr(char **file, t_map *map)
 {
 	t_object	*objects;
 	size_t		size;
@@ -102,13 +104,19 @@ int	get_obj_arr(char **file, t_map *map)
 
 	size = 0;
 	objects = get_objects(file, &size, "sp\t", parse_sphere);
+	if (objects == NULL)
+		return (size);
 	prev = size;
 	objects = join_objs(objects,
 			get_objects(file, &size, "pl\t", parse_plane), prev, size);
+	if (objects == NULL)
+		return (size);
 	prev = size;
 	objects = join_objs(objects,
 			get_objects(file, &size, "cy\t", parse_cylinder), prev, size);
+	if (objects == NULL)
+		return (size);
 	map->objects = objects;
 	map->obj_count = size;
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }

@@ -71,8 +71,8 @@ t_object	*get_objects(char **file, size_t *size, char *set,
 	while (check != NULL)
 	{
 		res[i] = parse(check, &ecode);
-		if (!ecode)
-			i++;
+		if (ecode)
+			return (free(res), *size = ecode, NULL);
 		check = stra_iteri(file, set, id);
 	}
 	*size += i;
