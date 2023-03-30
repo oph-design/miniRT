@@ -12,14 +12,14 @@ typedef enum e_type
 
 typedef enum e_errors
 {
-	success,
-	fatal,
-	arg_num,
-	val_range,
-	no_number,
-	val_num,
-	dup_entity,
-	not_found
+	SUCCESS,
+	FATAL,
+	ARG_NUM,
+	VAL_RANGE,
+	NO_NUMBER,
+	VAL_NUM,
+	DUP_ENTITY,
+	NOT_FOUND
 }	t_errors;
 
 typedef struct s_vector
