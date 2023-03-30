@@ -18,12 +18,7 @@ void	free_map(t_map *map)
 {
 	if (!map)
 		return ;
-	free(map->camera->orientation);
-	free(map->camera->pos);
 	free(map->camera);
-	free(map->lighting->a_color);
-	free(map->lighting->l_color);
-	free(map->lighting->pos);
-	free_object_arr(map->objects, map->obj_count);
+	free(map->objects);
 	free(map);
 }

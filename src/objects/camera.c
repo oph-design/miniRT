@@ -1,6 +1,6 @@
 #include "objects.h"
 
-t_camera	*new_camera(t_vector *pos)
+t_camera	*new_camera(t_vector pos)
 {
 	double		viewport_height;
 	double		viewport_width;
@@ -19,7 +19,7 @@ t_camera	*new_camera(t_vector *pos)
 	return (new);
 }
 
-t_camera	*new_cam(t_vector *vec, t_vector *pos, int fov)
+t_camera	*new_cam(t_vector vec, t_vector pos, int fov)
 {
 	t_camera	*new;
 
