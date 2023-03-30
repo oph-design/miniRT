@@ -10,6 +10,18 @@ typedef enum e_type
 	plane
 }	t_type;
 
+typedef enum e_errors
+{
+	success,
+	fatal,
+	arg_num,
+	val_range,
+	no_number,
+	val_num,
+	dup_entity,
+	not_found
+}	t_errors;
+
 typedef struct s_vector
 {
 	double	x;
