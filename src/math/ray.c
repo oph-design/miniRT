@@ -20,9 +20,7 @@ t_ray	get_ray(t_camera *camera, double x, double y)
 	ratio = 16.0 / 9.0;
 	fov = tan((camera->fov / 2));
 	nx = ((2 * x - 1.0) * ratio) * fov;
-	// nx = (((2 * ((x + 0.5)) / 1080.0) - 1.0) * ratio) * fov;
 	ny = (1.0 - 2.0 * y) * fov;
-	// ny = (1.0 - 2.0 * (y + 0.5) / 1920.0) * fov;
 	dest = new_vec(nx, ny, camera->orientation.z);
 	return (new_ray(camera->pos, dest));
 }

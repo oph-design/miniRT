@@ -39,16 +39,6 @@ int	hit_sphere(t_object sp, t_ray ray)
 		return (1);
 }
 
-uint32_t	color_test(double x, double y)
-{
-	double	r;
-	double	g;
-
-	r = x * 255;
-	g = y * 255;
-	return (color(r, g, 0, 255));
-}
-
 void	draw(t_window *window)
 {
 	int			i;
@@ -69,7 +59,6 @@ void	draw(t_window *window)
 			y = (double)i / (HEIGHT);
 			draw_pixel(window, j, i,
 				ray_color(get_ray(window->camera, x, y), sp));
-			// draw_pixel(window, j, i, color_test(x, y));
 			j++;
 		}
 		j = 0;
