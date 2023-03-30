@@ -20,7 +20,7 @@ uint32_t	color(double r, double g, double b, double a)
 	return (ir << 24 | ig << 16 | ib << 8 | ia);
 }
 
-double	hit_sphere(t_object sp, t_ray ray)
+int	hit_sphere(t_object sp, t_ray ray)
 {
 	double		a;
 	double		b;
@@ -32,11 +32,21 @@ double	hit_sphere(t_object sp, t_ray ray)
 	a = dot(ray.direction, ray.direction);
 	b = 2.0 * dot(p, ray.direction);
 	c = dot(p, p) - (sp.radius * sp.radius);
-	disc = (b * b) - (4 * a * c);
-	if (disc > 0)
-		return (-1.0);
+	disc = b * b - 4 * a * c;
+	if (disc < 0)
+		return (0);
 	else
-		return (((-1 * b) - sqrt(disc)) / (2.0 * a));
+		return (1);
+}
+
+uint32_t	color_test(double x, double y)
+{
+	double	r;
+	double	g;
+
+	r = x * 255;
+	g = y * 255;
+	return (color(r, g, 0, 255));
 }
 
 void	draw(t_window *window)
@@ -49,16 +59,17 @@ void	draw(t_window *window)
 
 	i = 0;
 	j = 0;
-	sp = new_sphere(new_vec(0.0, 0.0, -1.0), 0.5, new_vec(255, 200, 200));
+	sp = new_sphere(new_vec(0.0, 0.0, -3.0), 0.5, new_vec(255, 200, 200));
 	ft_bzero(window->image->pixels, WIDTH * HEIGHT * sizeof(int));
-	while (i < WIDTH)
+	while (i < HEIGHT)
 	{
-		while (j < HEIGHT)
+		while (j < WIDTH)
 		{
-			x = (double)i / (WIDTH - 1);
-			y = (double)j / (HEIGHT - 1);
-			draw_pixel(window, i, j,
+			x = (double)j / (WIDTH);
+			y = (double)i / (HEIGHT);
+			draw_pixel(window, j, i,
 				ray_color(get_ray(window->camera, x, y), sp));
+			// draw_pixel(window, j, i, color_test(x, y));
 			j++;
 		}
 		j = 0;

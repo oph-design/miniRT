@@ -12,13 +12,18 @@ t_ray	new_ray(t_vector origin, t_vector direction)
 t_ray	get_ray(t_camera *camera, double x, double y)
 {
 	t_vector	dest;
-	t_vector	nx;
-	t_vector	ny;
+	double		ratio;
+	double		fov;
+	double		nx;
+	double		ny;
 
-	nx = mult_double_vec(x, camera->horizontal);
-	ny = mult_double_vec(y, camera->vertical);
-	dest = subtract_vec(add_to_vec(add_to_vec(camera->orientation, nx), ny),
-			camera->pos);
+	ratio = 16.0 / 9.0;
+	fov = tan((camera->fov / 2));
+	nx = ((2 * x - 1.0) * ratio) * fov;
+	// nx = (((2 * ((x + 0.5)) / 1080.0) - 1.0) * ratio) * fov;
+	ny = (1.0 - 2.0 * y) * fov;
+	// ny = (1.0 - 2.0 * (y + 0.5) / 1920.0) * fov;
+	dest = new_vec(nx, ny, camera->orientation.z);
 	return (new_ray(camera->pos, dest));
 }
 
@@ -32,17 +37,11 @@ t_vector	at(t_ray ray, double t)
 
 uint32_t	ray_color(t_ray	ray, t_object sp)
 {
-	double		t;
 	t_vector	col;
-	t_vector	n;
+	double		t;
 
-	t = hit_sphere(sp, ray);
-	if (t < 0.0)
-	{
-		n = normalize(subtract_vec(at(ray, t), sp.pos));
-		return (color(127 * (n.x + 1), 127 * (n.y + 1),
-				127 * (n.z + 1), 255.0));
-	}
+	if (hit_sphere(sp, ray))
+		return (color(sp.color.x, sp.color.y, sp.color.z, 255.0));
 	t = 0.5 * normalize(ray.direction).y + 1.0;
 	col = add_to_vec(mult_double_vec(1.0 - t, new_vec(255, 255, 255)),
 			mult_double_vec(t, new_vec(127, 200, 255)));
