@@ -7,7 +7,7 @@ t_map	*get_map(char **file)
 	t_map		*map;
 	t_errors	exit_code;
 
-	exit_code = success;
+	exit_code = SUCCESS;
 	map = malloc(sizeof(map));
 	map->lighting = NULL;
 	map->camera = NULL;
@@ -33,23 +33,23 @@ void	free_map(t_map *map)
 
 void	parse_error(t_errors code, char *component, t_map **map)
 {
-	if (code == success)
+	if (code == SUCCESS)
 		return ;
 	ft_putstr_fd("Error: ", 2);
 	ft_putstr_fd(component, 2);
-	if (code == fatal)
+	if (code == FATAL)
 		ft_putendl_fd("fatal", 2);
-	if (code == arg_num)
+	if (code == ARG_NUM)
 		ft_putendl_fd("wrong number of arguments", 2);
-	if (code == val_range)
+	if (code == VAL_RANGE)
 		ft_putendl_fd("wrong range of values", 2);
-	if (code == no_number)
+	if (code == NO_NUMBER)
 		ft_putendl_fd("invalid number", 2);
-	if (code == val_num)
+	if (code == VAL_NUM)
 		ft_putendl_fd("wrong number of values", 2);
-	if (code == dup_entity)
+	if (code == DUP_ENTITY)
 		ft_putendl_fd("duplicate occurance of entity", 2);
-	if (code == not_found)
+	if (code == NOT_FOUND)
 		ft_putendl_fd("non existent", 2);
 	free_map(*map);
 	*map = NULL;
