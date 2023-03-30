@@ -15,7 +15,9 @@ typedef struct s_ray
 }	t_ray;
 
 double			dot(t_vector a, t_vector b);
+double			vec_length_squared(t_vector vec);
 t_vector		normalize(t_vector	vec);
+double			magnitude(t_vector vec);
 
 t_vector		add_to_vec(t_vector vec, t_vector add);
 t_vector		subtract_vec(t_vector vec, t_vector sub);
