@@ -26,9 +26,9 @@ t_vector	normalize(t_vector vec)
 	return (vec);
 }
 
-t_vector	*cross_product(t_vector *vec, t_vector *cross)
+t_vector	cross_product(t_vector vec, t_vector cross)
 {
-	return (new_vec(vec->y * cross->z - vec->z * cross->y,
-			vec->z * cross->x - vec->x * cross->z,
-			vec->x * cross->y - vec->y * cross->z));
+	return (new_vec(vec.y * cross.z - vec.z * cross.y,
+			vec.z * cross.x - vec.x * cross.z,
+			vec.x * cross.y - vec.y * cross.z));
 }

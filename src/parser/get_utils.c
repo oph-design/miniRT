@@ -23,7 +23,7 @@ t_object	parse_sphere(char *str, int *ecode)
 
 	args = ft_split(str, '\t');
 	if (ft_stra_len(args) != 4)
-		return (*ecode = 1, new_sphere(NULL, 0, 0));
+		return (*ecode = 1, new_sphere(new_vec(0, 0, 0), 0, new_vec(0, 0, 0)));
 	sphere = new_sphere(get_vector(args[1], ecode),
 			get_ratio(args[2], ecode), get_color(args[3], ecode));
 	return (sphere);
@@ -37,7 +37,8 @@ t_object	parse_cylinder(char *str, int *ecode)
 
 	args = ft_split(str, '\t');
 	if (ft_stra_len(args) != 6)
-		return (*ecode = 1, new_cylinder(NULL, NULL, size, 0));
+		return (*ecode = 1, new_cylinder(new_vec(0, 0, 0), new_vec(0, 0, 0),
+				size, new_vec(0, 0, 0)));
 	size[0] = get_ratio(args[3], ecode);
 	size[1] = get_ratio(args[4], ecode);
 	cylinder = new_cylinder(get_vector(args[1], ecode),
@@ -52,7 +53,8 @@ t_object	parse_plane(char *str, int *ecode)
 
 	args = ft_split(str, '\t');
 	if (ft_stra_len(args) != 4)
-		return (*ecode = 1, new_plane(NULL, NULL, 0));
+		return (*ecode = 1, new_plane(new_vec(0, 0, 0),
+				new_vec(0, 0, 0), new_vec(0, 0, 0)));
 	plane = new_plane(get_vector(args[1], ecode),
 			get_vector(args[2], ecode), get_color(args[3], ecode));
 	return (plane);

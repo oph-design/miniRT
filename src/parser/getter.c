@@ -15,7 +15,7 @@ double	get_ratio(char *str, int *exit_code)
 	return (ft_strtod(str));
 }
 
-t_vector	*get_color(char *str, int *exit_code)
+t_vector	get_color(char *str, int *exit_code)
 {
 	char			**split;
 	unsigned int	r;
@@ -24,19 +24,19 @@ t_vector	*get_color(char *str, int *exit_code)
 
 	split = ft_split(str, ',');
 	if (ft_stra_len(split) != 3)
-		return (*exit_code = 1, NULL);
+		return (*exit_code = 1, new_vec(0, 0, 0));
 	if (is_number(split[0]) || is_number(split[1]) || is_number(split[2]))
 		*exit_code = 1;
 	r = ft_atoi(split[0]);
 	g = ft_atoi(split[1]);
 	b = ft_atoi(split[2]);
 	if (r > 255 || g > 255 || b > 255)
-		return (*exit_code = 1, NULL);
+		return (*exit_code = 1, new_vec(0, 0, 0));
 	ft_free_stra(split);
 	return (new_vec((double)r, (double)g, (double)b));
 }
 
-t_vector	*get_vector(char *str, int *exit_code)
+t_vector	get_vector(char *str, int *exit_code)
 {
 	char	**split;
 	double	x;
@@ -45,7 +45,7 @@ t_vector	*get_vector(char *str, int *exit_code)
 
 	split = ft_split(str, ',');
 	if (ft_stra_len(split) != 3)
-		return (*exit_code = 1, NULL);
+		return (*exit_code = 1, new_vec(0, 0, 0));
 	x = get_ratio(split[0], exit_code);
 	y = get_ratio(split[1], exit_code);
 	z = get_ratio(split[2], exit_code);
@@ -68,12 +68,7 @@ t_object	*get_objects(char **file, size_t *size, char *set,
 	while (check != NULL)
 	{
 		res[i] = parse(check, &ecode);
-		if (ecode)
-		{
-			free(res[i].orientation);
-			free(res[i].pos);
-		}
-		else
+		if (!ecode)
 			i++;
 		check = stra_iteri(file, set, id);
 	}

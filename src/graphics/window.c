@@ -2,10 +2,6 @@
 
 static void	free_window(t_window *window)
 {
-	free(window->camera->horizontal);
-	free(window->camera->vertical);
-	free(window->camera->orientation);
-	free(window->camera->pos);
 	free(window->camera);
 	free(window);
 }

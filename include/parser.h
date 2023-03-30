@@ -8,8 +8,8 @@
 
 char		*stra_iteri(char **arr, char *set, int id);
 double		get_ratio(char *str, int *exit_code);
-t_vector	*get_color(char *str, int *exit_code);
-t_vector	*get_vector(char *src, int *exit_code);
+t_vector	get_color(char *str, int *exit_code);
+t_vector	get_vector(char *src, int *exit_code);
 t_object	*get_objects(char **file, size_t *size, char *set,
 				t_object (parse)(char *, int *));
 t_object	parse_sphere(char *str, int *ecode);
