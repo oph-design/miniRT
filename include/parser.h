@@ -20,5 +20,6 @@ t_errors	set_camera(char **file, t_map *map);
 t_errors	get_obj_arr(char **file, t_map *map);
 t_errors	set_lighting(char **file, t_map *map);
 size_t		get_size(char **file, char *set);
+int			ft_iswhitespcs(char c);
 
 #endif

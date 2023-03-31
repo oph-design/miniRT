@@ -2,15 +2,20 @@
 
 size_t	get_size(char **file, char *set)
 {
-	size_t		i;
-	size_t		size;
+	size_t	i;
+	size_t	j;
+	size_t	size;
 
 	i = 0;
+	j = 0;
 	size = 0;
 	while (file[i])
 	{
-		if (ft_strncmp(file[i], set, ft_strlen(set)))
+		while (file[i][j] && ft_iswhitespcs(file[i][j]))
+			j++;
+		if (ft_strncmp(file[i] + j, set, ft_strlen(set)))
 			size++;
+		j = 0;
 		i++;
 	}
 	return (size);

@@ -29,7 +29,7 @@ static t_errors	get_lighting(char **file, t_lighting *light)
 	t_errors	ecode;
 
 	ecode = SUCCESS;
-	input = stra_iteri(file, "L\t", 1);
+	input = stra_iteri(file, "L", 1);
 	if (!input)
 		return (NOT_FOUND);
 	args = ft_split(input, '\t');
@@ -41,7 +41,7 @@ static t_errors	get_lighting(char **file, t_lighting *light)
 		return (ft_free_stra(args), VAL_RANGE);
 	if (ecode)
 		return (ft_free_stra(args), ecode);
-	input = stra_iteri(file, "L\t", 1);
+	input = stra_iteri(file, "L", 1);
 	if (input != NULL)
 		return (ft_free_stra(args), DUP_ENTITY);
 	return (ft_free_stra(args), SUCCESS);
@@ -54,7 +54,7 @@ static t_errors	get_amlight(char **file, t_lighting *light)
 	t_errors	ecode;
 
 	ecode = SUCCESS;
-	input = stra_iteri(file, "A\t", 0);
+	input = stra_iteri(file, "A", 0);
 	if (!input)
 		return (NOT_FOUND);
 	args = ft_split(input, '\t');
@@ -65,7 +65,7 @@ static t_errors	get_amlight(char **file, t_lighting *light)
 		return (ft_free_stra(args), VAL_RANGE);
 	if (ecode)
 		return (ft_free_stra(args), ecode);
-	input = stra_iteri(file, "A\t", 0);
+	input = stra_iteri(file, "A", 0);
 	if (input != NULL)
 		return (ft_free_stra(args), DUP_ENTITY);
 	return (ft_free_stra(args), SUCCESS);
@@ -78,7 +78,7 @@ t_errors	set_camera(char **file, t_map *map)
 	t_errors	ecode;
 
 	ecode = SUCCESS;
-	input = stra_iteri(file, "C\t", 2);
+	input = stra_iteri(file, "C", 2);
 	if (!input)
 		return (NOT_FOUND);
 	args = ft_split(input, '\t');
@@ -90,7 +90,7 @@ t_errors	set_camera(char **file, t_map *map)
 		return (VAL_RANGE);
 	if (ecode)
 		return (ft_free_stra(args), ecode);
-	input = stra_iteri(file, "C\t", 2);
+	input = stra_iteri(file, "C", 2);
 	if (input != NULL)
 		return (ft_free_stra(args), DUP_ENTITY);
 	return (ft_free_stra(args), SUCCESS);
@@ -103,17 +103,17 @@ t_errors	get_obj_arr(char **file, t_map *map)
 	size_t		prev;
 
 	size = 0;
-	objects = get_objects(file, &size, "sp\t", parse_sphere);
+	objects = get_objects(file, &size, "sp", parse_sphere);
 	if (objects == NULL)
 		return (size);
 	prev = size;
 	objects = join_objs(objects,
-			get_objects(file, &size, "pl\t", parse_plane), prev, size);
+			get_objects(file, &size, "pl", parse_plane), prev, size);
 	if (objects == NULL)
 		return (size);
 	prev = size;
 	objects = join_objs(objects,
-			get_objects(file, &size, "cy\t", parse_cylinder), prev, size);
+			get_objects(file, &size, "cy", parse_cylinder), prev, size);
 	if (objects == NULL)
 		return (size);
 	map->objects = objects;

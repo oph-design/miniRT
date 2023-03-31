@@ -47,12 +47,18 @@ char	*stra_iteri(char **arr, char *set, int id)
 	j = 0;
 	while (arr[i[id]] != NULL)
 	{
-		while (arr[i[id]][j] == 32 || (arr[i[id]][j] > 9 && arr[i[id]][j] < 13))
+		while (arr[i[id]][j] && ft_iswhitespcs(arr[i[id]][j]))
 			j++;
-		if (!ft_strncmp(arr[i[id]] + j, set, ft_strlen(set)))
+		if (!ft_strncmp(arr[i[id]] + j, set, ft_strlen(set))
+			&& ft_iswhitespcs(arr[i[id]][j + ft_strlen(set)] + 1))
 			return (arr[(i[id])++]);
 		j = 0;
 		(i[id])++;
 	}
 	return (NULL);
+}
+
+int	ft_iswhitespcs(char c)
+{
+	return (c == 32 || (c > 9 && c < 13));
 }
