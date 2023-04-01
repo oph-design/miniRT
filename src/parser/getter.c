@@ -65,9 +65,11 @@ t_object	*get_objects(char **file, size_t *size, char *set,
 	t_errors		ecode;
 
 	i = 0;
+	res = NULL;
 	ecode = SUCCESS;
-	res = malloc(sizeof(t_object) * get_size(file, set));
 	check = stra_iteri(file, set, id);
+	if (check != NULL)
+		res = malloc(sizeof(t_object) * get_size(file, set));
 	while (check != NULL)
 	{
 		res[i] = parse(check, &ecode);
@@ -86,6 +88,8 @@ static t_object	*realloc_arr(size_t size, t_object *src)
 	t_object	*res;
 
 	i = 0;
+	if (src == NULL)
+		return (NULL);
 	res = malloc(size * sizeof(t_object));
 	while (i < size)
 	{

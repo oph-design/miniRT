@@ -104,18 +104,14 @@ t_errors	get_obj_arr(char **file, t_map *map)
 
 	size = 0;
 	objects = get_objects(file, &size, "sp", parse_sphere);
-	if (objects == NULL)
-		return (size);
 	prev = size;
 	objects = join_objs(objects,
 			get_objects(file, &size, "pl", parse_plane), prev, size);
-	if (objects == NULL)
-		return (size);
 	prev = size;
 	objects = join_objs(objects,
 			get_objects(file, &size, "cy", parse_cylinder), prev, size);
 	if (objects == NULL)
-		return (size);
+		return (NOT_FOUND);
 	map->objects = objects;
 	map->obj_count = size;
 	return (SUCCESS);
