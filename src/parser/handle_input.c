@@ -42,7 +42,7 @@ char	**get_file(char	*name)
 char	*stra_iteri(char **arr, char *set, int id)
 {
 	size_t			j;
-	static size_t	i[5] = {0, 0, 0, 0, 0};
+	static size_t	i[6] = {0, 0, 0, 0, 0, 0};
 
 	j = 0;
 	while (arr[i[id]] != NULL)
