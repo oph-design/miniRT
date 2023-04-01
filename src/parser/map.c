@@ -53,5 +53,5 @@ void	parse_error(t_errors code, char *component, t_map **map)
 		ft_putendl_fd("non existent", 2);
 	free_map(*map);
 	*map = NULL;
-	exit(1);
+	exit(EXIT_FAILURE);
 }
