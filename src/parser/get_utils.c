@@ -21,7 +21,6 @@ size_t	get_size(char **file, char *set)
 	return (size);
 }
 
-
 t_object	*join_objs(t_object *dst, t_object *src, size_t prev, size_t len)
 {
 	size_t		i;
