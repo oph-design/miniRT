@@ -1,7 +1,5 @@
 #include "parser.h"
 
-static t_object	*realloc_arr(size_t size, t_object *src);
-
 double	get_ratio(char *str, t_errors *exit_code)
 {
 	size_t	i;
@@ -55,47 +53,28 @@ t_vector	get_vector(char *str, t_errors *exit_code, int pos)
 	return (ft_free_stra(split), new_vec(x, y, z));
 }
 
-t_object	*get_objects(char **file, size_t *size, char *set,
-	t_object (parse)(char *, t_errors *))
+t_errors	get_objects(t_object **obj, char **file, char *set, size_t *size)
 {
-	char			*check;
-	t_object		*res;
-	size_t			i;
-	static int		id = 3;
-	t_errors		ecode;
+	char		*check;
+	size_t		i;
+	static int	id = 3;
+	t_errors	ecode;
 
 	i = 0;
-	res = NULL;
+	*obj = NULL;
 	ecode = SUCCESS;
 	check = stra_iteri(file, set, id);
 	if (check != NULL)
-		res = malloc(sizeof(t_object) * get_size(file, set));
+		*obj = malloc(sizeof(t_object) * get_size(file, set));
 	while (check != NULL)
 	{
-		res[i] = parse(check, &ecode);
+		*obj[i] = parse(check, set, &ecode);
 		if (ecode)
-			return (free(res), *size = ecode, NULL);
+			return (free(*obj), *obj = NULL, ecode);
 		check = stra_iteri(file, set, id);
 	}
+	*obj = realloc_arr(i, *obj);
 	*size += i;
 	id++;
-	return (realloc_arr(i, res));
-}
-
-static t_object	*realloc_arr(size_t size, t_object *src)
-{
-	size_t		i;
-	t_object	*res;
-
-	i = 0;
-	if (src == NULL)
-		return (NULL);
-	res = malloc(size * sizeof(t_object));
-	while (i < size)
-	{
-		res[i] = src[i];
-		i++;
-	}
-	free(src);
-	return (res);
+	return (ecode);
 }
