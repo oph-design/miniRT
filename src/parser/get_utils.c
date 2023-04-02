@@ -72,8 +72,8 @@ t_object	parse(char *str, char *set, t_errors *ecode)
 	if (!ft_strncmp(set, "sp", 3))
 		return (parse_sphere(str, ecode));
 	if (!ft_strncmp(set, "cy", 3))
-		parse_cylinder(str, ecode);
+		return (parse_cylinder(str, ecode));
 	if (!ft_strncmp(set, "pl", 3))
-		parse_plane(str, ecode);
+		return (parse_plane(str, ecode));
 	return (parse_sphere(str, ecode));
 }
