@@ -9,7 +9,7 @@ double	get_ratio(char *str, t_errors *exit_code)
 	while (ft_isdigit(str[i]) || str[i] == '.' || str[i] == '-')
 		i++;
 	if (str[i] && !ft_isdigit(str[i]))
-		return (*exit_code = 3, 0);
+		return (*exit_code = NO_NUMBER, 0);
 	return (ft_strtod(str));
 }
 
@@ -24,7 +24,7 @@ t_vector	get_color(char *str, t_errors *exit_code)
 	if (ft_stra_len(split) != 3)
 		return (*exit_code = VAL_NUM, new_vec(0, 0, 0));
 	if (is_number(split[0]) || is_number(split[1]) || is_number(split[2]))
-		*exit_code = 1;
+		*exit_code = NO_NUMBER;
 	r = ft_atoi(split[0]);
 	g = ft_atoi(split[1]);
 	b = ft_atoi(split[2]);
@@ -68,7 +68,7 @@ t_errors	get_objects(t_object **obj, char **file, char *set, size_t *size)
 		*obj = malloc(sizeof(t_object) * get_size(file, set));
 	while (check != NULL)
 	{
-		*obj[i] = parse(check, set, &ecode);
+		obj[0][i++] = parse(check, set, &ecode);
 		if (ecode)
 			return (free(*obj), *obj = NULL, ecode);
 		check = stra_iteri(file, set, id);
