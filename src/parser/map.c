@@ -1,6 +1,6 @@
 #include "parser.h"
 
-void	parse_error(t_errors code, char *component, t_map **map);
+void	parse_error(t_errors code, char *component, t_map **map, char **file);
 
 t_map	*get_map(char **file)
 {
@@ -13,11 +13,11 @@ t_map	*get_map(char **file)
 	map->camera = NULL;
 	map->objects = NULL;
 	exit_code = set_lighting(file, map);
-	parse_error(exit_code, "lighting: ", &map);
+	parse_error(exit_code, "lighting: ", &map, file);
 	exit_code = set_camera(file, map);
-	parse_error(exit_code, "camera: ", &map);
+	parse_error(exit_code, "camera: ", &map, file);
 	exit_code = get_obj_arr(file, map);
-	parse_error(exit_code, "objects: ", &map);
+	parse_error(exit_code, "objects: ", &map, file);
 	return (ft_free_stra(file), map);
 }
 
@@ -31,7 +31,7 @@ void	free_map(t_map *map)
 	free(map);
 }
 
-void	parse_error(t_errors code, char *component, t_map **map)
+void	parse_error(t_errors code, char *component, t_map **map, char **file)
 {
 	if (code == SUCCESS)
 		return ;
@@ -52,6 +52,7 @@ void	parse_error(t_errors code, char *component, t_map **map)
 	if (code == NOT_FOUND)
 		ft_putendl_fd("non existent", 2);
 	free_map(*map);
+	ft_free_stra(file);
 	*map = NULL;
 	exit(EXIT_FAILURE);
 }

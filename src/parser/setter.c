@@ -14,10 +14,10 @@ t_errors	set_lighting(char **file, t_map *map)
 		return (FATAL);
 	ecode = get_amlight(file, light);
 	if (ecode)
-		return (ecode);
+		return (free(light), ecode);
 	ecode = get_lighting(file, light);
 	if (ecode)
-		return (ecode);
+		return (free(light), ecode);
 	map->lighting = light;
 	return (SUCCESS);
 }
@@ -86,14 +86,15 @@ t_errors	set_camera(char **file, t_map *map)
 		return (ft_free_stra(args), ARG_NUM);
 	map->camera = new_cam(get_vector(args[1], &ecode, 1),
 			get_vector(args[2], &ecode, 0), ft_atoi(args[3]));
+	ft_free_stra(args);
 	if (map->camera->fov > 180 || map->camera->fov < 0)
 		return (VAL_RANGE);
 	if (ecode)
-		return (ft_free_stra(args), ecode);
+		return (ecode);
 	input = stra_iteri(file, "C", 2);
 	if (input != NULL)
-		return (ft_free_stra(args), DUP_ENTITY);
-	return (ft_free_stra(args), SUCCESS);
+		return (DUP_ENTITY);
+	return (SUCCESS);
 }
 
 t_errors	get_obj_arr(char **file, t_map *map)
