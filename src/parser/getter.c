@@ -22,15 +22,15 @@ t_vector	get_color(char *str, t_errors *exit_code)
 
 	split = ft_split(str, ',');
 	if (ft_stra_len(split) != 3)
-		return (*exit_code = VAL_NUM, new_vec(0, 0, 0));
+		return (ft_free_stra(split), *exit_code = VAL_NUM, new_vec(0, 0, 0));
 	if (is_number(split[0]) || is_number(split[1]) || is_number(split[2]))
 		*exit_code = NO_NUMBER;
 	r = ft_atoi(split[0]);
 	g = ft_atoi(split[1]);
 	b = ft_atoi(split[2]);
+	ft_free_stra(split);
 	if (r > 255 || g > 255 || b > 255)
 		return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
-	ft_free_stra(split);
 	return (new_vec((double)r, (double)g, (double)b));
 }
 
@@ -43,14 +43,15 @@ t_vector	get_vector(char *str, t_errors *exit_code, int pos)
 
 	split = ft_split(str, ',');
 	if (ft_stra_len(split) != 3)
-		return (*exit_code = VAL_NUM, new_vec(0, 0, 0));
+		return (ft_free_stra(split), *exit_code = VAL_NUM, new_vec(0, 0, 0));
 	x = get_ratio(split[0], exit_code);
 	y = get_ratio(split[1], exit_code);
 	z = get_ratio(split[2], exit_code);
+	ft_free_stra(split);
 	if (!pos)
 		if (x > 1.0 || x < -1.0 || y > 1.0 || y < -1.0 || z > 1.0 || z < -1.0)
 			return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
-	return (ft_free_stra(split), new_vec(x, y, z));
+	return (new_vec(x, y, z));
 }
 
 t_errors	get_objects(t_object **obj, char **file, char *set, size_t *size)
