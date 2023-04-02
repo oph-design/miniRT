@@ -22,7 +22,7 @@ GRAPHICS_SRC	= window draw
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
-PARSER_SRC		= handle_input setter getter get_utils map
+PARSER_SRC		= handle_input setter getter get_utils map parse_obj
 PARSER			= $(addprefix $(PARSER_DIR), $(addsuffix .c, $(PARSER_SRC)))
 
 OBJECTS_DIR		= src/objects/

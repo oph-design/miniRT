@@ -99,20 +99,28 @@ t_errors	set_camera(char **file, t_map *map)
 t_errors	get_obj_arr(char **file, t_map *map)
 {
 	t_object	*objects;
+	t_errors	ecode;
 	size_t		size;
 	size_t		prev;
 
 	size = 0;
-	objects = get_objects(file, &size, "sp", parse_sphere);
+	ecode = SUCCESS;
+	objects = NULL;
+	ecode = get_objects(&map->objects, file, "sp", &size);
+	if (ecode)
+		return (ecode);
 	prev = size;
-	objects = join_objs(objects,
-			get_objects(file, &size, "pl", parse_plane), prev, size);
+	ecode = get_objects(&objects, file, "cy", &size);
+	if (ecode)
+		return (ecode);
+	map->objects = join_objs(map->objects, objects, prev, size);
 	prev = size;
-	objects = join_objs(objects,
-			get_objects(file, &size, "cy", parse_cylinder), prev, size);
-	if (objects == NULL)
+	ecode = get_objects(&objects, file, "pl", &size);
+	if (ecode)
+		return (ecode);
+	map->objects = join_objs(map->objects, objects, prev, size);
+	if (map->objects == NULL)
 		return (NOT_FOUND);
-	map->objects = objects;
 	map->obj_count = size;
 	return (SUCCESS);
 }
