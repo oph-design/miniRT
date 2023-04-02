@@ -9,6 +9,9 @@ t_map	*get_map(char **file)
 
 	exit_code = SUCCESS;
 	map = malloc(sizeof(t_map));
+	map->lighting = NULL;
+	map->camera = NULL;
+	map->objects = NULL;
 	exit_code = set_lighting(file, map);
 	parse_error(exit_code, "lighting: ", &map);
 	exit_code = set_camera(file, map);

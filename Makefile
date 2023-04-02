@@ -7,7 +7,7 @@ MLX42 		= ./MLX42/build/libmlx42.a
 MLXFLAGS	= -lglfw -L "$(HOME)/$(BREW)/opt/glfw/lib"
 RL_VERSION	= readline-8.1.2
 INCLUDE		= -I libft/ -I MLX42/include/MLX42/ -I include/
-CFLAGS		= -g -Wall -Werror -Wextra -fsanitize=address
+CFLAGS		= -g -Wall -Werror -Wextra #-fsanitize=address
 
 GREEN		= \033[0;32m
 CYAN		= \033[0;36m
@@ -41,7 +41,7 @@ OBJ				= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
 all:		$(NAME)
 
 $(NAME):	$(MLX42) $(LIBFT) $(OBJ_DIR) $(OBJ)
-			@$(CC) $(LIBFT) $(MLX42) $(LINK_FLAGS) $(OBJ) $(MLXFLAGS) -o $(NAME) -fsanitize=address
+			@$(CC) $(LIBFT) $(MLX42) $(LINK_FLAGS) $(OBJ) $(MLXFLAGS) -o $(NAME) #-fsanitize=address
 			@echo "$(GREEN)miniRT compiled!$(WHITE)"
 
 LSANLIB = /LeakSanitizer/liblsan.a
