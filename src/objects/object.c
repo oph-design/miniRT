@@ -17,7 +17,7 @@ t_object	new_cylinder(t_vector pos, t_vector orientation,
 {
 	t_object	new;
 
-	new.type = zylinder;
+	new.type = cylinder;
 	new.pos = pos;
 	new.radius = size[0];
 	new.height = size[1];

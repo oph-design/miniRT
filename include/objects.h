@@ -6,7 +6,7 @@
 typedef enum e_type
 {
 	sphere,
-	zylinder,
+	cylinder,
 	plane
 }	t_type;
 
