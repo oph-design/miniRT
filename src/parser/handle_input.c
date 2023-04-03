@@ -23,7 +23,7 @@ char	**get_file(char	*name)
 	if (fd == -1)
 	{
 		ft_putendl_fd("Error: file: not accessable", 2);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	file = get_next_line(fd);
 	while (file && file[0] && file[ft_strlen(file) - 1] == '\n')
@@ -36,6 +36,7 @@ char	**get_file(char	*name)
 	}
 	res = ft_split(file, '\n');
 	free(file);
+	close(fd);
 	return (res);
 }
 

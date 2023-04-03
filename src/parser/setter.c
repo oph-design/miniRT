@@ -37,14 +37,15 @@ static t_errors	get_lighting(char **file, t_lighting *light)
 		return (ft_free_stra(args), ARG_NUM);
 	set_light(light, get_ratio(args[2], &ecode), get_color(args[3], &ecode),
 		get_vector(args[1], &ecode, 1));
+	ft_free_stra(args);
 	if (light->l_ratio < 0.0 || light->l_ratio > 1.0)
-		return (ft_free_stra(args), VAL_RANGE);
+		return (VAL_RANGE);
 	if (ecode)
-		return (ft_free_stra(args), ecode);
+		return (ecode);
 	input = stra_iteri(file, "L", 1);
 	if (input != NULL)
-		return (ft_free_stra(args), DUP_ENTITY);
-	return (ft_free_stra(args), SUCCESS);
+		return (DUP_ENTITY);
+	return (SUCCESS);
 }
 
 static t_errors	get_amlight(char **file, t_lighting *light)
@@ -60,15 +61,16 @@ static t_errors	get_amlight(char **file, t_lighting *light)
 	args = ft_split(input, '\t');
 	if (ft_stra_len(args) != 3)
 		return (ft_free_stra(args), ARG_NUM);
-	set_amblight(light, get_ratio(args[1], &ecode), get_color(args[2], &ecode));
+	set_amblight(light, get_ratio(args[2], &ecode), get_color(args[2], &ecode));
+	ft_free_stra(args);
 	if (light->a_ratio < 0.0 || light->a_ratio > 1.0)
-		return (ft_free_stra(args), VAL_RANGE);
+		return (VAL_RANGE);
 	if (ecode)
-		return (ft_free_stra(args), ecode);
+		return (ecode);
 	input = stra_iteri(file, "A", 0);
 	if (input != NULL)
-		return (ft_free_stra(args), DUP_ENTITY);
-	return (ft_free_stra(args), SUCCESS);
+		return (DUP_ENTITY);
+	return (SUCCESS);
 }
 
 t_errors	set_camera(char **file, t_map *map)

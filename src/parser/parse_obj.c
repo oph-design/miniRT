@@ -7,7 +7,7 @@ t_object	parse_sphere(char *str, t_errors *ecode)
 
 	args = ft_split(str, '\t');
 	if (ft_stra_len(args) != 4)
-		return (*ecode = 2, ft_free_stra(args),
+		return (*ecode = ARG_NUM, ft_free_stra(args),
 			new_sphere(new_vec(0, 0, 0), 0, new_vec(0, 0, 0)));
 	sphere = new_sphere(get_vector(args[1], ecode, 1),
 			get_ratio(args[2], ecode), get_color(args[3], ecode));
@@ -22,7 +22,7 @@ t_object	parse_cylinder(char *str, t_errors *ecode)
 
 	args = ft_split(str, '\t');
 	if (ft_stra_len(args) != 6)
-		return (*ecode = 2, ft_free_stra(args),
+		return (*ecode = ARG_NUM, ft_free_stra(args),
 			new_cylinder(new_vec(0, 0, 0), new_vec(0, 0, 0),
 				size, new_vec(0, 0, 0)));
 	size[0] = get_ratio(args[3], ecode);
