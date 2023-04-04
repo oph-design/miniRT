@@ -58,8 +58,3 @@ char	*stra_iteri(char **arr, char *set, int id)
 	}
 	return (NULL);
 }
-
-int	ft_iswhitespcs(char c)
-{
-	return (c == 32 || (c > 9 && c < 13));
-}
