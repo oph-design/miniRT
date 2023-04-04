@@ -49,7 +49,7 @@ void	draw(t_window *window)
 
 	i = 0;
 	j = 0;
-	sp = new_sphere(new_vec(0.0, 0.0, -3.0), 0.5, new_vec(255, 200, 200));
+	sp = new_sphere(new_vec(0.0, 0.0, -4.0), 0.5, new_vec(255, 200, 200));
 	ft_bzero(window->image->pixels, WIDTH * HEIGHT * sizeof(int));
 	while (i < HEIGHT)
 	{

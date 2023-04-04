@@ -44,7 +44,8 @@ typedef struct s_camera
 	t_vector	horizontal;
 	t_vector	orientation;
 	t_vector	vertical;
-	int			fov;
+	double		fov;
+	double		ratio;
 }	t_camera;
 
 typedef struct s_object

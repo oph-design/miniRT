@@ -72,6 +72,8 @@ $(MLX42):
 			@cd MLX42 && cmake -B build
 			@cd MLX42 && cmake --build build -j4
 
+test: all
+			./minirt default.rt	
 clean:
 			@rm -rf $(OBJ_DIR)
 			@echo "$(GREEN)miniRT object files cleaned!$(WHITE)"
