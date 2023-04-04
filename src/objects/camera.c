@@ -19,12 +19,12 @@ t_camera	*new_camera(t_vector pos)
 	return (new);
 }
 
-t_camera	*new_cam(t_vector vec, t_vector pos, int fov)
+t_camera	*new_cam(t_vector pos, t_vector orientation, int fov)
 {
 	t_camera	*new;
 
 	new = malloc(sizeof(t_camera));
-	new->orientation = vec;
+	new->orientation = orientation;
 	new->pos = pos;
 	new->fov = fov;
 	return (new);
