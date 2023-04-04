@@ -86,11 +86,11 @@ t_errors	set_camera(char **file, t_map *map)
 	args = ft_split_whitespcs(input);
 	if (ft_stra_len(args) != 4)
 		return (ft_free_stra(args), ARG_NUM);
+	if (ft_atoi(args[3]) > 180 || ft_atoi(args[3]) < 0)
+		return (ft_free_stra(args), VAL_RANGE);
 	map->camera = new_cam(get_vector(args[1], &ecode, 1),
 			get_vector(args[2], &ecode, 0), ft_atoi(args[3]));
 	ft_free_stra(args);
-	if (map->camera->fov > 180 || map->camera->fov < 0)
-		return (VAL_RANGE);
 	if (ecode)
 		return (ecode);
 	input = stra_iteri(file, "C", 2);

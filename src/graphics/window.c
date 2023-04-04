@@ -39,7 +39,7 @@ void	setup_window(void)
 	if (!window->image)
 		window_panic(window);
 	window->camera = new_cam(new_vec(0.0, 0.0, 1.0),
-			new_vec(0.0, 0.0, -1.0), 70);
+			new_vec(0.0, 0.0, -1.0), 90);
 	if (mlx_image_to_window(window->mlx, window->image, 0, 0) == -1)
 		window_panic(window);
 	draw(window);

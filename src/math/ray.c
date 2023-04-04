@@ -15,7 +15,7 @@ t_ray	get_ray(t_camera *cam, double x, double y)
 	double		nx;
 	double		ny;
 
-	nx = ((2 * x - 1.0) * cam->ratio) * cam->fov;
+	nx = (2 * x - 1.0) * cam->fov * cam->ratio;
 	ny = (1.0 - 2.0 * y) * cam->fov;
 	dest = new_vec(nx, ny, cam->orientation.z);
 	return (new_ray(cam->pos, dest));

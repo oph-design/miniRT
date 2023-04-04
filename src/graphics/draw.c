@@ -55,8 +55,8 @@ void	draw(t_window *window)
 	{
 		while (j < WIDTH)
 		{
-			x = (double)j / (WIDTH);
-			y = (double)i / (HEIGHT);
+			x = ((double)j + 0.5) / (WIDTH);
+			y = ((double)i + 0.5) / (HEIGHT);
 			draw_pixel(window, j, i,
 				ray_color(get_ray(window->camera, x, y), sp));
 			j++;
