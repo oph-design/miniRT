@@ -5,7 +5,7 @@ t_object	parse_sphere(char *str, t_errors *ecode)
 	char		**args;
 	t_object	sphere;
 
-	args = ft_split(str, '\t');
+	args = ft_split_whitespcs(str);
 	if (ft_stra_len(args) != 4)
 		return (*ecode = ARG_NUM, ft_free_stra(args),
 			new_sphere(new_vec(0, 0, 0), 0, new_vec(0, 0, 0)));
@@ -20,7 +20,7 @@ t_object	parse_cylinder(char *str, t_errors *ecode)
 	double		size[2];
 	t_object	cylinder;
 
-	args = ft_split(str, '\t');
+	args = ft_split_whitespcs(str);
 	if (ft_stra_len(args) != 6)
 		return (*ecode = ARG_NUM, ft_free_stra(args),
 			new_cylinder(new_vec(0, 0, 0), new_vec(0, 0, 0),
@@ -37,7 +37,7 @@ t_object	parse_plane(char *str, t_errors *ecode)
 	char		**args;
 	t_object	plane;
 
-	args = ft_split(str, '\t');
+	args = ft_split_whitespcs(str);
 	if (ft_stra_len(args) != 4)
 		return (*ecode = 2, ft_free_stra(args), new_plane(new_vec(0, 0, 0),
 				new_vec(0, 0, 0), new_vec(0, 0, 0)));
