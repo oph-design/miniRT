@@ -12,16 +12,13 @@ t_ray	new_ray(t_vector origin, t_vector direction)
 t_ray	get_ray(t_camera *camera, double x, double y)
 {
 	t_vector	dest;
-	double		ratio;
-	double		fov;
-	double		nx;
-	double		ny;
+	t_vector	nx;
+	t_vector	ny;
 
-	ratio = 16.0 / 9.0;
-	fov = tan((camera->fov / 2));
-	nx = ((2 * x - 1.0) * ratio) * fov;
-	ny = (1.0 - 2.0 * y) * fov;
-	dest = new_vec(nx, ny, camera->orientation.z);
+	nx = mult_double_vec(x, camera->horizontal);
+	ny = mult_double_vec(y, camera->vertical);
+	dest = subtract_vec(add_to_vec(add_to_vec(camera->orientation, nx), ny),
+			camera->pos);
 	return (new_ray(camera->pos, dest));
 }
 

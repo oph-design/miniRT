@@ -6,9 +6,21 @@
 typedef enum e_type
 {
 	sphere,
-	zylinder,
+	cylinder,
 	plane
 }	t_type;
+
+typedef enum e_errors
+{
+	SUCCESS,
+	FATAL,
+	ARG_NUM,
+	VAL_RANGE,
+	NO_NUMBER,
+	VAL_NUM,
+	DUP_ENTITY,
+	NOT_FOUND
+}	t_errors;
 
 typedef struct s_vector
 {
