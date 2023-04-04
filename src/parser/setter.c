@@ -32,7 +32,7 @@ static t_errors	get_lighting(char **file, t_lighting *light)
 	input = stra_iteri(file, "L", 1);
 	if (!input)
 		return (NOT_FOUND);
-	args = ft_split(input, '\t');
+	args = ft_split_whitespcs(input);
 	if (ft_stra_len(args) != 4)
 		return (ft_free_stra(args), ARG_NUM);
 	set_light(light, get_ratio(args[2], &ecode), get_color(args[3], &ecode),
@@ -58,7 +58,7 @@ static t_errors	get_amlight(char **file, t_lighting *light)
 	input = stra_iteri(file, "A", 0);
 	if (!input)
 		return (NOT_FOUND);
-	args = ft_split(input, '\t');
+	args = ft_split_whitespcs(input);
 	if (ft_stra_len(args) != 3)
 		return (ft_free_stra(args), ARG_NUM);
 	set_amblight(light, get_ratio(args[1], &ecode), get_color(args[2], &ecode));
@@ -83,7 +83,7 @@ t_errors	set_camera(char **file, t_map *map)
 	input = stra_iteri(file, "C", 2);
 	if (!input)
 		return (NOT_FOUND);
-	args = ft_split(input, '\t');
+	args = ft_split_whitespcs(input);
 	if (ft_stra_len(args) != 4)
 		return (ft_free_stra(args), ARG_NUM);
 	map->camera = new_cam(get_vector(args[1], &ecode, 1),
