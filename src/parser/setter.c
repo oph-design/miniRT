@@ -61,7 +61,7 @@ static t_errors	get_amlight(char **file, t_lighting *light)
 	args = ft_split(input, '\t');
 	if (ft_stra_len(args) != 3)
 		return (ft_free_stra(args), ARG_NUM);
-	set_amblight(light, get_ratio(args[2], &ecode), get_color(args[2], &ecode));
+	set_amblight(light, get_ratio(args[1], &ecode), get_color(args[2], &ecode));
 	ft_free_stra(args);
 	if (light->a_ratio < 0.0 || light->a_ratio > 1.0)
 		return (VAL_RANGE);
