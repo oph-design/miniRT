@@ -50,6 +50,14 @@ typedef struct s_camera
 	double		vph;
 }	t_camera;
 
+typedef struct s_window
+{
+	mlx_t		*mlx;
+	mlx_image_t	*image;
+	int			width;
+	int			height;
+}	t_window;
+
 typedef struct s_object
 {
 	t_type		type;
@@ -66,6 +74,7 @@ typedef struct s_map
 	t_camera	*camera;
 	t_object	*objects;
 	size_t		obj_count;
+	t_window	*window;
 }				t_map;
 
 typedef struct s_ray

@@ -39,7 +39,7 @@ int	hit_sphere(t_object sp, t_ray ray)
 		return (1);
 }
 
-void	draw(t_window *window)
+void	draw(t_map *map)
 {
 	int			i;
 	int			j;
@@ -50,15 +50,15 @@ void	draw(t_window *window)
 	i = 0;
 	j = 0;
 	sp = new_sphere(new_vec(0.0, 0.0, 20.0), 20, new_vec(255, 200, 200));
-	ft_bzero(window->image->pixels, WIDTH * HEIGHT * sizeof(int));
+	ft_bzero(map->window->image->pixels, WIDTH * HEIGHT * sizeof(int));
 	while (i < HEIGHT)
 	{
 		while (j < WIDTH)
 		{
 			x = (double)j / (WIDTH);
 			y = (double)i / (HEIGHT);
-			draw_pixel(window, j, i,
-				ray_color(get_ray(window->camera, x, y), sp));
+			draw_pixel(map->window, j, i,
+				ray_color(get_ray(map->camera, x, y), sp));
 			j++;
 		}
 		j = 0;

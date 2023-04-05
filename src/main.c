@@ -10,7 +10,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	file = get_file(argv[1]);
 	map = get_map(file);
-	setup_window();
+	setup_window(map);
 	free_map(map);
 	return (EXIT_SUCCESS);
 }
