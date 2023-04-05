@@ -23,3 +23,11 @@ t_vector	multiply_vec(t_vector vec, t_vector m)
 	vec.z *= m.z;
 	return (vec);
 }
+
+t_vector	div_vec(t_vector vec, t_vector div)
+{
+	vec.x /= div.x;
+	vec.y /= div.y;
+	vec.z /= div.z;
+	return (vec);
+}

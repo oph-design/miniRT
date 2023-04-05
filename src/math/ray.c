@@ -11,14 +11,14 @@ t_ray	new_ray(t_vector origin, t_vector direction)
 
 t_ray	get_ray(t_camera *cam, double x, double y)
 {
-	t_vector	dest;
-	double		nx;
-	double		ny;
+	t_vector	dh;
+	t_vector	dv;
 
-	nx = (2 * x - 1.0) * cam->fov * cam->ratio;
-	ny = (1.0 - 2.0 * y) * cam->fov;
-	dest = new_vec(nx, ny, cam->orientation.z);
-	return (new_ray(cam->pos, dest));
+	dh = mult_double_vec(x, cam->horizontal);
+	dv = mult_double_vec(y, cam->vertical);
+	return (new_ray(cam->pos,
+			subtract_vec(add_to_vec(add_to_vec(cam->orientation,
+						dh), dv), cam->pos)));
 }
 
 t_vector	at(t_ray ray, double t)

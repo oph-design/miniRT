@@ -49,14 +49,14 @@ void	draw(t_window *window)
 
 	i = 0;
 	j = 0;
-	sp = new_sphere(new_vec(0.0, 0.0, -4.0), 0.5, new_vec(255, 200, 200));
+	sp = new_sphere(new_vec(0.0, 0.0, 20.0), 20, new_vec(255, 200, 200));
 	ft_bzero(window->image->pixels, WIDTH * HEIGHT * sizeof(int));
 	while (i < HEIGHT)
 	{
 		while (j < WIDTH)
 		{
-			x = ((double)j + 0.5) / (WIDTH);
-			y = ((double)i + 0.5) / (HEIGHT);
+			x = (double)j / (WIDTH);
+			y = (double)i / (HEIGHT);
 			draw_pixel(window, j, i,
 				ray_color(get_ray(window->camera, x, y), sp));
 			j++;

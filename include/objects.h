@@ -42,10 +42,12 @@ typedef struct s_camera
 {
 	t_vector	pos;
 	t_vector	horizontal;
-	t_vector	orientation;
 	t_vector	vertical;
+	t_vector	orientation;
 	double		fov;
 	double		ratio;
+	double		vpw;
+	double		vph;
 }	t_camera;
 
 typedef struct s_object

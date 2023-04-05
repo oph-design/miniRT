@@ -18,10 +18,12 @@ t_vector		cross_product(t_vector vec, t_vector cross);
 t_vector		add_to_vec(t_vector vec, t_vector add);
 t_vector		subtract_vec(t_vector vec, t_vector sub);
 t_vector		multiply_vec(t_vector vec, t_vector m);
+t_vector		div_vec(t_vector vec, t_vector div);
 
 t_vector		mult_double_vec(double d, t_vector vec);
 t_vector		add_double_vec(double d, t_vector vec);
 t_vector		sub_double_vec(double d, t_vector vec);
+t_vector		div_double_vec(double d, t_vector vec);
 
 t_ray			new_ray(t_vector origin, t_vector direction);
 uint32_t		ray_color(t_ray	ray, t_object sp);
