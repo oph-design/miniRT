@@ -4,10 +4,11 @@ CC			= cc
 LIBFT		= libft/libft.a
 BREW		= $(shell which brew | cut -f 4 -d '/')
 MLX42 		= ./MLX42/build/libmlx42.a
-MLXFLAGS	= -lglfw -L "$(HOME)/$(BREW)/opt/glfw/lib"
+MLXFLAGS	= $(MLX42) -Iinclude -ldl -lglfw -pthread -lm
 RL_VERSION	= readline-8.1.2
 INCLUDE		= -I libft/ -I MLX42/include/MLX42/ -I include/
 CFLAGS		= -g -Wall -Werror -Wextra #-fsanitize=address
+LINK_FLAGS	= -L libft -l:libft.a
 
 GREEN		= \033[0;32m
 CYAN		= \033[0;36m
@@ -41,7 +42,7 @@ OBJ				= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
 all:		$(NAME)
 
 $(NAME):	$(MLX42) $(LIBFT) $(OBJ_DIR) $(OBJ)
-			@$(CC) $(LIBFT) $(MLX42) $(LINK_FLAGS) $(OBJ) $(MLXFLAGS) -o $(NAME) #-fsanitize=address
+			@$(CC) $(LIBFT) $(OBJ) $(MLXFLAGS) $(LINK_FLAGS) -o $(NAME) #-fsanitize=address
 			@echo "$(GREEN)miniRT compiled!$(WHITE)"
 
 LSANLIB = /LeakSanitizer/liblsan.a
@@ -70,7 +71,7 @@ $(MLX42):
 			@git submodule init MLX42
 			@git submodule update MLX42
 			@cd MLX42 && cmake -B build
-			@cd MLX42 && cmake --build build -j4
+			@cmake --build build -j4
 
 clean:
 			@rm -rf $(OBJ_DIR)
@@ -82,5 +83,13 @@ fclean:		clean
 
 re:			fclean all
 			@echo "$(GREEN)Cleaned and rebuilt everything for miniRT!$(WHITE)"
+
+relib:
+			@make re -C libft
+			@rm -rf MLX42
+			@git submodule init
+			@git submodule update
+			@cd MLX42 && cmake -B build
+			@make -C MLX42/build
 
 .PHONY:		all clean fclean re
