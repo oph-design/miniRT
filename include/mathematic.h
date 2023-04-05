@@ -26,6 +26,6 @@ t_vector		sub_double_vec(double d, t_vector vec);
 t_vector		div_double_vec(double d, t_vector vec);
 
 t_ray			new_ray(t_vector origin, t_vector direction);
-uint32_t		ray_color(t_ray	ray, t_object sp);
+uint32_t		ray_color(t_ray	ray);
 
 #endif

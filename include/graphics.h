@@ -17,7 +17,9 @@ void		draw(t_map *map);
 void		draw_pixel(t_window *window, int x, int y, uint32_t color);
 void		setup_window(t_map *map);
 uint32_t	color(double r, double g, double b, double a);
+
 int			hit_sphere(t_object sp, t_ray ray);
+void		hit(t_map *map, int j, int i);
 
 t_ray		get_ray(t_camera *camera, double x, double y);
 

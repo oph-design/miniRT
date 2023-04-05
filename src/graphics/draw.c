@@ -20,45 +20,19 @@ uint32_t	color(double r, double g, double b, double a)
 	return (ir << 24 | ig << 16 | ib << 8 | ia);
 }
 
-int	hit_sphere(t_object sp, t_ray ray)
-{
-	double		a;
-	double		b;
-	double		c;
-	double		disc;
-	t_vector	p;
-
-	p = subtract_vec(ray.origin, sp.pos);
-	a = dot(ray.direction, ray.direction);
-	b = 2.0 * dot(p, ray.direction);
-	c = dot(p, p) - (sp.radius * sp.radius);
-	disc = b * b - 4 * a * c;
-	if (disc < 0)
-		return (0);
-	else
-		return (1);
-}
-
 void	draw(t_map *map)
 {
 	int			i;
 	int			j;
-	double		x;
-	double		y;
-	t_object	sp;
 
 	i = 0;
 	j = 0;
-	sp = new_sphere(new_vec(0.0, 0.0, 20.0), 20, new_vec(255, 200, 200));
 	ft_bzero(map->window->image->pixels, WIDTH * HEIGHT * sizeof(int));
 	while (i < HEIGHT)
 	{
 		while (j < WIDTH)
 		{
-			x = (double)j / (WIDTH);
-			y = (double)i / (HEIGHT);
-			draw_pixel(map->window, j, i,
-				ray_color(get_ray(map->camera, x, y), sp));
+			hit(map, j, i);
 			j++;
 		}
 		j = 0;

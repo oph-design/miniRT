@@ -9,8 +9,6 @@ t_camera	*new_cam(t_vector pos, t_vector orientation, int fov)
 	t_vector	u;
 	t_vector	v;
 
-	printf("Camera:\npos: %f, %f, %f\norientation: %f, %f, %f\n",
-		pos.x, pos.y, pos.z, orientation.x, orientation.y, orientation.z);
 	new = malloc(sizeof(t_camera));
 	vup = new_vec(0.0, 1.0, 0.0);
 	new->fov = tan((fov * (M_PI / 180)) / 2);
