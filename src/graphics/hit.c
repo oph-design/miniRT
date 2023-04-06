@@ -36,9 +36,8 @@ void	hit(t_map *map, int j, int i)
 		{
 			if (hit_sphere(map->objects[k], ray))
 			{
-				draw_pixel(map->window, j, i, color(map->objects[k].color.x,
-						map->objects[k].color.y,
-						map->objects[k].color.z, 255.0));
+				draw_pixel(map->window, j, i,
+					sample_color(map->objects[k].color, 100));
 				break ;
 			}
 			draw_pixel(map->window, j, i,
@@ -47,3 +46,6 @@ void	hit(t_map *map, int j, int i)
 		k++;
 	}
 }
+// draw_pixel(map->window, j, i, color(map->objects[k].color.x,
+// 		map->objects[k].color.y,
+// 		map->objects[k].color.z, 255.0));
