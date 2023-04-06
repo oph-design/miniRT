@@ -7,6 +7,8 @@ t_map	*get_map(char **file)
 	t_map		*map;
 	t_errors	exit_code;
 
+	if (file == NULL)
+		return (ft_putendl_fd("Error: file: empty file", 2), NULL);
 	exit_code = SUCCESS;
 	map = malloc(sizeof(t_map));
 	map->lighting = NULL;
