@@ -1,6 +1,19 @@
 #include "minirt.h"
 
-int	hit_sphere(t_object sp, t_ray ray)
+void	check_root(int *t, int a, int b, int c)
+{
+	int	to;
+	int	tl;
+
+	to = (-b - sqrt((b * b) - 4 * a * c)) / 2;
+	tl = (-b + sqrt((b * b) - 4 * a * c)) / 2;
+	if (to < tl && *t > to)
+		*t = to;
+	else if (*t > tl)
+		*t = tl;
+}
+
+int	hit_sphere(t_object sp, t_ray ray, int *pos, int *t)
 {
 	double		a;
 	double		b;
@@ -16,36 +29,42 @@ int	hit_sphere(t_object sp, t_ray ray)
 	if (disc < 0)
 		return (0);
 	else
+	{
+		if (disc == 0)
+		{
+			if (*t > (-b / 2 * a))
+				*t = -b / 2 * a;
+		}
+		else
+			check_root(t, a, b, c);
+		pos[0] = pos[1];
 		return (1);
+	}
 }
 
 void	hit(t_map *map, int j, int i)
 {
-	int		k;
 	double	x;
 	double	y;
-	t_ray	ray;
+	int		pos[2];
+	int		t;
 
-	k = 0;
-	x = (double)j / WIDTH;
-	y = (double)i / HEIGHT;
-	ray = get_ray(map->camera, x, y);
-	while ((int)map->obj_count > k)
+	pos[0] = 0;
+	pos[1] = 0;
+	t = 9999;
+	x = (double)j / map->window->width;
+	y = (double)i / map->window->height;
+	while ((int)map->obj_count > pos[1])
 	{
-		if (map->objects[k].type == sphere)
+		if (map->objects[pos[1]].type == sphere)
 		{
-			if (hit_sphere(map->objects[k], ray))
-			{
-				draw_pixel(map->window, j, i,
-					sample_color(map->objects[k].color, 100));
-				break ;
-			}
-			draw_pixel(map->window, j, i,
-				ray_color(ray));
+			hit_sphere(map->objects[pos[1]], get_ray(map->camera, x, y),
+				pos, &t);
 		}
-		k++;
+		pos[1]++;
 	}
+	if (t < 9999)
+		draw_pixel(map->window, j, i, vec_to_color(map->objects[pos[0]].color));
+	else
+		draw_pixel(map->window, j, i, ray_color(get_ray(map->camera, x, y)));
 }
-// draw_pixel(map->window, j, i, color(map->objects[k].color.x,
-// 		map->objects[k].color.y,
-// 		map->objects[k].color.z, 255.0));

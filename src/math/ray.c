@@ -37,5 +37,5 @@ uint32_t	ray_color(t_ray	ray)
 	t = 0.5 * normalize(ray.direction).y + 1.0;
 	col = add_to_vec(mult_double_vec(1.0 - t, new_vec(255, 255, 255)),
 			mult_double_vec(t, new_vec(127, 200, 255)));
-	return (color(col.x, col.y, col.z, 255.0));
+	return (write_color(col.x, col.y, col.z, 255.0));
 }

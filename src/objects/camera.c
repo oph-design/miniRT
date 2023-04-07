@@ -1,5 +1,4 @@
 #include "objects.h"
-#include <stdio.h>
 
 t_camera	*new_cam(t_vector pos, t_vector orientation, int fov)
 {
@@ -12,7 +11,7 @@ t_camera	*new_cam(t_vector pos, t_vector orientation, int fov)
 	new = malloc(sizeof(t_camera));
 	vup = new_vec(0.0, 1.0, 0.0);
 	new->fov = tan((fov * (M_PI / 180)) / 2);
-	new->ratio = (16.0 / 9.0);
+	new->ratio = ((double)WIDTH / (double)HEIGHT);
 	new->vph = 2.0 * new->fov;
 	new->vpw = new->ratio * new->vph;
 	w = normalize(subtract_vec(pos, orientation));

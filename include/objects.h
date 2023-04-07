@@ -54,8 +54,8 @@ typedef struct s_window
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
-	int			width;
-	int			height;
+	double		width;
+	double		height;
 }	t_window;
 
 typedef struct s_object

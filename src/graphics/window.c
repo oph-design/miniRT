@@ -30,6 +30,8 @@ void	setup_window(t_map *map)
 {
 	map->window = malloc(sizeof(t_window));
 	map->window->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
+	map->window->width = WIDTH;
+	map->window->height = HEIGHT;
 	if (!map->window->mlx)
 		window_panic(map->window);
 	map->window->image = mlx_new_image(map->window->mlx, WIDTH, HEIGHT);
