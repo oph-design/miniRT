@@ -19,11 +19,11 @@ CYAN		= \033[0;36m
 WHITE		= \033[0m
 
 MATH_DIR	= src/math/
-MATH_SRC	= ray vec_util vec_operations vec_double_operations util
+MATH_SRC	= ray vec_util vec_operations vec_double_operations util vec_clamp double_clamp
 MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
 
 GRAPHICS_DIR	= src/graphics/
-GRAPHICS_SRC	= window draw hit lighting
+GRAPHICS_SRC	= window draw hit cast_light 
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/

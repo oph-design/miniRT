@@ -21,7 +21,7 @@ int	hit_sphere(t_object sp, t_ray ray, int *pos, double *t)
 	double		disc;
 	t_vector	p;
 
-	p = subtract_vec(ray.origin, sp.pos);
+	p = sub_vec(ray.origin, sp.pos);
 	a = vec_length_squared(ray.direction);
 	b = 2 * dot(p, ray.direction);
 	c = vec_length_squared(p) - (sp.radius * sp.radius);
