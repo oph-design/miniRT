@@ -5,7 +5,7 @@
 # include "objects.h"
 
 # define WIDTH 1920
-# define HEIGHT 1080
+# define HEIGHT	1080 
 
 typedef struct s_vector	t_vector;
 typedef struct s_ray	t_ray;
@@ -23,5 +23,7 @@ int			hit_sphere(t_object sp, t_ray ray, int *pos, double *t);
 void		hit(t_map *map, int j, int i);
 
 t_ray		get_ray(t_camera *camera, double x, double y);
+
+t_vector	cast_light(t_map *map, int pos, t_vector hit);
 
 #endif

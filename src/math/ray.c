@@ -13,12 +13,12 @@ t_ray	get_ray(t_camera *cam, double x, double y)
 {
 	t_vector	dh;
 	t_vector	dv;
+	t_vector	dst;
 
 	dh = mult_double_vec(x, cam->horizontal);
 	dv = mult_double_vec(y, cam->vertical);
-	return (new_ray(cam->pos,
-			subtract_vec(add_to_vec(add_to_vec(cam->orientation,
-						dh), dv), cam->pos)));
+	dst = add_to_vec(add_to_vec(cam->orientation, dh), dv);
+	return (new_ray(cam->pos, subtract_vec(dst, cam->pos)));
 }
 
 t_vector	at(t_ray ray, double t)

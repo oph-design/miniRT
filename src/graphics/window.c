@@ -44,5 +44,5 @@ void	setup_window(t_map *map)
 	mlx_loop(map->window->mlx);
 	mlx_delete_image(map->window->mlx, map->window->image);
 	mlx_terminate(map->window->mlx);
-	free_window(map->window);
+	free(map->window);
 }
