@@ -79,11 +79,13 @@ $(MLX42):
 
 test: all
 			./minirt default.rt
+
 st: all
 			./minirt single.rt
 
 raw: all
 			./minirt raw.rt
+
 clean:
 			@rm -rf $(OBJ_DIR)
 			@echo "$(GREEN)miniRT object files cleaned!$(WHITE)"
