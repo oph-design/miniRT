@@ -51,7 +51,7 @@ char	*stra_iteri(char **arr, char *set, int id)
 		while (arr[i[id]][j] && ft_iswhitespcs(arr[i[id]][j]))
 			j++;
 		if (!ft_strncmp(arr[i[id]] + j, set, ft_strlen(set))
-			&& ft_iswhitespcs(arr[i[id]][j + ft_strlen(set)] + 1))
+			&& ft_iswhitespcs(arr[i[id]][j + ft_strlen(set)]))
 			return (arr[(i[id])++]);
 		j = 0;
 		(i[id])++;
