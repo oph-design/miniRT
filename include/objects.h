@@ -5,9 +5,9 @@
 
 typedef enum e_type
 {
-	sphere,
-	cylinder,
-	plane
+	SPHERE,
+	CYLINDER,
+	PLANE
 }	t_type;
 
 typedef enum e_errors
