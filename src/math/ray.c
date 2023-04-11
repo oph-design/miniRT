@@ -23,10 +23,7 @@ t_ray	get_ray(t_camera *cam, double x, double y)
 
 t_vector	at(t_ray ray, double t)
 {
-	t_vector	dt;
-
-	dt = mult_double_vec(t, ray.direction);
-	return (add_vec(ray.origin, dt));
+	return (add_vec(ray.origin, mult_double_vec(t, ray.direction)));
 }
 
 uint32_t	ray_color(t_ray	ray)

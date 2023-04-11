@@ -4,9 +4,11 @@ void	check_root(double *t, double a, double b, double c)
 {
 	double	to;
 	double	tl;
+	double	disc;
 
-	to = (-b - sqrt((b * b) - 4 * a * c)) / 2;
-	tl = (-b + sqrt((b * b) - 4 * a * c)) / 2;
+	disc = sqrt(b * b - 4 * a * c);
+	to = (-b + disc) / 2;
+	tl = (-b - disc) / 2;
 	if (to < tl && *t > to)
 		*t = to;
 	else if (*t > tl)
@@ -59,7 +61,7 @@ void	hit(t_map *map, int j, int i)
 			hit_sphere(map->objects[pos[1]], ray, pos, &t);
 		pos[1]++;
 	}
-	if (t < INFINITY)
+	if (t < INFINITY && t >= 0)
 		draw_pixel(map->window, j, i, vec_to_color(cast_light(map, pos[0],
 					at(ray, t))));
 	else

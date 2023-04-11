@@ -13,9 +13,10 @@ t_vector	cast_light(t_map *map, int pos, t_vector hit)
 	light_dir = normalize(sub_vec(map->lighting->pos, hit));
 	dir = normalize(sub_vec(hit, map->objects[pos].pos));
 	radiant = dot(light_dir, dir);
-	return (add_vec(mult_clamp_d(map->lighting->a_ratio,
-				map->objects[pos].color, 0, 255),
-			mult_clamp_d(map->lighting->l_ratio,
-				mult_clamp_d(radiant, map->objects[pos].color,
-					0, 255), 0, 255)));
+	ambient = mult_clamp_d(map->lighting->a_ratio, map->objects[pos].color,
+			0, 255);
+	light = mult_clamp_d(map->lighting->l_ratio,
+			mult_clamp_d(radiant, map->objects[pos].color,
+				0, 255), 0, 255);
+	return (add_clamp(light, ambient, 0, 255));
 }
