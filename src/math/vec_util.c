@@ -30,5 +30,5 @@ t_vector	cross_product(t_vector vec, t_vector cross)
 {
 	return (new_vec(vec.y * cross.z - vec.z * cross.y,
 			vec.z * cross.x - vec.x * cross.z,
-			vec.x * cross.y - vec.y * cross.z));
+			vec.x * cross.y - vec.y * cross.x));
 }

@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-t_vector	add_to_vec(t_vector vec, t_vector add)
+t_vector	add_vec(t_vector vec, t_vector add)
 {
 	vec.x += add.x;
 	vec.y += add.y;
@@ -8,7 +8,7 @@ t_vector	add_to_vec(t_vector vec, t_vector add)
 	return (vec);
 }
 
-t_vector	subtract_vec(t_vector vec, t_vector sub)
+t_vector	sub_vec(t_vector vec, t_vector sub)
 {
 	vec.x -= sub.x;
 	vec.y -= sub.y;
@@ -16,10 +16,18 @@ t_vector	subtract_vec(t_vector vec, t_vector sub)
 	return (vec);
 }
 
-t_vector	multiply_vec(t_vector vec, t_vector m)
+t_vector	mult_vec(t_vector vec, t_vector m)
 {
 	vec.x *= m.x;
 	vec.y *= m.y;
 	vec.z *= m.z;
+	return (vec);
+}
+
+t_vector	div_vec(t_vector vec, t_vector div)
+{
+	vec.x /= div.x;
+	vec.y /= div.y;
+	vec.z /= div.z;
 	return (vec);
 }

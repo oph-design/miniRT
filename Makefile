@@ -19,11 +19,11 @@ CYAN		= \033[0;36m
 WHITE		= \033[0m
 
 MATH_DIR	= src/math/
-MATH_SRC	= ray vec_util vec_operations vec_double_operations
+MATH_SRC	= ray vec_util vec_operations vec_double_operations util vec_clamp double_clamp
 MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
 
 GRAPHICS_DIR	= src/graphics/
-GRAPHICS_SRC	= window draw
+GRAPHICS_SRC	= window draw hit cast_light 
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
@@ -77,6 +77,13 @@ $(MLX42):
 			@cd MLX42 && cmake -B build
 			@cmake --build build -j4
 
+test: all
+			./minirt default.rt	
+st: all
+			./minirt single.rt	
+
+raw: all
+			./minirt raw.rt	
 clean:
 			@rm -rf $(OBJ_DIR)
 			@echo "$(GREEN)miniRT object files cleaned!$(WHITE)"

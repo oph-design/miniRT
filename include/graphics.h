@@ -5,27 +5,25 @@
 # include "objects.h"
 
 # define WIDTH 1920
-# define HEIGHT 1080
+# define HEIGHT	1080 
 
 typedef struct s_vector	t_vector;
 typedef struct s_ray	t_ray;
 typedef struct s_camera	t_camera;
+typedef struct s_window	t_window;
+typedef struct s_map	t_map;
 
-typedef struct s_window
-{
-	mlx_t		*mlx;
-	mlx_image_t	*image;
-	t_camera	*camera;
-	int			width;
-	int			height;
-}	t_window;
-
-void		draw(t_window *window);
+void		draw(t_map *map);
 void		draw_pixel(t_window *window, int x, int y, uint32_t color);
-void		setup_window(void);
-uint32_t	color(double r, double g, double b, double a);
-double		hit_sphere(t_object sp, t_ray ray);
+void		setup_window(t_map *map);
+uint32_t	write_color(double r, double g, double b, double a);
+uint32_t	vec_to_color(t_vector vec);
+
+int			hit_sphere(t_object sp, t_ray ray, int *pos, double *t);
+void		hit(t_map *map, int j, int i);
 
 t_ray		get_ray(t_camera *camera, double x, double y);
+
+t_vector	cast_light(t_map *map, int pos, t_vector hit);
 
 #endif

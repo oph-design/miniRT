@@ -9,42 +9,30 @@ t_ray	new_ray(t_vector origin, t_vector direction)
 	return (new);
 }
 
-t_ray	get_ray(t_camera *camera, double x, double y)
+t_ray	get_ray(t_camera *cam, double x, double y)
 {
-	t_vector	dest;
-	t_vector	nx;
-	t_vector	ny;
+	t_vector	dh;
+	t_vector	dv;
+	t_vector	dst;
 
-	nx = mult_double_vec(x, camera->horizontal);
-	ny = mult_double_vec(y, camera->vertical);
-	dest = subtract_vec(add_to_vec(add_to_vec(camera->orientation, nx), ny),
-			camera->pos);
-	return (new_ray(camera->pos, dest));
+	dh = mult_double_vec(x, cam->horizontal);
+	dv = mult_double_vec(y, cam->vertical);
+	dst = add_vec(add_vec(cam->orientation, dh), dv);
+	return (new_ray(cam->pos, sub_vec(dst, cam->pos)));
 }
 
 t_vector	at(t_ray ray, double t)
 {
-	t_vector	dt;
-
-	dt = mult_double_vec(t, ray.direction);
-	return (add_to_vec(ray.origin, dt));
+	return (add_vec(ray.origin, mult_double_vec(t, ray.direction)));
 }
 
-uint32_t	ray_color(t_ray	ray, t_object sp)
+uint32_t	ray_color(t_ray	ray)
 {
-	double		t;
 	t_vector	col;
-	t_vector	n;
+	double		t;
 
-	t = hit_sphere(sp, ray);
-	if (t < 0.0)
-	{
-		n = normalize(subtract_vec(at(ray, t), sp.pos));
-		return (color(127 * (n.x + 1), 127 * (n.y + 1),
-				127 * (n.z + 1), 255.0));
-	}
 	t = 0.5 * normalize(ray.direction).y + 1.0;
-	col = add_to_vec(mult_double_vec(1.0 - t, new_vec(255, 255, 255)),
+	col = add_vec(mult_double_vec(1.0 - t, new_vec(255, 255, 255)),
 			mult_double_vec(t, new_vec(127, 200, 255)));
-	return (color(col.x, col.y, col.z, 255.0));
+	return (write_color(col.x, col.y, col.z, 255.0));
 }

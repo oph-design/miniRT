@@ -1,31 +1,33 @@
 #include "objects.h"
 
-t_camera	*new_camera(t_vector pos)
+double	degrees_to_radians(double fov)
 {
-	double		viewport_height;
-	double		viewport_width;
-	double		focal_length;
-	t_camera	*new;
-
-	viewport_height = 2.0;
-	viewport_width = (16.0 / 9.0) * viewport_height;
-	focal_length = 1.0;
-	new = malloc(sizeof(t_camera));
-	new->pos = pos;
-	new->horizontal = new_vec(viewport_width, 0.0, 0.0);
-	new->vertical = new_vec(0.0, viewport_height, 0.0);
-	new->orientation = new_vec(0.0 - (viewport_width / 2),
-			0.0 - (viewport_height / 2), 0.0 - focal_length);
-	return (new);
+	return (fov * M_PI / 180);
 }
 
-t_camera	*new_cam(t_vector vec, t_vector pos, int fov)
+t_camera	*new_cam(t_vector pos, t_vector orientation, int fov)
 {
 	t_camera	*new;
+	t_vector	vup;
+	t_vector	w;
+	t_vector	u;
+	t_vector	v;
 
 	new = malloc(sizeof(t_camera));
-	new->orientation = vec;
+	vup = new_vec(0.0, -1.0, 0.0);
+	new->fov = tan(degrees_to_radians(fov) / 2);
+	new->ratio = ((double)WIDTH / (double)HEIGHT);
+	new->vph = 2.0 * new->fov;
+	new->vpw = new->vph * new->ratio;
+	w = normalize(sub_vec(pos, orientation));
+	u = normalize(cross_product(vup, w));
+	v = cross_product(w, u);
 	new->pos = pos;
-	new->fov = fov;
+	new->horizontal = mult_double_vec(new->vpw, u);
+	new->vertical = mult_double_vec(new->vph, v);
+	new->orientation = sub_vec(pos, div_double_vec(2.0, new->horizontal));
+	new->orientation = sub_vec(new->orientation,
+			div_double_vec(2.0, new->vertical));
+	new->orientation = sub_vec(new->orientation, w);
 	return (new);
 }

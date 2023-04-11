@@ -23,3 +23,11 @@ t_vector	sub_double_vec(double d, t_vector vec)
 	vec.z -= d;
 	return (vec);
 }
+
+t_vector	div_double_vec(double d, t_vector vec)
+{
+	vec.x /= d;
+	vec.y /= d;
+	vec.z /= d;
+	return (vec);
+}

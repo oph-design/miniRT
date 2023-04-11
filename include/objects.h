@@ -42,10 +42,21 @@ typedef struct s_camera
 {
 	t_vector	pos;
 	t_vector	horizontal;
-	t_vector	orientation;
 	t_vector	vertical;
-	int			fov;
+	t_vector	orientation;
+	double		fov;
+	double		ratio;
+	double		vpw;
+	double		vph;
 }	t_camera;
+
+typedef struct s_window
+{
+	mlx_t		*mlx;
+	mlx_image_t	*image;
+	double		width;
+	double		height;
+}	t_window;
 
 typedef struct s_object
 {
@@ -63,6 +74,7 @@ typedef struct s_map
 	t_camera	*camera;
 	t_object	*objects;
 	size_t		obj_count;
+	t_window	*window;
 }				t_map;
 
 typedef struct s_ray

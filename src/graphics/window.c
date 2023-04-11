@@ -2,7 +2,6 @@
 
 static void	free_window(t_window *window)
 {
-	free(window->camera);
 	free(window);
 }
 
@@ -27,24 +26,23 @@ static void	input(void *param)
 	}
 }
 
-void	setup_window(void)
+void	setup_window(t_map *map)
 {
-	t_window	*window;
-
-	window = malloc(sizeof(t_window));
-	window->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
-	if (!window->mlx)
-		window_panic(window);
-	window->image = mlx_new_image(window->mlx, WIDTH, HEIGHT);
-	if (!window->image)
-		window_panic(window);
-	window->camera = new_camera(new_vec(0.0, 0.0, 1.0));
-	if (mlx_image_to_window(window->mlx, window->image, 0, 0) == -1)
-		window_panic(window);
-	draw(window);
-	mlx_loop_hook(window->mlx, input, window);
-	mlx_loop(window->mlx);
-	mlx_delete_image(window->mlx, window->image);
-	mlx_terminate(window->mlx);
-	free_window(window);
+	map->window = malloc(sizeof(t_window));
+	map->window->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
+	map->window->width = WIDTH;
+	map->window->height = HEIGHT;
+	if (!map->window->mlx)
+		window_panic(map->window);
+	map->window->image = mlx_new_image(map->window->mlx, WIDTH, HEIGHT);
+	if (!map->window->image)
+		window_panic(map->window);
+	if (mlx_image_to_window(map->window->mlx, map->window->image, 0, 0) == -1)
+		window_panic(map->window);
+	draw(map);
+	mlx_loop_hook(map->window->mlx, input, map->window);
+	mlx_loop(map->window->mlx);
+	mlx_delete_image(map->window->mlx, map->window->image);
+	mlx_terminate(map->window->mlx);
+	free(map->window);
 }
