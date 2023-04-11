@@ -1,42 +1,49 @@
 #include "minirt.h"
 
-static void	check_root(double *t, double a, double b, double c)
+static double	check_root(double *t, t_vector h, int *pos)
 {
 	double	to;
 	double	tl;
 	double	disc;
 
-	disc = sqrt(b * b - 4 * a * c);
-	to = (-b + disc) / 2;
-	tl = (-b - disc) / 2;
+	disc = sqrt(h.y * h.y - 4 * h.x * h.z);
+	to = (-h.y + disc) / 2;
+	tl = (-h.y - disc) / 2;
 	if (to < tl && *t > to)
-		*t = to;
+	{
+		pos[INDEX_HIT] = pos[INDEX];
+		return (to);
+	}
 	else if (*t > tl)
-		*t = tl;
+	{
+		pos[INDEX_HIT] = pos[INDEX];
+		return (tl);
+	}
+	return (*t);
 }
 
 int	hit_sphere(t_object sp, t_ray ray, int *pos, double *t)
 {
-	double		a;
-	double		b;
-	double		c;
+	t_vector	h;
 	double		disc;
 	t_vector	p;
 
 	p = sub_vec(ray.origin, sp.pos);
-	a = vec_length_squared(ray.direction);
-	b = 2 * dot(p, ray.direction);
-	c = vec_length_squared(p) - (sp.radius * sp.radius);
-	disc = (b * b) - 4 * a * c;
+	h.x = vec_length_squared(ray.direction);
+	h.y = 2 * dot(p, ray.direction);
+	h.z = vec_length_squared(p) - (sp.radius * sp.radius);
+	disc = (h.y * h.y) - 4 * h.x * h.z;
 	if (disc < 0)
 		return (0);
 	else
 	{
-		if (disc == 0 && *t > (-b / 2 * a))
-			*t = -b / 2 * a;
+		if (disc == 0 && *t > (-h.y / 2 * h.x))
+		{
+			*t = -h.y / 2 * h.x;
+			pos[INDEX_HIT] = pos[INDEX];
+		}
 		else
-			check_root(t, a, b, c);
-		pos[0] = pos[1];
+			*t = check_root(t, h, pos);
 		return (1);
 	}
 }
