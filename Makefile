@@ -75,15 +75,17 @@ $(MLX42):
 			@git submodule init MLX42
 			@git submodule update MLX42
 			@cd MLX42 && cmake -B build
-			@cmake --build build -j4
+			@make -C MLX42/build
 
 test: all
-			./minirt default.rt	
+			./minirt default.rt
+
 st: all
-			./minirt single.rt	
+			./minirt single.rt
 
 raw: all
-			./minirt raw.rt	
+			./minirt raw.rt
+
 clean:
 			@rm -rf $(OBJ_DIR)
 			@echo "$(GREEN)miniRT object files cleaned!$(WHITE)"
