@@ -13,6 +13,12 @@ typedef struct s_camera	t_camera;
 typedef struct s_window	t_window;
 typedef struct s_map	t_map;
 
+typedef enum e_hit_index
+{
+	INDEX_HIT,
+	INDEX
+}	t_hit_index;
+
 void		draw(t_map *map);
 void		draw_pixel(t_window *window, int x, int y, uint32_t color);
 void		setup_window(t_map *map);
