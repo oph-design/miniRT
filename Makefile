@@ -23,7 +23,7 @@ MATH_SRC	= ray vec_util vec_operations vec_double_operations util vec_clamp doub
 MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
 
 GRAPHICS_DIR	= src/graphics/
-GRAPHICS_SRC	= window draw hit cast_light 
+GRAPHICS_SRC	= window draw hit cast_light
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
@@ -75,15 +75,15 @@ $(MLX42):
 			@git submodule init MLX42
 			@git submodule update MLX42
 			@cd MLX42 && cmake -B build
-			@cmake --build build -j4
+			@make -C MLX42/build
 
 test: all
-			./minirt default.rt	
+			./minirt default.rt
 st: all
-			./minirt single.rt	
+			./minirt single.rt
 
 raw: all
-			./minirt raw.rt	
+			./minirt raw.rt
 clean:
 			@rm -rf $(OBJ_DIR)
 			@echo "$(GREEN)miniRT object files cleaned!$(WHITE)"
