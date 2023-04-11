@@ -5,7 +5,7 @@
 # include "objects.h"
 
 # define WIDTH 1920
-# define HEIGHT	1080 
+# define HEIGHT	1080
 
 typedef struct s_vector	t_vector;
 typedef struct s_ray	t_ray;
@@ -25,6 +25,7 @@ void		setup_window(t_map *map);
 uint32_t	write_color(double r, double g, double b, double a);
 uint32_t	vec_to_color(t_vector vec);
 
+int			hit_cylinder(t_object cy, t_ray ray, int *pos, double *t);
 int			hit_sphere(t_object sp, t_ray ray, int *pos, double *t);
 void		hit(t_map *map, int j, int i);
 

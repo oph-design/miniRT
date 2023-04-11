@@ -47,3 +47,34 @@ int	hit_sphere(t_object sp, t_ray ray, int *pos, double *t)
 		return (1);
 	}
 }
+
+int	hit_cylinder(t_object cy, t_ray ray, int *pos, double *t)
+{
+	t_vector	h;
+	double		disc;
+	t_vector	p;
+	double		m;
+
+	p = sub_vec(ray.origin, cy.pos);
+	h.x = dot(ray.direction, ray.direction) - pow(dot(ray.direction, cy.orientation), 2);
+	h.y = (dot(ray.direction, p) - (dot(ray.direction, cy.orientation) * dot(p, cy.orientation))) * 2;
+	h.z = dot(p, p) - pow(dot(p, cy.orientation), 2) - pow(cy.radius, 2);
+	disc = (h.y * h.y) - 4 * h.x * h.z;
+	m = dot(ray.direction, mult_double_vec(*t, cy.orientation)) + dot(p, cy.orientation);
+	if (disc < 0)
+		return (0);
+	else
+	{
+		if (disc == 0 && *t > (-h.y / 2 * h.x))
+		{
+			*t = -h.y / 2 * h.x;
+			pos[INDEX_HIT] = pos[INDEX];
+		}
+		else
+			*t = check_root(t, h, pos);
+		return (1);
+	}
+}
+
+// || m < (dot(ray.direction, mult_double_vec(magnitude(cy.pos), cy.orientation)) + dot(p, cy.orientation))
+// 		|| m > (dot(ray.direction, mult_double_vec(magnitude(add_vec(cy.pos, mult_double_vec(cy.height, cy.orientation))), cy.orientation)) + dot(p, cy.orientation))
