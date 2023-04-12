@@ -41,7 +41,7 @@ int	intercept_sphere(t_object obj, t_ray ray)
 
 int	is_shaded(t_map *map, t_vector hit, int i)
 {
-	if (map->objects[i].type == sphere)
+	if (map->objects[i].type == SPHERE)
 		if (intercept_sphere(map->objects[i],
 				new_ray(hit, normalize(sub_vec(map->lighting->pos, hit)))))
 			return (1);
