@@ -27,19 +27,23 @@ int	intercept_sphere(t_object obj, t_ray ray)
 		return (0);
 	else
 	{
+		if (disc == 0)
+			return (1);
 		to = (-h.y + disc) / 2;
 		tl = (-h.y - disc) / 2;
-		if (to > 0 && tl > 0)
+		if (to > 1.0 && tl > 1.0)
 			return (1);
 	}
 	return (0);
 }
+// if ((to > 0.0 && to <= sqrt(vec_length_squared(ray.direction)))
+// 	|| (tl > 0.0 && tl <= sqrt(vec_length_squared(ray.direction))))
 
 int	is_shaded(t_map *map, t_vector hit, int i)
 {
 	if (map->objects[i].type == sphere)
 		if (intercept_sphere(map->objects[i],
-				new_ray(hit, map->lighting->pos)))
+				new_ray(hit, normalize(sub_vec(map->lighting->pos, hit)))))
 			return (1);
 	return (0);
 }
@@ -75,10 +79,10 @@ void	hit(t_map *map, int j, int i)
 	loop_objects(map, ray, &t, pos);
 	if (shadow_cast(map, pos[INDEX_HIT], at(ray, t)))
 		draw_pixel(map->window, j, i, write_color(255.0, 255.0, 255.0, 255.0));
-	// if (t < INFINITY && t >= 0 && !shadow(map, pos[INDEX_hit], at(ray, t), 0))
 	else if (t < INFINITY && t >= 0)
 		draw_pixel(map->window, j, i, vec_to_color(cast_light(map,
 					pos[INDEX_HIT], at(ray, t))));
 	else
 		draw_pixel(map->window, j, i, write_color(0.0, 0.0, 0.0, 255.0));
 }
+// if (t < INFINITY && t >= 0 && !shadow_cast(map, pos[INDEX_HIT], at(ray, t)))
