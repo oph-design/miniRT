@@ -10,8 +10,6 @@ t_errors	set_lighting(char **file, t_map *map)
 
 	ecode = SUCCESS;
 	light = malloc(sizeof(t_lighting));
-	if (!light)
-		return (FATAL);
 	ecode = get_amlight(file, light);
 	if (ecode)
 		return (free(light), ecode);

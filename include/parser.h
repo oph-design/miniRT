@@ -21,5 +21,6 @@ t_errors	set_lighting(char **file, t_map *map);
 size_t		get_size(char **file, char *set);
 t_object	*realloc_arr(size_t size, t_object *src);
 t_object	parse(char *str, char *set, t_errors *ecode);
+int			find_invalid_ids(char **file);
 
 #endif

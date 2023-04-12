@@ -13,7 +13,8 @@ typedef enum e_type
 typedef enum e_errors
 {
 	SUCCESS,
-	FATAL,
+	EMPTY,
+	IDENTIFIER,
 	ARG_NUM,
 	VAL_RANGE,
 	NO_NUMBER,
