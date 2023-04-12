@@ -58,3 +58,39 @@ char	*stra_iteri(char **arr, char *set, int id)
 	}
 	return (NULL);
 }
+
+int	is_identifier(char *line)
+{
+	if (!ft_strncmp(line, "A", 1) && ft_iswhitespcs(*(line + 1)))
+		return (1);
+	if (!ft_strncmp(line, "C", 1) && ft_iswhitespcs(*(line + 1)))
+		return (1);
+	if (!ft_strncmp(line, "L", 1) && ft_iswhitespcs(*(line + 1)))
+		return (1);
+	if (!ft_strncmp(line, "sp", 2) && ft_iswhitespcs(*(line + 2)))
+		return (1);
+	if (!ft_strncmp(line, "cy", 2) && ft_iswhitespcs(*(line + 2)))
+		return (1);
+	if (!ft_strncmp(line, "pl", 2) && ft_iswhitespcs(*(line + 2)))
+		return (1);
+	return (0);
+}
+
+int	find_invalid_ids(char **file)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (file[i] != NULL)
+	{
+		while (file[i][j] && ft_iswhitespcs(file[i][j]))
+			j++;
+		if (!is_identifier(file[i] + j))
+			return (0);
+		j = 0;
+		i++;
+	}
+	return (1);
+}
