@@ -5,6 +5,7 @@
 # include "MLX42.h"
 # include "mathematic.h"
 # include "graphics.h"
+# include "key_input.h"
 
 typedef struct s_map	t_map;
 

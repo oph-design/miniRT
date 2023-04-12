@@ -4,8 +4,8 @@
 # include "MLX42.h"
 # include "objects.h"
 
-# define WIDTH 1920
-# define HEIGHT	1080
+# define WIDTH 800
+# define HEIGHT	500
 
 typedef struct s_vector	t_vector;
 typedef struct s_ray	t_ray;
@@ -32,5 +32,7 @@ void		hit(t_map *map, int j, int i);
 t_ray		get_ray(t_camera *camera, double x, double y);
 
 t_vector	cast_light(t_map *map, int pos, t_vector hit);
+
+int			is_shaded(t_map *map, int pos, t_vector hit);
 
 #endif

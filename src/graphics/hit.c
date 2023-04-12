@@ -27,7 +27,7 @@ void	hit(t_map *map, int j, int i)
 	y = i / map->window->height;
 	ray = get_ray(map->camera, x, y);
 	loop_objects(map, ray, &t, pos);
-	if (t < INFINITY && t >= 0)
+	if (t < INFINITY && t >= 0 && !is_shaded(map, pos[INDEX_HIT], at(ray, t)))
 		draw_pixel(map->window, j, i, vec_to_color(cast_light(map,
 					pos[INDEX_HIT], at(ray, t))));
 	else
