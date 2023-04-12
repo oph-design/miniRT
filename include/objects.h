@@ -41,6 +41,7 @@ typedef struct s_lighting
 typedef struct s_camera
 {
 	t_vector	pos;
+	t_vector	dir;
 	t_vector	horizontal;
 	t_vector	vertical;
 	t_vector	orientation;

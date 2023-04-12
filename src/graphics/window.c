@@ -12,21 +12,6 @@ static void	window_panic(t_window *window)
 	exit(EXIT_FAILURE);
 }
 
-static void	input(void *param)
-{
-	t_map	*map;
-
-	map = param;
-	if (mlx_is_key_down(map->window->mlx, MLX_KEY_ESCAPE))
-	{
-		mlx_delete_image(map->window->mlx, map->window->image);
-		mlx_terminate(map->window->mlx);
-		free_window(map->window);
-		free_map(map);
-		exit(EXIT_SUCCESS);
-	}
-}
-
 void	setup_window(t_map *map)
 {
 	map->window = malloc(sizeof(t_window));
