@@ -71,7 +71,6 @@ int	hit_cylinder(t_object cy, t_ray ray, int *pos, double *t)
 	t_vector	h;
 	double		disc;
 	t_vector	p;
-	double		m;
 	t_vector	base;
 
 	base = add_vec(cy.pos, add_double_vec(cy.height / 2, cy.orientation));
@@ -82,7 +81,6 @@ int	hit_cylinder(t_object cy, t_ray ray, int *pos, double *t)
 	h.y = (dot(ray.direction, p) - (dot(ray.direction, cy.orientation) * dot(p, cy.orientation))) * 2;
 	h.z = dot(p, p) - pow(dot(p, cy.orientation), 2) - pow(cy.radius, 2);
 	disc = (h.y * h.y) - 4 * h.x * h.z;
-	m = dot(ray.direction, mult_double_vec(*t, cy.orientation)) + dot(p, cy.orientation);
 	if (disc < 0)
 		return (0);
 	else
