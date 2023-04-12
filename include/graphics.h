@@ -26,6 +26,8 @@ uint32_t	write_color(double r, double g, double b, double a);
 uint32_t	vec_to_color(t_vector vec);
 
 int			hit_cylinder(t_object cy, t_ray ray, int *pos, double *t);
+
+double		check_root(double *t, t_vector h, int *pos);
 int			hit_sphere(t_object sp, t_ray ray, int *pos, double *t);
 void		hit(t_map *map, int j, int i);
 

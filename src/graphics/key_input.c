@@ -28,12 +28,12 @@ static void	light_movement(t_map *map)
 	}
 	if (mlx_is_key_down(map->window->mlx, MLX_KEY_LEFT))
 	{
-		map->lighting->pos.x += 5;
+		map->lighting->pos.x -= 5;
 		draw(map);
 	}
 	if (mlx_is_key_down(map->window->mlx, MLX_KEY_RIGHT))
 	{
-		map->lighting->pos.x -= 5;
+		map->lighting->pos.x += 5;
 		draw(map);
 	}
 }

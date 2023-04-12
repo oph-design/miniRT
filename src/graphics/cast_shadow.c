@@ -21,7 +21,7 @@ static int	intercept_sphere(t_object obj, t_ray ray)
 			return (1);
 		to = (-h.y + disc) / 2;
 		tl = (-h.y - disc) / 2;
-		if (to > 1.5 && tl > 1.5)
+		if (to > 0.0001 && tl > 0.0001)
 			return (1);
 	}
 	return (0);

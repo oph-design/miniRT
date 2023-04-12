@@ -24,7 +24,7 @@ MATH_SRC	= ray vec_util vec_operations vec_double_operations util vec_clamp doub
 MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
 
 GRAPHICS_DIR	= src/graphics/
-GRAPHICS_SRC	= window draw hit cast_light cast_shadow hit_sphere key_input
+GRAPHICS_SRC	= window draw hit cast_light cast_shadow hit_sphere hit_cylinder key_input
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
@@ -79,13 +79,16 @@ $(MLX42):
 			@make -C MLX42/build
 
 test: all
-			./minirt default.rt
+			./minirt scenes/default.rt
 
 st: all
-			./minirt single.rt
+			./minirt scenes/single.rt
 
 shadow: all
-			./minirt shadow_test.rt
+			./minirt scenes/shadow_test.rt
+
+cy: all
+			./minirt scenes/cyandsp.rt
 
 clean:
 			@rm -rf $(OBJ_DIR)
