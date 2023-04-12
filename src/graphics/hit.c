@@ -4,7 +4,7 @@ void	loop_objects(t_map *map, t_ray ray, double *t, int *pos)
 {
 	while ((int)map->obj_count > pos[INDEX])
 	{
-		if (map->objects[pos[INDEX]].type == sphere)
+		if (map->objects[pos[INDEX]].type == SPHERE)
 			hit_sphere(map->objects[pos[INDEX]], ray, pos, t);
 		pos[INDEX]++;
 	}
