@@ -109,11 +109,11 @@ t_errors	get_obj_arr(char **file, t_map *map)
 	size = 0;
 	ecode = SUCCESS;
 	objects = NULL;
-	ecode = get_objects(&map->objects, file, "sp", &size);
+	ecode = get_objects(&map->objects, file, "cy", &size);
 	if (ecode)
 		return (ecode);
 	prev = size;
-	ecode = get_objects(&objects, file, "cy", &size);
+	ecode = get_objects(&objects, file, "sp", &size);
 	if (ecode)
 		return (ecode);
 	map->objects = join_objs(map->objects, objects, prev, size);
