@@ -1,5 +1,4 @@
 #include "minirt.h"
-#include <stdio.h>
 
 double	check_root(double *t, t_vector h, int *pos)
 {
