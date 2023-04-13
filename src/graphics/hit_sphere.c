@@ -47,3 +47,30 @@ int	hit_sphere(t_object sp, t_ray ray, int *pos, double *t)
 		return (1);
 	}
 }
+
+int	intercept_sphere(t_object sp, t_ray ray)
+{
+	t_vector	h;
+	double		disc;
+	t_vector	p;
+	double		to;
+	double		tl;
+
+	p = sub_vec(ray.origin, sp.pos);
+	h.x = vec_length_squared(ray.direction);
+	h.y = 2 * dot(p, ray.direction);
+	h.z = vec_length_squared(p) - (sp.radius * sp.radius);
+	disc = (h.y * h.y) - 4 * h.x * h.z;
+	if (disc < 0)
+		return (0);
+	else
+	{
+		if (disc == 0)
+			return (1);
+		to = (-h.y + disc) / 2;
+		tl = (-h.y - disc) / 2;
+		if (to > 0.00001 && tl > 0.00001)
+			return (1);
+	}
+	return (0);
+}

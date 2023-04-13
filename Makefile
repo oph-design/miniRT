@@ -78,13 +78,13 @@ $(MLX42):
 			@make -C MLX42/build
 
 test: all
-			./minirt default.rt
-
-st: all
-			./minirt single.rt
+			./minirt scenes/default.rt
 
 shadow: all
-			./minirt shadow_test.rt
+			./minirt scenes/shadow_test.rt
+			
+morph: all
+			./minirt scenes/morphed.rt
 
 clean:
 			@rm -rf $(OBJ_DIR)

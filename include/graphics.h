@@ -26,6 +26,7 @@ uint32_t	write_color(double r, double g, double b, double a);
 uint32_t	vec_to_color(t_vector vec);
 
 int			hit_sphere(t_object sp, t_ray ray, int *pos, double *t);
+int			intercept_sphere(t_object sp, t_ray ray);
 void		hit(t_map *map, int j, int i);
 
 t_ray		get_ray(t_camera *camera, double x, double y);
