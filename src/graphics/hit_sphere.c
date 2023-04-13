@@ -1,14 +1,14 @@
 #include "minirt.h"
 
-static double	check_root(double *t, t_vector h, int *pos)
+static double	check_root(double *t, t_vector var, int *pos)
 {
 	double	to;
 	double	tl;
 	double	disc;
 
-	disc = sqrt(h.y * h.y - 4 * h.x * h.z);
-	to = (-h.y + disc) / 2;
-	tl = (-h.y - disc) / 2;
+	disc = sqrt(var.y * var.y - 4 * var.x * var.z);
+	to = (-var.y + disc) / 2;
+	tl = (-var.y - disc) / 2;
 	if (to < tl && *t > to)
 	{
 		pos[INDEX_HIT] = pos[INDEX];
@@ -24,52 +24,54 @@ static double	check_root(double *t, t_vector h, int *pos)
 
 int	hit_sphere(t_object sp, t_ray ray, int *pos, double *t)
 {
-	t_vector	h;
+	t_vector	var;
 	double		disc;
 	t_vector	p;
 
 	p = sub_vec(ray.origin, sp.pos);
-	h.x = vec_length_squared(ray.direction);
-	h.y = 2 * dot(p, ray.direction);
-	h.z = vec_length_squared(p) - (sp.radius * sp.radius);
-	disc = (h.y * h.y) - 4 * h.x * h.z;
+	var.x = vec_length_squared(ray.direction);
+	var.y = 2 * dot(p, ray.direction);
+	var.z = vec_length_squared(p) - (sp.radius * sp.radius);
+	disc = (var.y * var.y) - 4 * var.x * var.z;
 	if (disc < 0)
 		return (0);
 	else
 	{
-		if (disc == 0 && *t > (-h.y / 2 * h.x))
+		if (disc == 0 && *t > (-var.y / 2 * var.x))
 		{
-			*t = -h.y / 2 * h.x;
+			*t = -var.y / 2 * var.x;
 			pos[INDEX_HIT] = pos[INDEX];
 		}
 		else
-			*t = check_root(t, h, pos);
+			*t = check_root(t, var, pos);
 		return (1);
 	}
 }
 
 int	intercept_sphere(t_object sp, t_ray ray)
 {
-	t_vector	h;
+	t_vector	var;
 	double		disc;
 	t_vector	p;
 	double		to;
 	double		tl;
 
 	p = sub_vec(ray.origin, sp.pos);
-	h.x = vec_length_squared(ray.direction);
-	h.y = 2 * dot(p, ray.direction);
-	h.z = vec_length_squared(p) - (sp.radius * sp.radius);
-	disc = (h.y * h.y) - 4 * h.x * h.z;
+	var.x = vec_length_squared(ray.direction);
+	var.y = 2 * dot(p, ray.direction);
+	var.z = vec_length_squared(p) - (sp.radius * sp.radius);
+	disc = (var.y * var.y) - 4 * var.x * var.z;
 	if (disc < 0)
 		return (0);
 	else
 	{
 		if (disc == 0)
 			return (1);
-		to = (-h.y + disc) / 2;
-		tl = (-h.y - disc) / 2;
-		if (to > 0.00001 && tl > 0.00001)
+		to = (-var.y + disc) / 2;
+		tl = (-var.y - disc) / 2;
+		if (to > tl && tl > 0.00001)
+			return (1);
+		if (tl > to && to > 0.00001)
 			return (1);
 	}
 	return (0);
