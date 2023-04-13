@@ -50,8 +50,6 @@ int	hit_sphere(t_object sp, t_ray ray, int *pos, double *t)
 
 int	check_t(double to, double tl)
 {
-	if (to > ZERO || tl > ZERO)
-		return (1);
 	if (to > tl && tl > ZERO)
 		return (1);
 	if (tl > to && to > ZERO)
