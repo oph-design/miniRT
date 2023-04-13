@@ -48,6 +48,17 @@ int	hit_sphere(t_object sp, t_ray ray, int *pos, double *t)
 	}
 }
 
+int	check_t(double to, double tl)
+{
+	if (to > ZERO || tl > ZERO)
+		return (1);
+	if (to > tl && tl > ZERO)
+		return (1);
+	if (tl > to && to > ZERO)
+		return (1);
+	return (0);
+}
+
 int	intercept_sphere(t_object sp, t_ray ray)
 {
 	t_vector	var;
@@ -69,10 +80,7 @@ int	intercept_sphere(t_object sp, t_ray ray)
 			return (1);
 		to = (-var.y + disc) / 2;
 		tl = (-var.y - disc) / 2;
-		if (to > tl && tl > ZERO)
-			return (1);
-		if (tl > to && to > ZERO)
-			return (1);
+		return (check_t(to, tl));
 	}
 	return (0);
 }
