@@ -9,12 +9,12 @@ static double	check_root(double *t, t_vector var, int *pos)
 	disc = sqrt(var.y * var.y - 4 * var.x * var.z);
 	to = (-var.y + disc) / 2;
 	tl = (-var.y - disc) / 2;
-	if (to < tl && *t > to)
+	if (to < tl && *t + ZERO > to)
 	{
 		pos[INDEX_HIT] = pos[INDEX];
 		return (to);
 	}
-	else if (*t > tl)
+	else if (*t + ZERO > tl)
 	{
 		pos[INDEX_HIT] = pos[INDEX];
 		return (tl);
@@ -37,7 +37,7 @@ int	hit_sphere(t_object sp, t_ray ray, int *pos, double *t)
 		return (0);
 	else
 	{
-		if (disc == 0 && *t > (-var.y / 2 * var.x))
+		if (disc == 0 && *t + ZERO > (-var.y / 2 * var.x))
 		{
 			*t = -var.y / 2 * var.x;
 			pos[INDEX_HIT] = pos[INDEX];
@@ -69,9 +69,9 @@ int	intercept_sphere(t_object sp, t_ray ray)
 			return (1);
 		to = (-var.y + disc) / 2;
 		tl = (-var.y - disc) / 2;
-		if (to > tl && tl > 0.00001)
+		if (to > tl && tl > ZERO)
 			return (1);
-		if (tl > to && to > 0.00001)
+		if (tl > to && to > ZERO)
 			return (1);
 	}
 	return (0);

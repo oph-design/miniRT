@@ -5,6 +5,8 @@
 # include <math.h>
 # include "MLX42.h"
 
+# define ZERO 0.000001
+
 typedef struct s_vector	t_vector;
 typedef struct s_object	t_object;
 typedef struct s_ray	t_ray;
