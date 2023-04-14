@@ -11,10 +11,12 @@ int	hit_plane(t_object pl, t_ray ray, int *pos, double *t)
 	tt = dot(sub_vec(pl.pos, ray.origin), pl.orientation) / div;
 	if (tt <= 0)
 		return (0);
-	else if (*t > tt)
+	else if (!t || *t > tt)
 	{
-		*t = tt;
-		pos[INDEX_HIT] = pos[INDEX];
+		if (t)
+			*t = tt;
+		if (pos)
+			pos[INDEX_HIT] = pos[INDEX];
 		return (1);
 	}
 	return (0);
