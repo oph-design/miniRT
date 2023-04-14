@@ -29,6 +29,7 @@ int			hit_cylinder(t_object cy, t_ray ray, int *pos, double *t);
 
 double		check_root(double *t, t_vector h, int *pos);
 int			hit_sphere(t_object sp, t_ray ray, int *pos, double *t);
+int			hit_plane(t_object pl, t_ray ray, int *pos, double *t);
 void		hit(t_map *map, int j, int i);
 
 t_ray		get_ray(t_camera *camera, double x, double y);
