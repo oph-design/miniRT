@@ -29,6 +29,8 @@ int			hit_sphere(t_object sp, t_ray ray, int *pos, double *t);
 int			hit_plane(t_object pl, t_ray ray, int *pos, double *t);
 void		hit(t_map *map, int j, int i);
 
+t_vector	get_object_normal(t_object obj, t_vector hit);
+
 t_ray		get_ray(t_camera *camera, double x, double y);
 
 t_vector	cast_light(t_map *map, int pos, t_vector hit);
