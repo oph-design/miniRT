@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 	i = -1;
 	while (++i < (int)map->obj_count)
 	{
-		printf("Object POS	%d: %f	%f	%f\n", i + 1, map->objects[i].pos.x,
+		printf("Object POS %d: %f	%f	%f\n", i + 1, map->objects[i].pos.x,
 			map->objects[i].pos.y, map->objects[i].pos.z);
 		printf("Color		%d: %f	%f	%f\n\n", i + 1, map->objects[i].color.x,
 			map->objects[i].color.y, map->objects[i].color.z);

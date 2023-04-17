@@ -30,7 +30,6 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
-
 typedef struct s_lighting
 {
 	double		a_ratio;
@@ -92,6 +91,7 @@ typedef struct s_hit
 	t_vector	normal;
 	t_object	obj;
 	t_ray		cam_ray;
+	size_t		index;
 }	t_hit;
 
 void		free_object_arr(t_object *obj, size_t size);

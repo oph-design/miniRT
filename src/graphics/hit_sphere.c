@@ -1,21 +1,21 @@
 #include "minirt.h"
 
-static double	check_root(double *t, t_vector var, int *pos)
+static double	check_root(double *t, t_vector var, size_t *pos)
 {
 	double	to;
 	double	tl;
 	double	disc;
 
-	disc = sqrt(var.y * var.y - 4 * var.x * var.z);
-	to = (-var.y + disc) / 2;
-	tl = (-var.y - disc) / 2;
-	if (to < tl && *t + ZERO > to)
+	disc = sqrt(var.y * var.y - var.x * var.z);
+	to = (-var.y + disc) / var.x;
+	tl = (-var.y - disc) / var.x;
+	if (to < tl && *t > to)
 	{
 		if (pos)
 			pos[INDEX_HIT] = pos[INDEX];
 		return (to);
 	}
-	else if (*t + ZERO > tl)
+	else if (*t > tl)
 	{
 		if (pos)
 			pos[INDEX_HIT] = pos[INDEX];
@@ -24,7 +24,7 @@ static double	check_root(double *t, t_vector var, int *pos)
 	return (*t);
 }
 
-int	hit_sphere(t_object sp, t_ray ray, int *pos, double *t)
+int	hit_sphere(t_object sp, t_ray ray, size_t *pos, double *t)
 {
 	t_vector	var;
 	double		disc;
@@ -32,14 +32,14 @@ int	hit_sphere(t_object sp, t_ray ray, int *pos, double *t)
 
 	p = sub_vec(ray.origin, sp.pos);
 	var.x = vec_length_squared(ray.direction);
-	var.y = 2 * dot(p, ray.direction);
+	var.y = dot(p, ray.direction);
 	var.z = vec_length_squared(p) - (sp.radius * sp.radius);
-	disc = (var.y * var.y) - 4 * var.x * var.z;
-	if (disc < 0)
+	disc = sqrt((var.y * var.y) - var.x * var.z);
+	if (disc < 0.0)
 		return (0);
 	else
 	{
-		if (disc == 0 && *t + ZERO > (-var.y / 2 * var.x))
+		if (disc == 0 && *t > (-var.y / 2 * var.x))
 		{
 			*t = -var.y / 2 * var.x;
 			if (pos)

@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-int	hit_plane(t_object pl, t_ray ray, int *pos, double *t)
+int	hit_plane(t_object pl, t_ray ray, size_t *pos, double *t)
 {
 	double		div;
 	double		tt;
