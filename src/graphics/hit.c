@@ -24,6 +24,20 @@ static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 	}
 }
 
+t_vector	get_object_normal(t_object obj, t_vector hit)
+{
+	if (obj.type == PLANE)
+	{
+		obj.pos.x *= -1;
+		obj.pos.y *= -1;
+		obj.pos.z *= -1;
+		return (normalize(obj.pos));
+	}
+	else if (obj.type == SPHERE)
+		return (normalize(sub_vec(hit, obj.pos)));
+	return (new_vec(0, 0, 0));
+}
+
 void	hit(t_map *map, int j, int i)
 {
 	double	x;
@@ -40,9 +54,7 @@ void	hit(t_map *map, int j, int i)
 	loop_objects(map, get_ray(map->camera, x, y), &t, pos);
 	hit = new_hit(map->objects[pos[INDEX_HIT]], get_ray(map->camera, x, y),
 			t, pos[INDEX_HIT]);
-	if (is_shaded(map, hit))
-		draw_pixel(map->window, j, i, write_color(0.0, 0.0, 0.0, 255.0));
-	else if (t < INFINITY && t > ZERO)
+	if (t < INFINITY && t > ZERO)
 		draw_pixel(map->window, j, i, vec_to_color(cast_light(map, hit)));
 	else
 		draw_pixel(map->window, j, i, write_color(0.0, 0.0, 0.0, 255.0));

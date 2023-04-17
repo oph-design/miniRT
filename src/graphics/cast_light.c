@@ -1,14 +1,6 @@
 #include "minirt.h"
 
-t_vector	color_to_ratio(t_vector color)
-{
-	color.x /= 255.0;
-	color.y /= 255.0;
-	color.z /= 255.0;
-	return (color);
-}
-
-double	radian(t_vector nrml, t_vector light_dir)
+static double	radian(t_vector nrml, t_vector light_dir)
 {
 	double		tmp;
 	double		tmp2;
@@ -18,20 +10,6 @@ double	radian(t_vector nrml, t_vector light_dir)
 	tmp2 = sqrt(vec_length_squared(nrml));
 	tmp3 = sqrt(vec_length_squared(light_dir));
 	return (tmp / (tmp2 * tmp3));
-}
-
-t_vector	get_object_normal(t_object obj, t_vector hit)
-{
-	if (obj.type == PLANE)
-	{
-		obj.pos.x *= -1;
-		obj.pos.y *= -1;
-		obj.pos.z *= -1;
-		return (normalize(obj.pos));
-	}
-	else if (obj.type == SPHERE)
-		return (normalize(sub_vec(hit, obj.pos)));
-	return (new_vec(0, 0, 0));
 }
 
 t_vector	cast_light(t_map *map, t_hit hit)
@@ -44,6 +22,8 @@ t_vector	cast_light(t_map *map, t_hit hit)
 	ambient = mult_double_vec(map->lighting->a_ratio, map->lighting->a_color);
 	ambient = color_to_ratio(ambient);
 	ambient = mult_vec(ambient, hit.obj.color);
+	if (is_shaded(map, hit))
+		return (add_vec(ambient, new_vec(0, 0, 0)));
 	light = mult_double_vec(map->lighting->l_ratio, map->lighting->l_color);
 	light = color_to_ratio(light);
 	light_dir = normalize(sub_vec(map->lighting->pos, hit.hitpoint));

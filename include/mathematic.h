@@ -42,6 +42,6 @@ uint32_t		ray_color(t_ray	ray);
 t_vector		at(t_ray ray, double t);
 
 double			clamp(double x, double min, double max);
-uint32_t		sample_color(t_vector color, int sample_per_pixel);
+double			degrees(t_vector a, t_vector b);
 
 #endif

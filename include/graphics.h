@@ -23,8 +23,10 @@ typedef enum e_hit_index
 void		draw(t_map *map);
 void		draw_pixel(t_window *window, int x, int y, uint32_t color);
 void		setup_window(t_map *map);
+
 uint32_t	write_color(double r, double g, double b, double a);
 uint32_t	vec_to_color(t_vector vec);
+t_vector	color_to_ratio(t_vector color);
 
 int			hit_sphere(t_object sp, t_ray ray, size_t *pos, double *t);
 int			hit_plane(t_object pl, t_ray ray, size_t *pos, double *t);
