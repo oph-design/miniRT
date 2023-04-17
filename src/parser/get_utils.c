@@ -64,16 +64,26 @@ t_object	*realloc_arr(size_t size, t_object *src)
 		i++;
 	}
 	free(src);
+	printf("unehre\n");
 	return (res);
 }
 
-t_object	parse(char *str, char *set, t_errors *ecode)
+t_object	parse(char *str, t_errors *ecode)
 {
+	char	*set;
+
+	set = ft_substr(str, 0, 2);
 	if (!ft_strncmp(set, "sp", 3))
-		return (parse_sphere(str, ecode));
+		return (free(set), parse_sphere(str, ecode));
 	if (!ft_strncmp(set, "cy", 3))
-		return (parse_cylinder(str, ecode));
+		return (free(set), parse_cylinder(str, ecode));
 	if (!ft_strncmp(set, "pl", 3))
-		return (parse_plane(str, ecode));
-	return (parse_sphere(str, ecode));
+		return (free(set), parse_plane(str, ecode));
+	return (free(set), parse_sphere(str, ecode));
+}
+
+int	is_object(char *str)
+{
+	return (!ft_strncmp(str, "A", 1) || !ft_strncmp(str, "C", 1)
+		|| !ft_strncmp(str, "L", 1));
 }
