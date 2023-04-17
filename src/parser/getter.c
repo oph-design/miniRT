@@ -53,29 +53,3 @@ t_vector	get_vector(char *str, t_errors *exit_code, int pos)
 			return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
 	return (new_vec(x, y, z));
 }
-
-t_errors	get_objects(t_object **obj, char **file, char *set, size_t *size)
-{
-	char		*check;
-	size_t		i;
-	static int	id = 3;
-	t_errors	ecode;
-
-	i = 0;
-	*obj = NULL;
-	ecode = SUCCESS;
-	check = stra_iteri(file, set, id);
-	if (check != NULL)
-		*obj = malloc(sizeof(t_object) * get_size(file, set));
-	while (check != NULL)
-	{
-		obj[0][i++] = parse(check, set, &ecode);
-		if (ecode)
-			return (free(*obj), *obj = NULL, ecode);
-		check = stra_iteri(file, set, id);
-	}
-	*obj = realloc_arr(i, *obj);
-	*size += i;
-	id++;
-	return (ecode);
-}
