@@ -27,7 +27,7 @@ GRAPHICS_SRC	= window draw hit cast_light cast_shadow hit_sphere key_input hit_p
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
-PARSER_SRC		= handle_input setter getter get_utils map parse_obj
+PARSER_SRC		= handle_input setter getter map parse_obj
 PARSER			= $(addprefix $(PARSER_DIR), $(addsuffix .c, $(PARSER_SRC)))
 
 OBJECTS_DIR		= src/objects/
