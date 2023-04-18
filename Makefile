@@ -87,6 +87,9 @@ shadow: all
 morph: all
 			./minirt scenes/morphed.rt
 
+cy: all
+			./minirt scenes/cyandsp.rt
+
 clean:
 			@rm -rf $(OBJ_DIR)
 			@echo "$(GREEN)miniRT object files cleaned!$(WHITE)"

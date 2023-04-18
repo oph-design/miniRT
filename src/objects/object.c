@@ -19,7 +19,7 @@ t_object	new_cylinder(t_vector pos, t_vector orientation,
 
 	new.type = CYLINDER;
 	new.pos = pos;
-	new.radius = size[0];
+	new.radius = size[0] / 2;
 	new.height = size[1];
 	new.orientation = orientation;
 	new.color = color;

@@ -1,62 +1,63 @@
 #include "minirt.h"
 
-int	is_in_cylinder(t_object cy, t_ray ray, double t)
+double	check_root_cy(double *t, t_vector var)
 {
-	t_vector	a;
-	t_vector	b;
-	t_vector	hit;
-	double		r;
+	double	to;
+	double	tl;
+	double	disc;
 
-	hit = add_vec(ray.origin, mult_double_vec(t, ray.direction));
-	a = mult_double_vec(-1, mult_vec(cy.pos, cy.orientation));
-	a = add_vec(a, mult_vec(hit, cy.orientation));
-	b = mult_vec(cy.orientation, cy.orientation);
-	r = (a.x + a.y + a.z) / (b.x + b.y + b.z);
-	if (r > (cy.height / 2))
-		return (0);
-	if (r < 0)
-		return (0);
-	return (1);
+	disc = sqrt(var.y * var.y - var.x * var.z);
+	to = (-var.y + disc) / var.x;
+	tl = (-var.y - disc) / var.x;
+	if (to < tl && *t > to)
+		return (to);
+	else if (*t > tl)
+		return (tl);
+	return (*t);
 }
 
-t_vector	calculate_h(t_ray ray, t_vector base, t_object cy)
+t_vector	calc_var(t_ray ray, t_object cy)
 {
-	t_vector	h;
-	t_vector	p;
+	t_vector	var;
+	t_vector	q;
+	t_vector	d_proj;
 
-	p = sub_vec(ray.origin, base);
-	h.x = dot(ray.direction, ray.direction)
-		- pow(dot(ray.direction, cy.orientation), 2);
-	h.y = (dot(ray.direction, p) - (dot(ray.direction, cy.orientation)
-				* dot(p, cy.orientation))) * 2;
-	h.z = dot(p, p) - pow(dot(p, cy.orientation), 2) - pow(cy.radius, 2);
-	return (h);
+	q = sub_vec(ray.origin, cy.pos);
+	d_proj = sub_vec(ray.direction,
+			mult_double_vec(dot(ray.direction, cy.orientation),
+				cy.orientation));
+	q = sub_vec(q, mult_double_vec(dot(q, cy.orientation), cy.orientation));
+	var.x = vec_length_squared(d_proj);
+	var.y = dot(d_proj, q);
+	var.z = vec_length_squared(q) - pow(cy.radius, 2);
+	return (var);
 }
 
 int	hit_cylinder(t_object cy, t_ray ray, size_t *pos, double *t)
 {
-	t_vector	h;
-	double		disc;
+	t_vector	var;
+	double		tmp;
+	t_vector	x;
 
-	h = calculate_h(ray, add_vec(cy.pos,
-				add_double_vec(cy.height / 2, cy.orientation)), cy);
-	disc = (h.y * h.y) - 4 * h.x * h.z;
-	if (disc < 0)
+	tmp = *t;
+	var = calc_var(ray, cy);
+	if (var.y * var.y - var.x * var.z < 0)
 		return (0);
 	else
 	{
-		if (disc == 0 && *t > (-h.y / 2 * h.x)
-			&& is_in_cylinder(cy, ray, -h.y / 2 * h.x))
+		*t = check_root_cy(t, var);
+		if (*t != tmp)
 		{
-			*t = -h.y / 2 * h.x;
-			pos[INDEX_HIT] = pos[INDEX];
-		}
-		else
-		{
-			if (!is_in_cylinder(cy, ray, check_root(t, h, pos)))
+			x = add_vec(ray.origin, mult_double_vec(*t, ray.direction));
+			if (dot(sub_vec(x, cy.pos), cy.orientation) < cy.height
+				&& dot(sub_vec(x, cy.pos), cy.orientation) > 0)
+			{
+				if (pos)
+					pos[INDEX_HIT] = pos[INDEX];
 				return (1);
-			*t = check_root(t, h, pos);
+			}
+			*t = tmp;
 		}
-		return (1);
 	}
+	return (0);
 }

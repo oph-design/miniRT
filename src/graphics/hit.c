@@ -37,6 +37,10 @@ t_vector	get_object_normal(t_object obj, t_vector hit)
 	}
 	else if (obj.type == SPHERE)
 		return (normalize(sub_vec(hit, obj.pos)));
+	else if (obj.type == CYLINDER)
+		return (normalize(sub_vec(sub_vec(hit, obj.pos),
+					mult_double_vec(dot(sub_vec(hit, obj.pos),
+							obj.orientation), obj.orientation))));
 	return (new_vec(0, 0, 0));
 }
 
