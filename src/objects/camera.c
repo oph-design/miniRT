@@ -25,9 +25,9 @@ t_camera	*new_cam(t_vector pos, t_vector orientation, int fov)
 	new->dir = mult_double_vec(-1, orientation);
 	new->horizontal = mult_double_vec(new->vpw, u);
 	new->vertical = mult_double_vec(new->vph, v);
-	new->orientation = sub_vec(pos, mult_double_vec(0.5, new->horizontal));
-	new->orientation = sub_vec(new->orientation,
+	new->direct = sub_vec(pos, mult_double_vec(0.5, new->horizontal));
+	new->direct = sub_vec(new->direct,
 			mult_double_vec(0.5, new->vertical));
-	new->orientation = sub_vec(new->orientation, orientation);
+	new->direct = sub_vec(new->direct, orientation);
 	return (new);
 }

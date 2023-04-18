@@ -27,11 +27,11 @@ static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 		{
 			cy = map->objects[pos[INDEX]];
 			hit_cylinder(cy, ray, pos, t);
-			pl = new_plane(cy.pos, cy.orientation, cy.color);
+			pl = new_plane(cy.pos, cy.direct, cy.color);
 			pl.radius = cy.radius;
 			hit_disk(pl, ray, pos, t);
 			pl = new_plane(add_vec(cy.pos,
-				mult_double_vec(cy.height, cy.orientation)), cy.orientation, cy.color);
+				mult_double_vec(cy.height, cy.direct)), cy.direct, cy.color);
 			pl.radius = cy.radius;
 			hit_disk(pl, ray, pos, t);
 		}
@@ -53,7 +53,7 @@ t_vector	get_object_normal(t_object obj, t_vector hit)
 	else if (obj.type == CYLINDER)
 		return (normalize(sub_vec(sub_vec(hit, obj.pos),
 					mult_double_vec(dot(sub_vec(hit, obj.pos),
-							obj.orientation), obj.orientation))));
+							obj.direct), obj.direct))));
 	return (new_vec(0, 0, 0));
 }
 

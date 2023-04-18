@@ -31,8 +31,8 @@ int	hit_sphere(t_object sp, t_ray ray, size_t *pos, double *t)
 	t_vector	p;
 
 	p = sub_vec(ray.origin, sp.pos);
-	var.x = vec_length_squared(ray.direction);
-	var.y = dot(p, ray.direction);
+	var.x = vec_length_squared(ray.direct);
+	var.y = dot(p, ray.direct);
 	var.z = vec_length_squared(p) - (sp.radius * sp.radius);
 	disc = sqrt((var.y * var.y) - var.x * var.z);
 	if (disc < 0.0)

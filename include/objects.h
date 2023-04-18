@@ -45,7 +45,7 @@ typedef struct s_camera
 	t_vector	dir;
 	t_vector	horizontal;
 	t_vector	vertical;
-	t_vector	orientation;
+	t_vector	direct;
 	double		fov;
 	double		ratio;
 	double		vpw;
@@ -64,7 +64,7 @@ typedef struct s_object
 {
 	t_type		type;
 	t_vector	pos;
-	t_vector	orientation;
+	t_vector	direct;
 	double		radius;
 	double		height;
 	t_vector	color;
@@ -82,7 +82,7 @@ typedef struct s_map
 typedef struct s_ray
 {
 	t_vector	origin;
-	t_vector	direction;
+	t_vector	direct;
 }	t_ray;
 
 typedef struct s_hit
