@@ -31,7 +31,8 @@ static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 			pl.radius = cy.radius;
 			hit_disk(pl, ray, pos, t);
 			pl = new_plane(add_vec(cy.pos,
-				mult_double_vec(cy.height, cy.direct)), cy.direct, cy.color);
+						mult_double_vec(cy.height, cy.direct)),
+					cy.direct, cy.color);
 			pl.radius = cy.radius;
 			hit_disk(pl, ray, pos, t);
 		}
