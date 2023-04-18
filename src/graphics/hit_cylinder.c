@@ -33,7 +33,7 @@ t_vector	calculate_h(t_ray ray, t_vector base, t_object cy)
 	return (h);
 }
 
-int	hit_cylinder(t_object cy, t_ray ray, int *pos, double *t)
+int	hit_cylinder(t_object cy, t_ray ray, size_t *pos, double *t)
 {
 	t_vector	h;
 	double		disc;
