@@ -6,7 +6,7 @@ t_object	new_sphere(t_vector pos, double r, t_vector color)
 
 	new.type = SPHERE;
 	new.pos = pos;
-	new.radius = r;
+	new.radius = r / 2.0;
 	new.height = 0;
 	new.color = color;
 	return (new);

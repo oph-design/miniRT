@@ -1,14 +1,10 @@
 #include "minirt.h"
 
-static void	free_window(t_window *window)
+static void	window_panic(t_map *map)
 {
-	free(window);
-}
-
-static void	window_panic(t_window *window)
-{
-	mlx_terminate(window->mlx);
-	free_window(window);
+	mlx_terminate(map->window->mlx);
+	free(map->window);
+	free_map(map);
 	exit(EXIT_FAILURE);
 }
 
@@ -19,12 +15,12 @@ void	setup_window(t_map *map)
 	map->window->width = WIDTH;
 	map->window->height = HEIGHT;
 	if (!map->window->mlx)
-		window_panic(map->window);
+		window_panic(map);
 	map->window->image = mlx_new_image(map->window->mlx, WIDTH, HEIGHT);
 	if (!map->window->image)
-		window_panic(map->window);
+		window_panic(map);
 	if (mlx_image_to_window(map->window->mlx, map->window->image, 0, 0) == -1)
-		window_panic(map->window);
+		window_panic(map);
 	draw(map);
 	mlx_loop_hook(map->window->mlx, input, map);
 	mlx_loop(map->window->mlx);

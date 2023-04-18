@@ -1,51 +1,29 @@
 #include "minirt.h"
 
-static int	intercept_sphere(t_object obj, t_ray ray)
+static int	intercept_obj(t_map *map, t_hit hit, size_t i)
 {
-	t_vector	h;
-	double		disc;
-	t_vector	p;
-	double		to;
-	double		tl;
+	t_vector	light_dir;
+	double		t;
 
-	p = sub_vec(ray.origin, obj.pos);
-	h.x = vec_length_squared(ray.direction);
-	h.y = 2 * dot(p, ray.direction);
-	h.z = vec_length_squared(p) - (obj.radius * obj.radius);
-	disc = (h.y * h.y) - 4 * h.x * h.z;
-	if (disc < 0)
-		return (0);
-	else
-	{
-		if (disc == 0)
-			return (1);
-		to = (-h.y + disc) / 2;
-		tl = (-h.y - disc) / 2;
-		if (to > 1.5 && tl > 1.5)
-			return (1);
-	}
-	return (0);
-}
-
-static int	intercept_loop(t_map *map, t_vector hit, int i)
-{
+	t = INFINITY;
+	light_dir = normalize(sub_vec(map->lighting->pos, hit.hitpoint));
 	if (map->objects[i].type == SPHERE)
-		if (intercept_sphere(map->objects[i],
-				new_ray(hit, normalize(sub_vec(map->lighting->pos, hit)))))
-			return (1);
+		hit_sphere(map->objects[i],
+			new_ray(add_vec(mult_double_vec(ZERO, hit.normal),
+					hit.hitpoint), light_dir), NULL, &t);
+	if (t < INFINITY && t + ZERO > ZERO)
+		return (1);
 	return (0);
 }
 
-int	is_shaded(t_map *map, int pos, t_vector hit)
+int	is_shaded(t_map *map, t_hit hit)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while ((int)map->obj_count > i)
-	{
-		if (i != pos && intercept_loop(map, hit, i))
-			return (1);
+	while (map->obj_count > i && !intercept_obj(map, hit, i))
 		i++;
-	}
+	if (i != map->obj_count)
+		return (1);
 	return (0);
 }

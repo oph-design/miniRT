@@ -85,6 +85,15 @@ typedef struct s_ray
 	t_vector	direction;
 }	t_ray;
 
+typedef struct s_hit
+{
+	t_vector	hitpoint;
+	t_vector	normal;
+	t_object	obj;
+	t_ray		cam_ray;
+	size_t		index;
+}	t_hit;
+
 void		free_object_arr(t_object *obj, size_t size);
 t_camera	*new_camera(t_vector pos);
 t_vector	new_vec(double x, double y, double z);

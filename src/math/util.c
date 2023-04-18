@@ -9,17 +9,14 @@ double	clamp(double x, double min, double max)
 	return (x);
 }
 
-uint32_t	sample_color(t_vector col, int sample_per_pixel)
+double	degrees(t_vector nrml, t_vector light_dir)
 {
-	double	r;
-	double	g;
-	double	b;
-	double	scale;
+	double		tmp;
+	double		tmp2;
+	double		tmp3;
 
-	scale = 255.0 / sample_per_pixel;
-	r = col.x * scale;
-	g = col.y * scale;
-	b = col.z * scale;
-	return (write_color(clamp(r, 0.0, 255.0), clamp(g, 0.0, 255.0),
-			clamp(b, 0.0, 255.0), 255.0));
+	tmp = dot(nrml, light_dir);
+	tmp2 = sqrt(vec_length_squared(nrml));
+	tmp3 = sqrt(vec_length_squared(light_dir));
+	return (acos(tmp / (tmp2 * tmp3)) * 180.0 / M_PI);
 }
