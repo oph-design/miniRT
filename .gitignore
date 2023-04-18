@@ -4,7 +4,6 @@ miniRT
 LeakSanitizer/
 .ccls-cache
 .ccls
-*.rt
 .vscode
 
 # Object files
