@@ -21,7 +21,7 @@ t_object	new_cylinder(t_vector pos, t_vector orientation,
 	new.pos = pos;
 	new.radius = size[0] / 2;
 	new.height = size[1];
-	new.orientation = orientation;
+	new.orientation = normalize(orientation);
 	new.pos = sub_vec(new.pos,
 			mult_double_vec(new.height / 2, new.orientation));
 	new.color = color;
