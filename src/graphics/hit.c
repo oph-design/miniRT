@@ -14,6 +14,9 @@ static t_hit	new_hit(t_object obj, t_ray ray, double t, int index)
 
 static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 {
+	t_object	pl;
+	t_object	cy;
+
 	while (map->obj_count > pos[INDEX])
 	{
 		if (map->objects[pos[INDEX]].type == SPHERE)
@@ -21,7 +24,17 @@ static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 		else if (map->objects[pos[INDEX]].type == PLANE)
 			hit_plane(map->objects[pos[INDEX]], ray, pos, t);
 		if (map->objects[pos[INDEX]].type == CYLINDER)
-			hit_cylinder(map->objects[pos[INDEX]], ray, pos, t);
+		{
+			cy = map->objects[pos[INDEX]];
+			hit_cylinder(cy, ray, pos, t);
+			pl = new_plane(cy.pos, cy.orientation, cy.color);
+			pl.radius = cy.radius;
+			hit_disk(pl, ray, pos, t);
+			pl = new_plane(add_vec(cy.pos,
+				mult_double_vec(cy.height, cy.orientation)), cy.orientation, cy.color);
+			pl.radius = cy.radius;
+			hit_disk(pl, ray, pos, t);
+		}
 		pos[INDEX]++;
 	}
 }
