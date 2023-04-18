@@ -2,14 +2,8 @@
 
 static double	radian(t_vector nrml, t_vector light_dir)
 {
-	double		tmp;
-	double		tmp2;
-	double		tmp3;
-
-	tmp = dot(nrml, light_dir);
-	tmp2 = sqrt(vec_length_squared(nrml));
-	tmp3 = sqrt(vec_length_squared(light_dir));
-	return (tmp / (tmp2 * tmp3));
+	return (dot(nrml, light_dir) / (sqrt(vec_length_squared(nrml))
+			* sqrt(vec_length_squared(light_dir))));
 }
 
 t_vector	cast_light(t_map *map, t_hit hit)
