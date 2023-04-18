@@ -12,6 +12,21 @@ static t_hit	new_hit(t_object obj, t_ray ray, double t, int index)
 	return (new);
 }
 
+static int	hit_light(t_object light, t_ray ray, double *t)
+{
+	double	tmp;
+
+	tmp = *t;
+	hit_sphere(light, ray, NULL, t);
+	if (tmp + ZERO > *t && *t + ZERO > ZERO)
+	{
+		*t = -1;
+		return (1);
+	}
+	*t = INFINITY;
+	return (0);
+}
+
 static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 {
 	while (map->obj_count > pos[INDEX])
@@ -51,11 +66,16 @@ void	hit(t_map *map, int j, int i)
 	t = INFINITY;
 	x = j / map->window->width;
 	y = i / map->window->height;
-	loop_objects(map, get_ray(map->camera, x, y), &t, pos);
-	hit = new_hit(map->objects[pos[INDEX_HIT]], get_ray(map->camera, x, y),
-			t, pos[INDEX_HIT]);
+	if (!hit_light(map->lighting->obj, get_ray(map->camera, x, y), &t))
+	{
+		loop_objects(map, get_ray(map->camera, x, y), &t, pos);
+		hit = new_hit(map->objects[pos[INDEX_HIT]], get_ray(map->camera, x, y),
+				t, pos[INDEX_HIT]);
+	}
 	if (t < INFINITY && t > ZERO)
 		draw_pixel(map->window, j, i, vec_to_color(cast_light(map, hit)));
-	else
+	else if (t != -1)
 		draw_pixel(map->window, j, i, write_color(0.0, 0.0, 0.0, 255.0));
+	else
+		draw_pixel(map->window, j, i, write_color(255.0, 255.0, 255.0, 255.0));
 }

@@ -1,5 +1,17 @@
 #include "objects.h"
 
+t_object	new_light(t_vector pos, double r, t_vector color)
+{
+	t_object	new;
+
+	new.type = LIGHT;
+	new.pos = pos;
+	new.radius = r / 2.0;
+	new.height = 0;
+	new.color = color;
+	return (new);
+}
+
 t_object	new_sphere(t_vector pos, double r, t_vector color)
 {
 	t_object	new;
