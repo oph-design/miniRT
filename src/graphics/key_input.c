@@ -4,12 +4,14 @@ static void	light_move_z(t_map *map)
 {
 	if (mlx_is_key_down(map->window->mlx, MLX_KEY_J))
 	{
-		map->lighting->pos.z -= 5;
+		map->lighting->pos.z -= 1;
+		map->lighting->obj.pos.z -= 1;
 		draw(map);
 	}
 	if (mlx_is_key_down(map->window->mlx, MLX_KEY_K))
 	{
-		map->lighting->pos.z += 5;
+		map->lighting->pos.z += 1;
+		map->lighting->obj.pos.z += 1;
 		draw(map);
 	}
 }
@@ -18,22 +20,26 @@ static void	light_movement(t_map *map)
 {
 	if (mlx_is_key_down(map->window->mlx, MLX_KEY_UP))
 	{
-		map->lighting->pos.y += 5;
+		map->lighting->pos.y += 1;
+		map->lighting->obj.pos.y += 1;
 		draw(map);
 	}
 	if (mlx_is_key_down(map->window->mlx, MLX_KEY_DOWN))
 	{
-		map->lighting->pos.y -= 5;
+		map->lighting->pos.y -= 1;
+		map->lighting->obj.pos.y -= 1;
 		draw(map);
 	}
 	if (mlx_is_key_down(map->window->mlx, MLX_KEY_LEFT))
 	{
-		map->lighting->pos.x += 5;
+		map->lighting->pos.x += 1;
+		map->lighting->obj.pos.x += 1;
 		draw(map);
 	}
 	if (mlx_is_key_down(map->window->mlx, MLX_KEY_RIGHT))
 	{
-		map->lighting->pos.x -= 5;
+		map->lighting->pos.x -= 1;
+		map->lighting->obj.pos.x -= 1;
 		draw(map);
 	}
 }

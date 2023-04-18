@@ -17,6 +17,7 @@ t_errors	set_lighting(char **file, t_map *map)
 	if (ecode)
 		return (free(light), ecode);
 	map->lighting = light;
+	map->lighting->obj = new_light(light->pos, 1.0, new_vec(255, 255, 255));
 	return (SUCCESS);
 }
 
