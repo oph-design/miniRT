@@ -6,13 +6,14 @@ KERNEL		= $(shell uname -a | cut -f 1 -d ' ')
 BREW		= $(shell which brew | cut -f 4 -d '/')
 MLX42 		= ./MLX42/build/libmlx42.a
 MLXFLAGS	= -lglfw -L "$(HOME)/$(BREW)/opt/glfw/lib"
-ifeq ($(KERNEL),Linux)
-MLXFLAGS	= -Iinclude -ldl -lglfw -pthread -lm
-endif
 RL_VERSION	= readline-8.1.2
 INCLUDE		= -I libft/ -I MLX42/include/MLX42/ -I include/
 CFLAGS		= -g -Wall -Werror -Wextra #-fsanitize=address
 LINK_FLAGS	= -L libft -lft #-fsanitize=address
+
+ifeq ($(KERNEL),Linux)
+MLXFLAGS	= -Iinclude -ldl -lglfw -pthread -lm
+endif
 
 GREEN		= \033[0;32m
 CYAN		= \033[0;36m
@@ -23,7 +24,7 @@ MATH_SRC	= ray vec_util vec_operations vec_double_operations util vec_clamp doub
 MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
 
 GRAPHICS_DIR	= src/graphics/
-GRAPHICS_SRC	= window draw hit cast_light cast_shadow hit_sphere key_input hit_plane color
+GRAPHICS_SRC	= window draw hit cast_light cast_shadow hit_sphere hit_cylinder key_input hit_plane color
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
@@ -82,9 +83,12 @@ test: all
 
 shadow: all
 			./miniRT scenes/shadow_test.rt
-			
+
 morph: all
 			./miniRT scenes/morphed.rt
+
+cy: all
+			./miniRT scenes/cyandsp.rt
 
 clean:
 			@rm -rf $(OBJ_DIR)

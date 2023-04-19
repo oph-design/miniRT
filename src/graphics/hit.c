@@ -29,12 +29,28 @@ static int	hit_light(t_object light, t_ray ray, double *t)
 
 static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 {
+	t_object	pl;
+	t_object	cy;
+
 	while (map->obj_count > pos[INDEX])
 	{
 		if (map->objects[pos[INDEX]].type == SPHERE)
 			hit_sphere(map->objects[pos[INDEX]], ray, pos, t);
 		else if (map->objects[pos[INDEX]].type == PLANE)
 			hit_plane(map->objects[pos[INDEX]], ray, pos, t);
+		if (map->objects[pos[INDEX]].type == CYLINDER)
+		{
+			cy = map->objects[pos[INDEX]];
+			hit_cylinder(cy, ray, pos, t);
+			pl = new_plane(cy.pos, cy.direct, cy.color);
+			pl.radius = cy.radius;
+			hit_disk(pl, ray, pos, t);
+			pl = new_plane(add_vec(cy.pos,
+						mult_double_vec(cy.height, cy.direct)),
+					cy.direct, cy.color);
+			pl.radius = cy.radius;
+			hit_disk(pl, ray, pos, t);
+		}
 		pos[INDEX]++;
 	}
 }
@@ -50,6 +66,10 @@ t_vector	get_object_normal(t_object obj, t_vector hit)
 	}
 	else if (obj.type == SPHERE)
 		return (normalize(sub_vec(hit, obj.pos)));
+	else if (obj.type == CYLINDER)
+		return (normalize(sub_vec(sub_vec(hit, obj.pos),
+					mult_double_vec(dot(sub_vec(hit, obj.pos),
+							obj.direct), obj.direct))));
 	return (new_vec(0, 0, 0));
 }
 
