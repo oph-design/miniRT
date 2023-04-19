@@ -71,6 +71,19 @@ static void	camera_movement(t_map *map)
 	draw(map);
 }
 
+void resizing(int32_t width, int32_t height, void* param)
+{
+	t_map	*map;
+
+	map = param;
+	map->window->height = height;
+	map->window->width = width;
+	mlx_delete_image(map->window->mlx, map->window->image);
+	map->window->image = mlx_new_image(map->window->mlx, width, height);
+	mlx_image_to_window(map->window->mlx, map->window->image, 0, 0);
+	draw(map);
+}
+
 void	input(void *param)
 {
 	t_map	*map;
