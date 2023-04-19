@@ -7,7 +7,8 @@ static t_hit	new_hit(t_object obj, t_ray ray, double t, int index)
 	new.obj = obj;
 	new.cam_ray = ray;
 	new.hitpoint = at(ray, t);
-	new.normal = get_object_normal(obj, new.hitpoint);
+	new.normal = get_object_normal(obj, new.hitpoint,
+			sub_vec(ray.direct, ray.origin));
 	new.index = index;
 	return (new);
 }
@@ -55,14 +56,13 @@ static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 	}
 }
 
-t_vector	get_object_normal(t_object obj, t_vector hit)
+t_vector	get_object_normal(t_object obj, t_vector hit, t_vector cam_dir)
 {
 	if (obj.type == PLANE)
 	{
-		obj.pos.x *= -1;
-		obj.pos.y *= -1;
-		obj.pos.z *= -1;
-		return (normalize(obj.pos));
+		if (dot(obj.direct, mult_double_vec(-1, cam_dir)) < 0)
+			return (normalize(mult_double_vec(-1, obj.direct)));
+		return (normalize(obj.direct));
 	}
 	else if (obj.type == SPHERE)
 		return (normalize(sub_vec(hit, obj.pos)));

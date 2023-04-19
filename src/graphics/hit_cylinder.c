@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-double	check_root_cy(double *t, t_vector var)
+static double	check_root_cy(double *t, t_vector var)
 {
 	double	to;
 	double	tl;
@@ -16,7 +16,7 @@ double	check_root_cy(double *t, t_vector var)
 	return (*t);
 }
 
-t_vector	calc_var(t_ray ray, t_object cy)
+static t_vector	calc_var(t_ray ray, t_object cy)
 {
 	t_vector	var;
 	t_vector	q;
