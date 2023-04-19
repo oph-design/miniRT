@@ -21,8 +21,7 @@ t_vector	cast_light(t_map *map, t_hit hit)
 	light = mult_double_vec(map->lighting->l_ratio, map->lighting->l_color);
 	light = color_to_ratio(light);
 	light_dir = normalize(sub_vec(map->lighting->pos, hit.hitpoint));
-	radiant = radian(normalize(light_dir),
-			get_object_normal(hit.obj, hit.hitpoint));
+	radiant = radian(normalize(light_dir), hit.normal);
 	light = mult_vec(light,
 			mult_double_vec(radiant, hit.obj.color));
 	return (add_clamp(light, ambient, 0, 255));

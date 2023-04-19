@@ -6,9 +6,8 @@ KERNEL		= $(shell uname -a | cut -f 1 -d ' ')
 BREW		= $(shell which brew | cut -f 4 -d '/')
 MLX42 		= ./MLX42/build/libmlx42.a
 MLXFLAGS	= -lglfw -L "$(HOME)/$(BREW)/opt/glfw/lib"
-RL_VERSION	= readline-8.1.2
 INCLUDE		= -I libft/ -I MLX42/include/MLX42/ -I include/
-CFLAGS		= -g -Wall -Werror -Wextra #-fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra #-fsanitize=address
 LINK_FLAGS	= -L libft -lft #-fsanitize=address
 
 ifeq ($(KERNEL),Linux)
