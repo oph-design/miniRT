@@ -22,6 +22,7 @@ typedef enum e_hit_index
 
 void		draw(t_map *map);
 void		draw_pixel(t_window *window, int x, int y, uint32_t color);
+void		window_panic(t_map *map);
 void		setup_window(t_map *map);
 
 uint32_t	write_color(double r, double g, double b, double a);
