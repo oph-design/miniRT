@@ -76,13 +76,10 @@ void	resizing(int32_t width, int32_t height, void *param)
 	t_map	*map;
 
 	map = param;
-	if (map->window->height == height && map->window->width == width)
-		return ;
 	map->window->height = height;
 	map->window->width = width;
 	mlx_delete_image(map->window->mlx, map->window->image);
-	map->window->image = mlx_new_image(map->window->mlx,
-			map->window->width, map->window->height);
+	map->window->image = mlx_new_image(map->window->mlx, width, height);
 	if (!map->window->image)
 		window_panic(map);
 	if (mlx_image_to_window(map->window->mlx, map->window->image, 0, 0) == -1)
