@@ -71,7 +71,7 @@ static void	camera_movement(t_map *map)
 	draw(map);
 }
 
-void resizing(int32_t width, int32_t height, void* param)
+void	resizing(int32_t width, int32_t height, void *param)
 {
 	t_map	*map;
 
@@ -85,7 +85,7 @@ void resizing(int32_t width, int32_t height, void* param)
 			map->window->width, map->window->height);
 	if (!map->window->image)
 		window_panic(map);
-	if(mlx_image_to_window(map->window->mlx, map->window->image, 0, 0) == -1)
+	if (mlx_image_to_window(map->window->mlx, map->window->image, 0, 0) == -1)
 		window_panic(map);
 	draw(map);
 }
