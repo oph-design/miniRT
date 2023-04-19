@@ -23,6 +23,7 @@ void	setup_window(t_map *map)
 		window_panic(map);
 	draw(map);
 	mlx_loop_hook(map->window->mlx, input, map);
+	mlx_resize_hook(map->window->mlx, resizing, map);
 	mlx_loop(map->window->mlx);
 	mlx_delete_image(map->window->mlx, map->window->image);
 	mlx_terminate(map->window->mlx);
