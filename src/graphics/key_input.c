@@ -53,17 +53,19 @@ static void	camera_movement(t_map *map)
 	pos = map->camera->pos;
 	new = map->camera;
 	if (mlx_is_key_down(map->window->mlx, MLX_KEY_Q))
-		pos.z += 0.05;
-	if (mlx_is_key_down(map->window->mlx, MLX_KEY_E))
-		pos.z -= 0.05;
-	if (mlx_is_key_down(map->window->mlx, MLX_KEY_W))
-		pos.y -= 0.05;
-	if (mlx_is_key_down(map->window->mlx, MLX_KEY_S))
-		pos.y += 0.05;
-	if (mlx_is_key_down(map->window->mlx, MLX_KEY_A))
-		pos.x += 0.05;
-	if (mlx_is_key_down(map->window->mlx, MLX_KEY_D))
-		pos.x -= 0.05;
+		pos.z += 0.5;
+	else if (mlx_is_key_down(map->window->mlx, MLX_KEY_E))
+		pos.z -= 0.5;
+	else if (mlx_is_key_down(map->window->mlx, MLX_KEY_W))
+		pos.y -= 0.5;
+	else if (mlx_is_key_down(map->window->mlx, MLX_KEY_S))
+		pos.y += 0.5;
+	else if (mlx_is_key_down(map->window->mlx, MLX_KEY_A))
+		pos.x += 0.5;
+	else if (mlx_is_key_down(map->window->mlx, MLX_KEY_D))
+		pos.x -= 0.5;
+	else
+		return ;
 	map->camera = new_cam(pos, map->camera->dir, map->camera->fov, wh);
 	free(new);
 	draw(map);
