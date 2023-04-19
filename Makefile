@@ -79,16 +79,16 @@ $(MLX42):
 			@make -C MLX42/build
 
 test: all
-			./minirt scenes/default.rt
+			./miniRT scenes/default.rt
 
 shadow: all
-			./minirt scenes/shadow_test.rt
+			./miniRT scenes/shadow_test.rt
 
 morph: all
-			./minirt scenes/morphed.rt
+			./miniRT scenes/morphed.rt
 
 cy: all
-			./minirt scenes/cyandsp.rt
+			./miniRT scenes/cyandsp.rt
 
 clean:
 			@rm -rf $(OBJ_DIR)

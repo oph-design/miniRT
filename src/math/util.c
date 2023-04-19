@@ -9,14 +9,8 @@ double	clamp(double x, double min, double max)
 	return (x);
 }
 
-double	degrees(t_vector nrml, t_vector light_dir)
+double	degrees(t_vector a, t_vector b)
 {
-	double		tmp;
-	double		tmp2;
-	double		tmp3;
-
-	tmp = dot(nrml, light_dir);
-	tmp2 = sqrt(vec_length_squared(nrml));
-	tmp3 = sqrt(vec_length_squared(light_dir));
-	return (acos(tmp / (tmp2 * tmp3)) * 180.0 / M_PI);
+	return (acos(dot(a, b) / (sqrt(vec_length_squared(a))
+				* sqrt(vec_length_squared(b)))) * 180.0 / M_PI);
 }
