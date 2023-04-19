@@ -31,7 +31,7 @@ static void	intersect_cylinder(t_object cy, t_ray ray, double *t)
 static int	intercept_obj(t_map *map, t_hit hit, size_t i)
 {
 	t_vector	light_dir;
-	t_ray	ray;
+	t_ray		ray;
 	t_ray		light_ray;
 	double		t;
 
@@ -39,7 +39,7 @@ static int	intercept_obj(t_map *map, t_hit hit, size_t i)
 	light_dir = sub_vec(map->lighting->pos, hit.hitpoint);
 	light_ray = new_ray(hit.hitpoint, light_dir);
 	ray = new_ray(add_vec(mult_double_vec(ZERO, hit.normal),
-					hit.hitpoint), light_dir);
+				hit.hitpoint), light_dir);
 	if (map->objects[i].type == SPHERE)
 		hit_sphere(map->objects[i], ray, NULL, &t);
 	if (map->objects[i].type == CYLINDER)
