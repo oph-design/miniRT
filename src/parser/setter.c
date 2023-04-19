@@ -74,9 +74,10 @@ static t_errors	get_amlight(char **file, t_lighting *light)
 
 t_errors	set_camera(char **file, t_map *map)
 {
-	char		**args;
-	char		*input;
-	t_errors	ecode;
+	char			**args;
+	char			*input;
+	t_errors		ecode;
+	const double	wh[2] = {(double)WIDTH, (double)HEIGHT};
 
 	ecode = SUCCESS;
 	input = stra_iteri(file, "C", 2);
@@ -88,7 +89,7 @@ t_errors	set_camera(char **file, t_map *map)
 	if (ft_atoi(args[3]) > 180 || ft_atoi(args[3]) < 0)
 		return (ft_free_stra(args), VAL_RANGE);
 	map->camera = new_cam(get_vector(args[1], &ecode, 1),
-			get_vector(args[2], &ecode, 0), ft_atoi(args[3]));
+			get_vector(args[2], &ecode, 0), ft_atoi(args[3]), wh);
 	ft_free_stra(args);
 	if (ecode)
 		return (ecode);

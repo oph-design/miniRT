@@ -46,8 +46,9 @@ static void	light_movement(t_map *map)
 
 static void	camera_movement(t_map *map)
 {
-	t_vector	pos;
-	t_camera	*new;
+	t_vector		pos;
+	t_camera		*new;
+	const double	wh[2] = {map->window->width, map->window->height};
 
 	pos = map->camera->pos;
 	new = map->camera;
@@ -63,7 +64,7 @@ static void	camera_movement(t_map *map)
 		pos.x += 0.05;
 	if (mlx_is_key_down(map->window->mlx, MLX_KEY_D))
 		pos.x -= 0.05;
-	map->camera = new_cam(pos, map->camera->dir, map->camera->fov);
+	map->camera = new_cam(pos, map->camera->dir, map->camera->fov, wh);
 	free(new);
 	draw(map);
 }
