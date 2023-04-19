@@ -101,7 +101,7 @@ t_camera	*new_camera(t_vector pos);
 t_vector	new_vec(double x, double y, double z);
 t_object	new_sphere(t_vector pos, double r, t_vector color);
 t_object	new_light(t_vector pos, double r, t_vector color);
-t_camera	*new_cam(t_vector vec, t_vector pos, int fov);
+t_camera	*new_cam(t_vector pos, t_vector dir, int fov, const double wh[2]);
 t_object	new_plane(t_vector pos, t_vector orientation, t_vector color);
 t_object	new_cylinder(t_vector pos, t_vector orientation,
 				double *size, t_vector color);
