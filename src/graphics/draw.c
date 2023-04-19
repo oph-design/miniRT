@@ -14,7 +14,7 @@ void	draw(t_map *map)
 	i = 0;
 	j = 0;
 	ft_bzero(map->window->image->pixels,
-			map->window->width * map->window->height * sizeof(int));
+		map->window->width * map->window->height * sizeof(int));
 	while (i < map->window->height)
 	{
 		while (j < map->window->width)
