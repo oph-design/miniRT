@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-static void	window_panic(t_map *map)
+void	window_panic(t_map *map)
 {
 	mlx_terminate(map->window->mlx);
 	free(map->window);
