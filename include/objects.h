@@ -7,7 +7,8 @@ typedef enum e_type
 {
 	SPHERE,
 	CYLINDER,
-	PLANE
+	PLANE,
+	LIGHT
 }	t_type;
 
 typedef enum e_errors
@@ -29,15 +30,6 @@ typedef struct s_vector
 	double	y;
 	double	z;
 }	t_vector;
-
-typedef struct s_lighting
-{
-	double		a_ratio;
-	t_vector	a_color;
-	double		l_ratio;
-	t_vector	l_color;
-	t_vector	pos;
-}				t_lighting;
 
 typedef struct s_camera
 {
@@ -70,6 +62,16 @@ typedef struct s_object
 	t_vector	color;
 }	t_object;
 
+typedef struct s_lighting
+{
+	double		a_ratio;
+	t_vector	a_color;
+	double		l_ratio;
+	t_vector	l_color;
+	t_vector	pos;
+	t_object	obj;
+}				t_lighting;
+
 typedef struct s_map
 {
 	t_lighting	*lighting;
@@ -98,6 +100,7 @@ void		free_object_arr(t_object *obj, size_t size);
 t_camera	*new_camera(t_vector pos);
 t_vector	new_vec(double x, double y, double z);
 t_object	new_sphere(t_vector pos, double r, t_vector color);
+t_object	new_light(t_vector pos, double r, t_vector color);
 t_camera	*new_cam(t_vector vec, t_vector pos, int fov);
 t_object	new_plane(t_vector pos, t_vector orientation, t_vector color);
 t_object	new_cylinder(t_vector pos, t_vector orientation,
