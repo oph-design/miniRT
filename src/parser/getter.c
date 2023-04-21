@@ -48,8 +48,8 @@ t_vector	get_vector(char *str, int *exit_code, int pos)
 	y = get_ratio(args[1], exit_code);
 	z = get_ratio(args[2], exit_code);
 	ft_free_stra(args);
-	if (!pos)
-		if (x > 1.0 || x < -1.0 || y > 1.0 || y < -1.0 || z > 1.0 || z < -1.0)
-			return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
+	if (((x > 1.0 || x < -1.0 || y > 1.0 || y < -1.0 || z > 1.0 || z < -1.0)
+		|| (x + y + z != 0.0)) && !pos)
+		return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
 	return (new_vec(x, y, z));
 }
