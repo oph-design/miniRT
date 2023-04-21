@@ -74,7 +74,7 @@ t_vector	get_object_normal(t_object obj, t_vector hit, t_ray ray, double t)
 						mult_double_vec(t, ray.direct)), obj.pos), obj.direct);
 		if (offset < ZERO && offset > -ZERO)
 			return (normalize(mult_double_vec(-1, obj.direct)));
-		if (offset + ZERO > obj.height)
+		if (offset + ZERO >= obj.height)
 			return (normalize(obj.direct));
 		return (normalize(sub_vec(sub_vec(hit, obj.pos),
 					mult_double_vec(dot(sub_vec(hit, obj.pos),
