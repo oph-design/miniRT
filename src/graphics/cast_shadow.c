@@ -2,7 +2,7 @@
 
 static void	check_for_negative(double *t, double *tmp)
 {
-	if (*t < ZERO)
+	if (*t + ZERO < ZERO)
 		*t = *tmp;
 	*tmp = *t;
 }
