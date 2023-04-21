@@ -24,8 +24,6 @@ static void	intersect_cylinder(t_object cy, t_ray ray, double *t)
 			cy.direct, cy.color);
 	pl.radius = cy.radius;
 	hit_disk(pl, ray, NULL, t);
-	if (*t < ZERO)
-		*t = tmp;
 	check_for_negative(t, &tmp);
 }
 
