@@ -1,12 +1,12 @@
 #include "parser.h"
 
-static t_errors	get_lighting(char **file, t_lighting *light);
-static t_errors	get_amlight(char **file, t_lighting *light);
+static int	get_lighting(char **file, t_lighting *light);
+static int	get_amlight(char **file, t_lighting *light);
 
-t_errors	set_lighting(char **file, t_map *map)
+int	set_lighting(char **file, t_map *map)
 {
 	t_lighting	*light;
-	t_errors	ecode;
+	int			ecode;
 
 	ecode = SUCCESS;
 	light = malloc(sizeof(t_lighting));
@@ -21,11 +21,11 @@ t_errors	set_lighting(char **file, t_map *map)
 	return (SUCCESS);
 }
 
-static t_errors	get_lighting(char **file, t_lighting *light)
+static int	get_lighting(char **file, t_lighting *light)
 {
-	char		*input;
-	char		**args;
-	t_errors	ecode;
+	char	*input;
+	char	**args;
+	int		ecode;
 
 	ecode = SUCCESS;
 	input = stra_iteri(file, "L", 1);
@@ -47,11 +47,11 @@ static t_errors	get_lighting(char **file, t_lighting *light)
 	return (SUCCESS);
 }
 
-static t_errors	get_amlight(char **file, t_lighting *light)
+static int	get_amlight(char **file, t_lighting *light)
 {
-	char		*input;
-	char		**args;
-	t_errors	ecode;
+	char	*input;
+	char	**args;
+	int		ecode;
 
 	ecode = SUCCESS;
 	input = stra_iteri(file, "A", 0);
@@ -72,11 +72,11 @@ static t_errors	get_amlight(char **file, t_lighting *light)
 	return (SUCCESS);
 }
 
-t_errors	set_camera(char **file, t_map *map)
+int	set_camera(char **file, t_map *map)
 {
 	char			**args;
 	char			*input;
-	t_errors		ecode;
+	int				ecode;
 	const double	wh[2] = {(double)WIDTH, (double)HEIGHT};
 
 	ecode = SUCCESS;
@@ -99,11 +99,11 @@ t_errors	set_camera(char **file, t_map *map)
 	return (SUCCESS);
 }
 
-t_errors	get_obj_arr(char **file, t_map *map)
+int	get_obj_arr(char **file, t_map *map)
 {
-	t_errors	ecode;
-	size_t		i;
-	size_t		j;
+	int		ecode;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;

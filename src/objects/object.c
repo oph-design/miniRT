@@ -24,23 +24,23 @@ t_object	new_sphere(t_vector pos, double r, t_vector color)
 	return (new);
 }
 
-t_object	new_cylinder(t_vector pos, t_vector orientation,
-	double *size, t_vector color)
+t_object	new_cylinder(t_vector pos, t_vector direct,
+			double *size, t_vector color)
 {
 	t_object	new;
 
 	new.type = CYLINDER;
 	new.pos = pos;
-	new.radius = size[0] / 2;
+	new.radius = size[0] / 2.0;
 	new.height = size[1];
-	new.direct = normalize(orientation);
+	new.direct = normalize(direct);
 	new.pos = sub_vec(new.pos,
-			mult_double_vec(new.height / 2, new.direct));
+			mult_double_vec(new.height / 2.0, new.direct));
 	new.color = color;
 	return (new);
 }
 
-t_object	new_plane(t_vector pos, t_vector orientation, t_vector color)
+t_object	new_plane(t_vector pos, t_vector direct, t_vector color)
 {
 	t_object	new;
 
@@ -48,7 +48,7 @@ t_object	new_plane(t_vector pos, t_vector orientation, t_vector color)
 	new.pos = pos;
 	new.radius = 0;
 	new.height = 0;
-	new.direct = orientation;
+	new.direct = direct;
 	new.color = color;
 	return (new);
 }

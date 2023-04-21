@@ -1,6 +1,6 @@
 #include "parser.h"
 
-double	get_ratio(char *str, t_errors *exit_code)
+double	get_ratio(char *str, int *exit_code)
 {
 	size_t	i;
 
@@ -13,7 +13,7 @@ double	get_ratio(char *str, t_errors *exit_code)
 	return (ft_strtod(str));
 }
 
-t_vector	get_color(char *str, t_errors *exit_code)
+t_vector	get_color(char *str, int *exit_code)
 {
 	char			**args;
 	unsigned int	r;
@@ -34,7 +34,7 @@ t_vector	get_color(char *str, t_errors *exit_code)
 	return (new_vec((double)r, (double)g, (double)b));
 }
 
-t_vector	get_vector(char *str, t_errors *exit_code, int pos)
+t_vector	get_vector(char *str, int *exit_code, int pos)
 {
 	char	**args;
 	double	x;
@@ -48,8 +48,8 @@ t_vector	get_vector(char *str, t_errors *exit_code, int pos)
 	y = get_ratio(args[1], exit_code);
 	z = get_ratio(args[2], exit_code);
 	ft_free_stra(args);
-	if (!pos)
-		if (x > 1.0 || x < -1.0 || y > 1.0 || y < -1.0 || z > 1.0 || z < -1.0)
-			return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
+	if (((x > 1.0 || x < -1.0 || y > 1.0 || y < -1.0 || z > 1.0 || z < -1.0)
+			|| (x + y + z == 0.0)) && !pos)
+		return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
 	return (new_vec(x, y, z));
 }
