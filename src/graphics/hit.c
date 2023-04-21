@@ -72,7 +72,7 @@ t_vector	get_object_normal(t_object obj, t_vector hit, t_ray ray, double t)
 	{
 		offset = dot(sub_vec(add_vec(ray.origin,
 						mult_double_vec(t, ray.direct)), obj.pos), obj.direct);
-		if (offset < 0.0000000001 && offset > -0.0000000001)
+		if (offset < ZERO && offset > -ZERO)
 			return (normalize(mult_double_vec(-1, obj.direct)));
 		if (offset + ZERO > obj.height)
 			return (normalize(obj.direct));
@@ -107,5 +107,5 @@ void	hit(t_map *map, int j, int i)
 	else if (t != -1)
 		draw_pixel(map->window, j, i, write_color(0.0, 0.0, 0.0, 255.0));
 	else
-		draw_pixel(map->window, j, i, write_color(255.0, 255.0, 255.0, 255.0));
+		draw_pixel(map->window, j, i, vec_to_color(map->lighting->l_color));
 }
