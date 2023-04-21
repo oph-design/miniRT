@@ -37,7 +37,7 @@ static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 	{
 		if (map->objects[pos[INDEX]].type == SPHERE)
 			hit_sphere(map->objects[pos[INDEX]], ray, pos, t);
-		else if (map->objects[pos[INDEX]].type == PLANE)
+		if (map->objects[pos[INDEX]].type == PLANE)
 			hit_plane(map->objects[pos[INDEX]], ray, pos, t);
 		if (map->objects[pos[INDEX]].type == CYLINDER)
 		{
@@ -52,6 +52,8 @@ static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 			pl.radius = cy.radius;
 			hit_disk(pl, ray, pos, t);
 		}
+		if (map->objects[pos[INDEX]].type == CONE)
+			hit_cone(map->objects[pos[INDEX]], ray, pos, t);
 		pos[INDEX]++;
 	}
 }

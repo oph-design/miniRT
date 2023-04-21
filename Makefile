@@ -23,7 +23,7 @@ MATH_SRC	= ray vec_util vec_operations vec_double_operations util vec_clamp doub
 MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
 
 GRAPHICS_DIR	= src/graphics/
-GRAPHICS_SRC	= window draw hit cast_light cast_shadow hit_sphere hit_cylinder key_input hit_plane color
+GRAPHICS_SRC	= window draw hit cast_light cast_shadow hit_sphere hit_cylinder key_input hit_plane hit_cone color
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
