@@ -12,7 +12,7 @@ t_camera	*new_cam(t_vector pos, t_vector direct, int fov, const double wh[2])
 	t_vector	u;
 	t_vector	v;
 
-	direct = mult_double_vec(-1, direct);
+	direct = mult_double_vec(-1, normalize(direct));
 	new = malloc(sizeof(t_camera));
 	vup = new_vec(0.0, -1.0, 0.0);
 	new->fov = fov;
