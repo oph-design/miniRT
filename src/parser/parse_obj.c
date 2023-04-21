@@ -1,6 +1,6 @@
 #include "parser.h"
 
-t_object	parse_sphere(char *str, t_errors *ecode)
+t_object	parse_sphere(char *str, int *ecode)
 {
 	char		**args;
 	t_object	sphere;
@@ -14,7 +14,7 @@ t_object	parse_sphere(char *str, t_errors *ecode)
 	return (ft_free_stra(args), sphere);
 }
 
-t_object	parse_cylinder(char *str, t_errors *ecode)
+t_object	parse_cylinder(char *str, int *ecode)
 {
 	char		**args;
 	double		size[2];
@@ -32,7 +32,7 @@ t_object	parse_cylinder(char *str, t_errors *ecode)
 	return (ft_free_stra(args), cylinder);
 }
 
-t_object	parse_plane(char *str, t_errors *ecode)
+t_object	parse_plane(char *str, int *ecode)
 {
 	char		**args;
 	t_object	plane;
@@ -46,7 +46,7 @@ t_object	parse_plane(char *str, t_errors *ecode)
 	return (ft_free_stra(args), plane);
 }
 
-t_object	parse(char *str, t_errors *ecode)
+t_object	parse(char *str, int *ecode)
 {
 	char	*set;
 

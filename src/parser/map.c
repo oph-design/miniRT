@@ -1,11 +1,11 @@
 #include "parser.h"
 
-void	parse_error(t_errors code, char *component, t_map *map, char **file);
+void	parse_error(int code, char *component, t_map *map, char **file);
 
 t_map	*get_map(char **file)
 {
-	t_map		*map;
-	t_errors	exit_code;
+	t_map	*map;
+	int		exit_code;
 
 	if (file == NULL)
 		parse_error(EMPTY, "file: ", NULL, file);
@@ -35,7 +35,7 @@ void	free_map(t_map *map)
 	free(map);
 }
 
-void	parse_error(t_errors code, char *component, t_map *map, char **file)
+void	parse_error(int code, char *component, t_map *map, char **file)
 {
 	if (code == SUCCESS)
 		return ;
