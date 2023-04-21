@@ -76,7 +76,7 @@ int	set_camera(char **file, t_map *map)
 {
 	char			**args;
 	char			*input;
-	int		ecode;
+	int				ecode;
 	const double	wh[2] = {(double)WIDTH, (double)HEIGHT};
 
 	ecode = SUCCESS;
