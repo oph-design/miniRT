@@ -11,19 +11,6 @@ typedef enum e_type
 	LIGHT
 }	t_type;
 
-typedef enum e_errors
-{
-	SUCCESS,
-	EMPTY,
-	IDENTIFIER,
-	ARG_NUM,
-	VAL_RANGE,
-	NO_NUMBER,
-	VAL_NUM,
-	DUP_ENTITY,
-	NOT_FOUND
-}	t_errors;
-
 typedef struct s_vector
 {
 	double	x;

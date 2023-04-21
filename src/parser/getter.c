@@ -1,6 +1,6 @@
 #include "parser.h"
 
-double	get_ratio(char *str, t_errors *exit_code)
+double	get_ratio(char *str, int *exit_code)
 {
 	size_t	i;
 
@@ -13,7 +13,7 @@ double	get_ratio(char *str, t_errors *exit_code)
 	return (ft_strtod(str));
 }
 
-t_vector	get_color(char *str, t_errors *exit_code)
+t_vector	get_color(char *str, int *exit_code)
 {
 	char			**args;
 	unsigned int	r;
@@ -34,7 +34,7 @@ t_vector	get_color(char *str, t_errors *exit_code)
 	return (new_vec((double)r, (double)g, (double)b));
 }
 
-t_vector	get_vector(char *str, t_errors *exit_code, int pos)
+t_vector	get_vector(char *str, int *exit_code, int pos)
 {
 	char	**args;
 	double	x;
