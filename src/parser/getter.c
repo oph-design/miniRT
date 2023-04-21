@@ -49,7 +49,7 @@ t_vector	get_vector(char *str, int *exit_code, int pos)
 	z = get_ratio(args[2], exit_code);
 	ft_free_stra(args);
 	if (((x > 1.0 || x < -1.0 || y > 1.0 || y < -1.0 || z > 1.0 || z < -1.0)
-			|| (x + y + z == 0.0)) && !pos)
+			|| (fabs(x) + fabs(y) + fabs(z) == 0.0)) && !pos)
 		return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
 	return (new_vec(x, y, z));
 }
