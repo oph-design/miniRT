@@ -31,11 +31,11 @@ t_object	new_cylinder(t_vector pos, t_vector orientation,
 
 	new.type = CYLINDER;
 	new.pos = pos;
-	new.radius = size[0] / 2;
+	new.radius = size[0] / 2.0;
 	new.height = size[1];
 	new.direct = normalize(orientation);
 	new.pos = sub_vec(new.pos,
-			mult_double_vec(new.height / 2, new.direct));
+			mult_double_vec(new.height / 2.0, new.direct));
 	new.color = color;
 	return (new);
 }
