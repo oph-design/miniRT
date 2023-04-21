@@ -44,8 +44,10 @@ static void	check_for_objects(int exit_code, t_map *map, char **file)
 		parse_error(exit_code, "sphere: ", map, file);
 	if (exit_code > 20 && exit_code < 30)
 		parse_error(exit_code, "plane: ", map, file);
-	if (exit_code > 30)
+	if (exit_code > 30 && exit_code < 40)
 		parse_error(exit_code, "cylinder: ", map, file);
+	if (exit_code > 40)
+		parse_error(exit_code, "cone: ", map, file);
 }
 
 static void	parse_error(int code, char *component, t_map *map, char **file)

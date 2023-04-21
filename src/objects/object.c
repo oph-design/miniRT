@@ -40,6 +40,16 @@ t_object	new_cylinder(t_vector pos, t_vector direct,
 	return (new);
 }
 
+t_object	new_cone(t_vector pos, t_vector direct,
+			double *size, t_vector color)
+{
+	t_object	cone;
+
+	cone = new_cylinder(pos, direct, size, color);
+	cone.type = CONE;
+	return (cone);
+}
+
 t_object	new_plane(t_vector pos, t_vector direct, t_vector color)
 {
 	t_object	new;

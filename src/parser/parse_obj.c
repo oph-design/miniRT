@@ -52,7 +52,27 @@ t_object	parse_plane(char *str, int *ecode)
 	return (ft_free_stra(args), plane);
 }
 
-t_object	parse(char *str, int *ecode)
+static t_object	parse_cone(char *str, int *ecode)
+{
+	char		**args;
+	double		size[2];
+	t_object	cylinder;
+
+	args = ft_split_whitespcs(str);
+	if (ft_stra_len(args) != 6)
+		return (*ecode = (ARG_NUM + CN_ERROR), ft_free_stra(args),
+			new_cone(new_vec(0, 0, 0), new_vec(0, 0, 0),
+				size, new_vec(0, 0, 0)));
+	size[0] = get_ratio(args[3], ecode);
+	size[1] = get_ratio(args[4], ecode);
+	cylinder = new_cone(get_vector(args[1], ecode, 1),
+			get_vector(args[2], ecode, 0), size, get_color(args[5], ecode));
+	if (*ecode > 0)
+		*ecode += CN_ERROR;
+	return (ft_free_stra(args), cylinder);
+}
+
+t_object	parse_obj(char *str, int *ecode)
 {
 	char	*set;
 
@@ -61,13 +81,9 @@ t_object	parse(char *str, int *ecode)
 		return (free(set), parse_sphere(str, ecode));
 	if (!ft_strncmp(set, "cy", 3))
 		return (free(set), parse_cylinder(str, ecode));
+	if (!ft_strncmp(set, "cn", 3))
+		return (free(set), parse_cone(str, ecode));
 	if (!ft_strncmp(set, "pl", 3))
 		return (free(set), parse_plane(str, ecode));
 	return (free(set), parse_sphere(str, ecode));
-}
-
-int	is_object(char *str)
-{
-	return (!ft_strncmp(str, "A", 1) || !ft_strncmp(str, "C", 1)
-		|| !ft_strncmp(str, "L", 1));
 }
