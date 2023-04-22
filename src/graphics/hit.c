@@ -30,9 +30,6 @@ static int	hit_light(t_object light, t_ray ray, double *t)
 
 void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 {
-	t_object	pl;
-	t_object	cy;
-
 	while (map->obj_count > pos[INDEX])
 	{
 		if (map->objects[pos[INDEX]].type == SPHERE)
@@ -40,18 +37,7 @@ void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 		if (map->objects[pos[INDEX]].type == PLANE)
 			hit_plane(map->objects[pos[INDEX]], ray, pos, t);
 		if (map->objects[pos[INDEX]].type == CYLINDER)
-		{
-			cy = map->objects[pos[INDEX]];
-			hit_cylinder(cy, ray, pos, t);
-			pl = new_plane(cy.pos, cy.direct, cy.color);
-			pl.radius = cy.radius;
-			hit_disk(pl, ray, pos, t);
-			pl = new_plane(add_vec(cy.pos,
-						mult_double_vec(cy.height, cy.direct)),
-					cy.direct, cy.color);
-			pl.radius = cy.radius;
-			hit_disk(pl, ray, pos, t);
-		}
+			cylinder_helper(map->objects[pos[INDEX]], ray, pos, t);
 		if (map->objects[pos[INDEX]].type == CONE)
 			hit_cone(map->objects[pos[INDEX]], ray, pos, t);
 		pos[INDEX]++;
