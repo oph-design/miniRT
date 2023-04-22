@@ -7,7 +7,7 @@ static t_hit	new_hit(t_object obj, t_ray ray, double t, int index)
 
 	new.obj = obj;
 	new.cam_ray = ray;
-	new.hitpoint = at(ray, t);
+	new.hitpoint = at(ray, t - ZERO);
 	new.normal = get_object_normal(obj, new.hitpoint, ray, t);
 	new.index = index;
 	return (new);
@@ -28,7 +28,7 @@ static int	hit_light(t_object light, t_ray ray, double *t)
 	return (0);
 }
 
-static void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
+void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 {
 	t_object	pl;
 	t_object	cy;

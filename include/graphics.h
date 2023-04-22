@@ -38,6 +38,7 @@ int			hit_plane(t_object pl, t_ray ray, size_t *pos, double *t);
 void		hit(t_map *map, int j, int i);
 
 t_vector	get_object_normal(t_object obj, t_vector hit, t_ray ray, double t);
+void		loop_objects(t_map *map, t_ray ray, double *t, size_t *pos);
 
 t_ray		get_ray(t_camera *camera, double x, double y);
 
