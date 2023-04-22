@@ -1,5 +1,15 @@
 #include "minirt.h"
 
+static double	diffuse(void)
+{
+	double	random;
+
+	random = (double)rand() / 100000000;
+	if (random > 5)
+		random = 5;
+	return (random);
+}
+
 static t_vector	specular(t_map *map, t_hit hit, t_vector light_dir)
 {
 	t_vector	r;
@@ -30,11 +40,12 @@ t_vector	cast_light(t_map *map, t_hit hit)
 		radiant = 0;
 	ambient = mult_double_vec(map->lighting->a_ratio, map->lighting->a_color);
 	if (is_shaded(map, hit))
-		return (add_vec(ambient, new_vec(0, 0, 0)));
+		return (add_double_vec(diffuse(), add_vec(ambient, new_vec(0, 0, 0))));
 	light = mult_double_vec(map->lighting->l_ratio, map->lighting->l_color);
 	light = mult_double_vec(radiant, light);
 	color = color_to_ratio(add_vec(add_vec(light, ambient),
 				specular(map, hit, light_dir)));
 	color = mult_clamp(color, hit.obj.color, 0, 255);
+	color = add_clamp_d(diffuse(), color, 0, 255);
 	return (color);
 }
