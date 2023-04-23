@@ -15,7 +15,7 @@ int	main(int argc, char **argv)
 	while (++i < (int)map->light_count)
 	{
 		printf("\nLight POS	 : %f	%f	%f\n\n", map->lighting[i].pos.x,
-		map->lighting[i].pos.y, map->lighting[i].pos.z);
+			map->lighting[i].pos.y, map->lighting[i].pos.z);
 	}
 	i = -1;
 	while (++i < (int)map->obj_count)
