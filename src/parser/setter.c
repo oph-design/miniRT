@@ -27,7 +27,6 @@ int	set_lighting(char **file, t_map *map)
 		j++;
 	}
 	get_amlight(file, map, &ecode);
-
 	return (ecode);
 }
 
@@ -40,9 +39,10 @@ static t_lighting	get_lighting(char *line, int *ecode)
 	i = 0;
 	args = ft_split_whitespcs(line);
 	if (ft_stra_len(args) != 4)
-		return (ft_free_stra(args), *ecode = ARG_NUM, get_light(0, new_vec(0, 0, 0), new_vec(0, 0, 0)));
+		return (ft_free_stra(args), *ecode = ARG_NUM,
+			get_light(0, new_vec(0, 0, 0), new_vec(0, 0, 0)));
 	res = get_light(get_ratio(args[2], ecode), get_color(args[3], ecode),
-		get_vector(args[1], ecode, 1));
+			get_vector(args[1], ecode, 1));
 	ft_free_stra(args);
 	if (res.l_ratio < 0.0 || res.l_ratio > 1.0)
 		*ecode = VAL_RANGE;
@@ -111,7 +111,7 @@ int	get_obj_arr(char **file, t_map *map)
 	i = 0;
 	j = 0;
 	ecode = SUCCESS;
-	map->obj_count = ft_stra_len(file) - 3;
+	map->obj_count = ft_stra_len(file) - map->light_count - 2;
 	if (map->obj_count < 1)
 		return (NOT_FOUND);
 	map->objects = malloc(map->obj_count * sizeof(t_object));

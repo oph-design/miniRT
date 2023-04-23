@@ -14,5 +14,5 @@ t_lighting	get_light(double ratio, t_vector color, t_vector c)
 	light.l_color = color;
 	light.pos = c;
 	light.obj = new_light(light.pos, 0.5, light.l_color);
-	return(light);
+	return (light);
 }
