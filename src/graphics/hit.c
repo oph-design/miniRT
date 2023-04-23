@@ -1,5 +1,4 @@
 #include "minirt.h"
-#include <stdio.h>
 
 static t_hit	new_hit(t_object obj, t_ray ray, double t, int index)
 {
