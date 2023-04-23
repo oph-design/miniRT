@@ -40,7 +40,8 @@ t_vector	cast_light(t_map *map, t_hit hit)
 		radiant = 0;
 	ambient = mult_double_vec(map->lighting->a_ratio, map->lighting->a_color);
 	if (is_shaded(map, hit))
-		return (add_double_vec(diffuse(), add_vec(ambient, new_vec(0, 0, 0))));
+		return (add_double_vec(diffuse(),
+				mult_vec(color_to_ratio(ambient), hit.obj.color)));
 	light = mult_double_vec(map->lighting->l_ratio, map->lighting->l_color);
 	light = mult_double_vec(radiant, light);
 	color = color_to_ratio(add_vec(add_vec(light, ambient),
