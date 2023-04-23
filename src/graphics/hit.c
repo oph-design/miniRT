@@ -13,19 +13,16 @@ static t_hit	new_hit(t_object obj, t_ray ray, double t, int index)
 	return (new);
 }
 
-static int	hit_light(t_object light, t_ray ray, double *t)
+static void	hit_light(t_map *map, t_ray ray, double *t, size_t *pos)
 {
-	double	tmp;
-
-	tmp = *t;
-	hit_sphere(light, ray, NULL, t);
-	if (tmp + ZERO > *t && *t + ZERO > ZERO)
+	while (pos[INDEX] < map->light_count)
 	{
-		*t = -1;
-		return (1);
+		hit_sphere(map->lighting[pos[INDEX]].obj, ray, pos, &t[LIGHT]);
+		pos[INDEX]++;
 	}
-	*t = INFINITY;
-	return (0);
+	pos[INDEX] = 0;
+	pos[INDEX_HIT_LIGHT] = pos[INDEX_HIT];
+	pos[INDEX_HIT] = 0;
 }
 
 void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
@@ -87,25 +84,27 @@ void	hit(t_map *map, int j, int i)
 {
 	double	x;
 	double	y;
-	size_t	pos[2];
-	double	t;
+	size_t	pos[3];
+	double	t[2];
 	t_hit	hit;
 
 	pos[INDEX] = 0;
 	pos[INDEX_HIT] = 0;
-	t = INFINITY;
+	pos[INDEX_HIT_LIGHT] = 0;
+	t[OBJECT] = INFINITY;
+	t[LIGHTS] = INFINITY;
 	x = j / map->window->width;
 	y = i / map->window->height;
-	if (!hit_light(map->lighting->obj, get_ray(map->camera, x, y), &t))
-	{
-		loop_objects(map, get_ray(map->camera, x, y), &t, pos);
+	hit_light(map, get_ray(map->camera, x, y), t, pos);
+	loop_objects(map, get_ray(map->camera, x, y), t, pos);
+	if (t[LIGHTS] > t[OBJECT])
 		hit = new_hit(map->objects[pos[INDEX_HIT]], get_ray(map->camera, x, y),
-				t, pos[INDEX_HIT]);
-	}
-	if (t < INFINITY && t > ZERO)
-		draw_pixel(map->window, j, i, vec_to_color(cast_light(map, hit)));
-	else if (t != -1)
-		draw_pixel(map->window, j, i, write_color(0.0, 0.0, 0.0, 255.0));
+				t[OBJECT], pos[INDEX_HIT]);
 	else
-		draw_pixel(map->window, j, i, vec_to_color(map->lighting->l_color));
+		hit = new_hit(map->lighting[pos[INDEX_HIT_LIGHT]].obj,
+				get_ray(map->camera, x, y), t[LIGHTS], pos[INDEX_HIT_LIGHT]);
+	if (t[OBJECT] < INFINITY && t[OBJECT] > ZERO)
+		draw_pixel(map->window, j, i, vec_to_color(cast_light(map, hit)));
+	else
+		draw_pixel(map->window, j, i, write_color(0.0, 0.0, 0.0, 255.0));
 }

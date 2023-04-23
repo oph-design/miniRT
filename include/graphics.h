@@ -14,10 +14,17 @@ typedef struct s_camera	t_camera;
 typedef struct s_window	t_window;
 typedef struct s_map	t_map;
 
-typedef enum e_hit_index
+typedef enum e_pos_index
 {
 	INDEX_HIT,
-	INDEX
+	INDEX,
+	INDEX_HIT_LIGHT
+}	t_pos_index;
+
+typedef enum e_hit_index
+{
+	OBJECT,
+	LIGHTS
 }	t_hit_index;
 
 void		draw(t_map *map);
@@ -44,6 +51,6 @@ t_ray		get_ray(t_camera *camera, double x, double y);
 
 t_vector	cast_light(t_map *map, t_hit hit);
 
-int			is_shaded(t_map *map, t_hit hit);
+int			is_shaded(t_map *map, t_hit hit, t_vector light_dir);
 
 #endif

@@ -40,14 +40,12 @@ static int	is_in_front(t_vector light_dir, t_ray light_ray, double t)
 	return (0);
 }
 
-static int	intercept_obj(t_map *map, t_hit hit, size_t i)
+static int	intercept_obj(t_map *map, t_hit hit, size_t i, t_vector light_dir)
 {
-	t_vector	light_dir;
 	t_ray		light_ray;
 	double		t;
 
 	t = INFINITY;
-	light_dir = sub_vec(map->lighting->pos, hit.hitpoint);
 	light_ray = new_ray(add_vec(mult_double_vec(ZERO, hit.normal),
 				hit.hitpoint), light_dir);
 	if (map->objects[i].type == SPHERE)
@@ -62,12 +60,12 @@ static int	intercept_obj(t_map *map, t_hit hit, size_t i)
 	return (0);
 }
 
-int	is_shaded(t_map *map, t_hit hit)
+int	is_shaded(t_map *map, t_hit hit, t_vector light_dir)
 {
 	size_t	i;
 
 	i = 0;
-	while (map->obj_count > i && !intercept_obj(map, hit, i))
+	while (map->obj_count > i && !intercept_obj(map, hit, i, light_dir))
 		i++;
 	if (i != map->obj_count)
 		return (1);
