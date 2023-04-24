@@ -52,7 +52,7 @@ int	is_identifier(char *line)
 		return (1);
 	if (!ft_strncmp(line, "cy", 2) && ft_iswhitespcs(*(line + 2)))
 		return (1);
-	if (!ft_strncmp(line, "cn", 2) && ft_iswhitespcs(*(line + 2)))
+	if (!ft_strncmp(line, "cb", 2) && ft_iswhitespcs(*(line + 2)))
 		return (1);
 	if (!ft_strncmp(line, "pl", 2) && ft_iswhitespcs(*(line + 2)))
 		return (1);

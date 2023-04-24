@@ -1,43 +1,40 @@
 #include "minirt.h"
 
-int	hit_cone(t_object cn, t_ray ray, size_t *pos, double *t)
+static int	check_radius(double t, t_ray ray, t_object pl)
 {
-	t_vector	vals;
-	t_vector	q;
-	t_vector	d;
-	double		a;
-	double		tmp[3];
+	t_vector	i_pos;
+	double		len;
 
-	d = normalize(ray.direct);
-	q = sub_vec(ray.origin, cn.pos);
-	a = pow(cn.radius / cn.height, 2);
-	vals.x = dot(d, ray.direct) - pow(dot(cn.direct, d) / cn.height, 2) * a;
-	vals.y = dot(q, d) - dot(q, cn.direct) * a;
-	vals.z = dot(q, q) - pow(dot(q, cn.direct) / cn.height, 2) * a;
-	if (vals.y * vals.y - vals.x * vals.z < 0)
+	i_pos = add_vec(ray.origin, mult_double_vec(t, ray.direct));
+	//pl_dir = cross_product(pl.direct, (t_vector){0, 1, 0});
+	len = sqrt(vec_length_squared(sub_vec(pl.pos, i_pos)));
+	if (i_pos.x > pl.pos.x + pl.radius || i_pos.x < pl.pos.x - pl.radius)
 		return (0);
-	tmp[0] = (-vals.y - sqrt(vals.y * vals.y - vals.x * vals.z) / (vals.x));
-	tmp[1] = (-vals.y + sqrt(vals.y * vals.y - vals.x * vals.z) / (vals.x));
-	tmp[2] = tmp[0];
-	if (tmp[2] < 0 || tmp[2] > tmp[1])
-		tmp[2] = tmp[1];
-	if (tmp[2] < 0 || tmp[2] > *t)
+	if (i_pos.y > pl.pos.y + pl.radius || i_pos.y < pl.pos.y - pl.radius)
 		return (0);
-	*t = tmp[2];
-	if (pos)
-		pos[INDEX_HIT] = pos[INDEX];
+	if (i_pos.z > pl.pos.z + pl.radius || i_pos.z < pl.pos.z - pl.radius)
+		return (0);
 	return (1);
 }
 
-// a = atan(r / h)
-// q = o - p
-// x = p_x + t * v_x
-// y = p_y + t * v_y
-// z = p_z + t * v_z
-// (x - p_x)^2 + (y - p_y)^2 = (z - p_z)^2 * (r / h)^2
-// Substitute the parametric equation of the ray into the equation of the cone:
+int	hit_cube(t_object pl, t_ray ray, size_t *pos, double *t)
+{
+	double		div;
+	double		tt;
 
-// b = 2 * (q . d) - 2 * (q . v) * (r / h)^2
-// c = (q . q) - ((q . v) / h)^2 * r^2
-// a = (d . d) - ((v . d) / h)^2 * r^2
-// t1, t2 = (-b +/- sqrt(b^2 - 4ac)) / 2a
+	div = dot(ray.direct, pl.direct);
+	if (div == 0)
+		return (0);
+	tt = dot(sub_vec(pl.pos, ray.origin), pl.direct) / div;
+	if (tt <= 0)
+		return (0);
+	else if ((!t || *t > tt) && check_radius(tt, ray, pl))
+	{
+		if (t)
+			*t = tt;
+		if (pos)
+			pos[INDEX_HIT] = pos[INDEX];
+		return (1);
+	}
+	return (0);
+}

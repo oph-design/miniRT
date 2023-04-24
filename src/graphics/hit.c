@@ -38,8 +38,8 @@ void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 			hit_plane(map->objects[pos[INDEX]], ray, pos, t);
 		if (map->objects[pos[INDEX]].type == CYLINDER)
 			cylinder_helper(map->objects[pos[INDEX]], ray, pos, t);
-		if (map->objects[pos[INDEX]].type == CONE)
-			hit_cone(map->objects[pos[INDEX]], ray, pos, t);
+		if (map->objects[pos[INDEX]].type == CUBE)
+			hit_cube(map->objects[pos[INDEX]], ray, pos, t);
 		pos[INDEX]++;
 	}
 }
