@@ -60,14 +60,16 @@ static int	intercept_obj(t_map *map, t_hit hit, size_t i, t_vector light_dir)
 	return (0);
 }
 
-int	is_shaded(t_map *map, t_hit hit, t_vector light_dir)
+int	is_shaded(t_map *map, t_hit hit, size_t i)
 {
-	size_t	i;
+	size_t		j;
+	t_vector	light_dir;
 
-	i = 0;
-	while (map->obj_count > i && !intercept_obj(map, hit, i, light_dir))
-		i++;
-	if (i != map->obj_count)
+	j = 0;
+	light_dir = sub_vec(map->lighting[i].pos, hit.hitpoint);
+	while (map->obj_count > j && !intercept_obj(map, hit, j, light_dir))
+		j++;
+	if (j != map->obj_count)
 		return (1);
 	return (0);
 }
