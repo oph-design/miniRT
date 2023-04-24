@@ -51,6 +51,6 @@ t_ray		get_ray(t_camera *camera, double x, double y);
 
 t_vector	cast_light(t_map *map, t_hit hit);
 
-int			is_shaded(t_map *map, t_hit hit, t_vector light_dir);
+int			is_shaded(t_map *map, t_hit hit, size_t i);
 
 #endif
