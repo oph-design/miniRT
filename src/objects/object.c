@@ -46,7 +46,7 @@ t_object	new_cube(t_vector pos, t_vector direct,
 	t_object	cone;
 
 	cone = new_plane(pos, direct, color);
-	cone.radius = size / 2;
+	cone.radius = size;
 	cone.type = CUBE;
 	return (cone);
 }

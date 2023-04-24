@@ -4,8 +4,8 @@
 # include "MLX42.h"
 # include "objects.h"
 
-# define WIDTH 800
-# define HEIGHT	500
+# define WIDTH 400
+# define HEIGHT	300
 
 typedef struct s_vector	t_vector;
 typedef struct s_ray	t_ray;
