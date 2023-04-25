@@ -68,6 +68,8 @@ t_vector	get_object_normal(t_object obj, t_vector hit, t_ray ray, double t)
 					mult_double_vec(dot(sub_vec(hit, obj.pos),
 							obj.direct), obj.direct))));
 	}
+	else if (obj.type == CONE)
+		return (obj.direct);
 	return (new_vec(0, 0, 0));
 }
 
