@@ -65,6 +65,7 @@ typedef struct s_map
 	t_lighting	*lighting;
 	t_camera	*camera;
 	t_object	*objects;
+	size_t		light_count;
 	size_t		obj_count;
 	t_window	*window;
 }				t_map;
@@ -96,7 +97,6 @@ t_object	new_cylinder(t_vector pos, t_vector direct,
 t_object	new_cone(t_vector pos, t_vector direct,
 				double *size, t_vector color);
 void		set_amblight(t_lighting *light, double ratio, t_vector color);
-void		set_light(t_lighting *light, double ratio,	t_vector color,
-				t_vector cords);
+t_lighting	get_light(double ratio,	t_vector color, t_vector cords);
 
 #endif

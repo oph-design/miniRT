@@ -77,18 +77,6 @@ $(MLX42):
 			@cd MLX42 && cmake -B build
 			@make -C MLX42/build
 
-test: all
-			./miniRT scenes/default.rt
-
-shadow: all
-			./miniRT scenes/shadow_test.rt
-
-morph: all
-			./miniRT scenes/morphed.rt
-
-cy: all
-			./miniRT scenes/cyandsp.rt
-
 clean:
 			@rm -rf $(OBJ_DIR)
 			@echo "$(GREEN)miniRT object files cleaned!$(WHITE)"

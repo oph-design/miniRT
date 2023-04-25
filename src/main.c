@@ -11,8 +11,12 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	file = get_file(argv[1]);
 	map = get_map(file);
-	printf("\nLight POS	 : %f	%f	%f\n\n", map->lighting->pos.x,
-		map->lighting->pos.y, map->lighting->pos.z);
+	i = -1;
+	while (++i < (int)map->light_count)
+	{
+		printf("\nLight POS	 : %f	%f	%f\n\n", map->lighting[i].pos.x,
+			map->lighting[i].pos.y, map->lighting[i].pos.z);
+	}
 	i = -1;
 	while (++i < (int)map->obj_count)
 	{
