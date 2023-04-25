@@ -35,7 +35,7 @@ static t_vector	calc_var(t_ray ray, t_object cn)
 	return (var);
 }
 
-int	beat_cone(t_object cn, t_ray ray, size_t *pos, double *t)
+static int	hit_cone(t_object cn, t_ray ray, size_t *pos, double *t)
 {
 	t_vector	var;
 	t_vector	x;
@@ -64,15 +64,26 @@ int	beat_cone(t_object cn, t_ray ray, size_t *pos, double *t)
 	return (0);
 }
 
-int hit_cone(t_object cn, t_ray ray, size_t *pos, double *t)
+static void	check_for_negative(double *t, double *tmp)
+{
+	if (*t + ZERO < ZERO)
+		*t = *tmp;
+	*tmp = *t;
+}
+
+void	cone_helper(t_object cn, t_ray ray, size_t *pos, double *t)
 {
 	t_object	pl;
+	double		tmp;
 
-	beat_cone(cn, ray, pos, t);
+	hit_cone(cn, ray, pos, t);
+	if (pos == NULL)
+		check_for_negative(t, &tmp);
 	pl = new_plane(add_vec(cn.pos,
 				mult_double_vec(cn.height, cn.direct)),
 			cn.direct, cn.color);
 	pl.radius = cn.radius;
 	hit_disk(pl, ray, pos, t);
-	return (1);
+	if (pos == NULL)
+		check_for_negative(t, &tmp);
 }
