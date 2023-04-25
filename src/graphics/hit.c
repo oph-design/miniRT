@@ -43,8 +43,6 @@ void	loop_objects(t_map *map, t_ray ray, double *t, size_t *pos)
 
 t_vector	get_object_normal(t_object obj, t_vector hit, t_ray ray, double t)
 {
-	double	offset;
-
 	if (obj.type == PLANE)
 	{
 		if (dot(obj.direct, mult_double_vec(-1, ray.direct)) < 0)
@@ -54,29 +52,9 @@ t_vector	get_object_normal(t_object obj, t_vector hit, t_ray ray, double t)
 	else if (obj.type == SPHERE)
 		return (normalize(sub_vec(hit, obj.pos)));
 	else if (obj.type == CYLINDER)
-	{
-		offset = dot(sub_vec(add_vec(ray.origin,
-						mult_double_vec(t, ray.direct)), obj.pos), obj.direct);
-		if (offset < ZERO && offset > -ZERO)
-			return (normalize(mult_double_vec(-1, obj.direct)));
-		if (offset + ZERO >= obj.height)
-			return (normalize(obj.direct));
-		return (normalize(sub_vec(sub_vec(hit, obj.pos),
-					mult_double_vec(dot(sub_vec(hit, obj.pos),
-							obj.direct), obj.direct))));
-	}
+		return (cylinder_normal(obj, hit, ray, t));
 	else if (obj.type == CONE)
-	{
-		offset = dot(sub_vec(add_vec(ray.origin,
-						mult_double_vec(t, ray.direct)), obj.pos), obj.direct);
-		if (offset < ZERO && offset > -ZERO)
-			return (normalize(mult_double_vec(-1, obj.direct)));
-		if (offset + ZERO >= obj.height)
-			return (normalize(obj.direct));
-		return (normalize(cross_product(cross_product(obj.direct,
-						sub_vec(at(ray, t), obj.pos)),
-					sub_vec(at(ray, t), obj.pos))));
-	}
+		return (cone_normal(obj, ray, t));
 	return (new_vec(0, 0, 0));
 }
 

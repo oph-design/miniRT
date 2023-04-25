@@ -43,6 +43,8 @@ int			hit_disk(t_object pl, t_ray ray, size_t *pos, double *t);
 double		check_root(double *t, t_vector h, size_t *pos);
 int			hit_sphere(t_object sp, t_ray ray, size_t *pos, double *t);
 int			hit_plane(t_object pl, t_ray ray, size_t *pos, double *t);
+t_vector	cone_normal(t_object obj, t_ray ray, double t);
+t_vector	cylinder_normal(t_object obj, t_vector hit, t_ray ray, double t);
 void		hit(t_map *map, int j, int i);
 
 t_vector	get_object_normal(t_object obj, t_vector hit, t_ray ray, double t);
