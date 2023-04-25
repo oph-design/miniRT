@@ -16,17 +16,18 @@ int	set_lighting(char **file, t_map *map)
 	while (stra_iteri(file, "L", 1))
 		map->light_count += 1;
 	if (map->light_count < 1)
-		return (NOT_FOUND);
+		return (NOT_FOUND + L_ERROR);
 	map->lighting = malloc(sizeof(t_lighting) * map->light_count);
 	while (file[j] != NULL)
 	{
 		if (!ft_strncmp(file[j], "L", 1))
 			map->lighting[i++] = get_lighting(file[j], &ecode);
 		if (ecode)
-			return (ecode);
+			return (ecode + i * 100 + L_ERROR);
 		j++;
 	}
 	get_amlight(file, map, &ecode);
+	printf("%d\n", ecode);
 	return (ecode);
 }
 
@@ -60,19 +61,21 @@ static void	get_amlight(char **file, t_map *map, int *ecode)
 	i = 0;
 	input = stra_iteri(file, "A", 0);
 	if (!input)
-		return ((void)(*ecode = NOT_FOUND));
+		return ((void)(*ecode = NOT_FOUND + A_ERROR));
 	args = ft_split_whitespcs(input);
 	if (ft_stra_len(args) != 3)
-		return ((void)(ft_free_stra(args), *ecode = ARG_NUM));
+		return ((void)(ft_free_stra(args), *ecode = ARG_NUM + A_ERROR));
 	color = get_color(args[2], ecode);
 	ratio = get_ratio(args[1], ecode);
+	if (*ecode)
+		*ecode = *ecode + A_ERROR;
 	if (ratio < 0.0 || ratio > 1.0)
-		return ((void)(*ecode = VAL_RANGE));
+		return ((void)(*ecode = VAL_RANGE + A_ERROR));
 	while (i < map->light_count)
 		set_amblight(&map->lighting[i++], ratio, color);
 	ft_free_stra(args);
 	if (stra_iteri(file, "A", 0) != NULL)
-		*ecode = DUP_ENTITY;
+		*ecode = DUP_ENTITY + A_ERROR;
 }
 
 int	set_camera(char **file, t_map *map)

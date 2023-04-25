@@ -18,6 +18,8 @@
 # define SP_ERROR	10
 # define PL_ERROR	20
 # define CY_ERROR	30
+# define L_ERROR	50
+# define A_ERROR	60
 
 char		*stra_iteri(char **arr, char *set, int id);
 double		get_ratio(char *str, int *exit_code);
