@@ -35,7 +35,7 @@ static t_vector	calc_var(t_ray ray, t_object cn)
 	return (var);
 }
 
-int	hit_cone(t_object cn, t_ray ray, size_t *pos, double *t)
+int	beat_cone(t_object cn, t_ray ray, size_t *pos, double *t)
 {
 	t_vector	var;
 	t_vector	x;
@@ -62,4 +62,17 @@ int	hit_cone(t_object cn, t_ray ray, size_t *pos, double *t)
 		}
 	}
 	return (0);
+}
+
+int hit_cone(t_object cn, t_ray ray, size_t *pos, double *t)
+{
+	t_object	pl;
+
+	beat_cone(cn, ray, pos, t);
+	pl = new_plane(add_vec(cn.pos,
+				mult_double_vec(cn.height, cn.direct)),
+			cn.direct, cn.color);
+	pl.radius = cn.radius;
+	hit_disk(pl, ray, pos, t);
+	return (1);
 }
