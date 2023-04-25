@@ -23,12 +23,18 @@ static double	get_shadow(t_map *map, t_hit hit)
 
 	i = 0;
 	shadow = 1.0;
-	while (i < map->light_count)
+	if (map->light_count > 1)
 	{
-		if (is_shaded(map, hit, i))
-			shadow *= (map->lighting[0].a_ratio);
-		i++;
+		while (i < map->light_count)
+		{
+			if (is_shaded(map, hit, i))
+				shadow *= (map->lighting[i].l_ratio);
+			i++;
+		}
 	}
+	else
+		if (is_shaded(map, hit, i))
+			shadow *= map->lighting[i].a_ratio;
 	return (shadow);
 }
 
