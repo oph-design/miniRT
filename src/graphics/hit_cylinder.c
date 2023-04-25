@@ -74,6 +74,7 @@ void	cylinder_helper(t_object cy, t_ray ray, size_t *pos, double *t)
 	t_object	pl;
 	double		tmp;
 
+	tmp = *t;
 	hit_cylinder(cy, ray, pos, t);
 	if (pos == NULL)
 		check_for_negative(t, &tmp);

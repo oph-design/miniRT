@@ -76,6 +76,7 @@ void	cone_helper(t_object cn, t_ray ray, size_t *pos, double *t)
 	t_object	pl;
 	double		tmp;
 
+	tmp = *t;
 	hit_cone(cn, ray, pos, t);
 	if (pos == NULL)
 		check_for_negative(t, &tmp);
