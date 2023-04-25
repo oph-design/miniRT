@@ -52,17 +52,17 @@ t_object	parse_plane(char *str, int *ecode)
 	return (ft_free_stra(args), plane);
 }
 
-t_object	parse(char *str, int *ecode)
+t_object	parse(char *str, int *ecode, t_count *count)
 {
 	char	*set;
 
 	set = ft_substr(str, 0, 2);
 	if (!ft_strncmp(set, "sp", 3))
-		return (free(set), parse_sphere(str, ecode));
+		return (free(set), (count->sp)++, parse_sphere(str, ecode));
 	if (!ft_strncmp(set, "cy", 3))
-		return (free(set), parse_cylinder(str, ecode));
+		return (free(set), (count->cy)++, parse_cylinder(str, ecode));
 	if (!ft_strncmp(set, "pl", 3))
-		return (free(set), parse_plane(str, ecode));
+		return (free(set), (count->pl)++, parse_plane(str, ecode));
 	return (free(set), parse_sphere(str, ecode));
 }
 

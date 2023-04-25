@@ -27,7 +27,6 @@ int	set_lighting(char **file, t_map *map)
 		j++;
 	}
 	get_amlight(file, map, &ecode);
-	printf("%d\n", ecode);
 	return (ecode);
 }
 
@@ -108,11 +107,13 @@ int	set_camera(char **file, t_map *map)
 int	get_obj_arr(char **file, t_map *map)
 {
 	int		ecode;
+	t_count	count;
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	j = 0;
+	count = (t_count){0, 0, 0, 0};
 	ecode = SUCCESS;
 	map->obj_count = ft_stra_len(file) - map->light_count - 2;
 	if (map->obj_count < 1)
@@ -121,9 +122,17 @@ int	get_obj_arr(char **file, t_map *map)
 	while (file[j] != NULL)
 	{
 		if (!is_object(file[j]))
-			map->objects[i++] = parse(file[j], &ecode);
+			map->objects[i++] = parse(file[j], &ecode, &count);
 		if (ecode)
+		{
+			if (!ft_strncmp(file[j], "sp", 2))
+				ecode = ecode + count.sp * 100;
+			if (!ft_strncmp(file[j], "pl", 2))
+				ecode = ecode + count.pl * 100;
+			if (!ft_strncmp(file[j], "cy", 2))
+				ecode = ecode + count.cy * 100;
 			return (ecode);
+		}
 		j++;
 	}
 	return (SUCCESS);
