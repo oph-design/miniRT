@@ -2,7 +2,6 @@
 # define PARSER_H
 
 # include "minirt.h"
-# include <fcntl.h>
 # include <stdio.h>
 # include "objects.h"
 

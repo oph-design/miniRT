@@ -12,51 +12,47 @@ int	check_input(int argc, char **argv)
 	return (0);
 }
 
-char	**get_file(char	*name)
+char	*get_first_line(int fd)
 {
-	int		fd;
-	char	*nl;
-	char	*file;
-	char	**res;
+	char	*res;
+	char	*tmp;
 
-	fd = open(name, 0);
-	if (fd == -1)
+	tmp = get_next_line(fd);
+	res = ft_strtrim(tmp, " \t\v\r\f");
+	free(tmp);
+	while (res && !ft_strncmp(res, "#", 1))
 	{
-		ft_putendl_fd("Error: file: not accessable", 2);
-		exit(EXIT_FAILURE);
+		free(res);
+		tmp = get_next_line(fd);
+		res = ft_strtrim(tmp, " \t\v\r\f");
+		free(tmp);
 	}
-	file = get_next_line(fd);
-	while (file && file[0] && file[ft_strlen(file) - 1] == '\n')
-	{
-		nl = get_next_line(fd);
-		if (nl == NULL)
-			break ;
-		file = ft_strjoin_gnl(file, nl);
-		free(nl);
-	}
-	res = ft_split(file, '\n');
-	free(file);
-	close(fd);
+	if (res && (!res[0] || res[0] == '\n'))
+		return (free(res), NULL);
 	return (res);
 }
 
-char	*stra_iteri(char **arr, char *set, int id)
+char	**get_file(int fd)
 {
-	size_t			j;
-	static size_t	i[3] = {0, 0, 0};
+	char	*nl;
+	char	*tmp;
+	char	*file;
+	char	**res;
 
-	j = 0;
-	while (arr[i[id]] != NULL)
+	file = get_first_line(fd);
+	while (file && file[0] && file[ft_strlen(file) - 1] == '\n')
 	{
-		while (arr[i[id]][j] && ft_iswhitespcs(arr[i[id]][j]))
-			j++;
-		if (!ft_strncmp(arr[i[id]] + j, set, ft_strlen(set))
-			&& ft_iswhitespcs(arr[i[id]][j + ft_strlen(set)]))
-			return (arr[(i[id])++]);
-		j = 0;
-		(i[id])++;
+		tmp = get_next_line(fd);
+		if (tmp == NULL)
+			break ;
+		nl = ft_strtrim(tmp, " \t\v\r\f");
+		free(tmp);
+		if (ft_strncmp(nl, "#", 1))
+			file = ft_strjoin_gnl(file, nl);
+		free(nl);
 	}
-	return (NULL);
+	res = ft_split(file, '\n');
+	return (free(file), close(fd), res);
 }
 
 int	is_identifier(char *line)
@@ -85,8 +81,6 @@ int	find_invalid_ids(char **file)
 	j = 0;
 	while (file[i] != NULL)
 	{
-		while (file[i][j] && ft_iswhitespcs(file[i][j]))
-			j++;
 		if (!is_identifier(file[i] + j))
 			return (0);
 		j = 0;
