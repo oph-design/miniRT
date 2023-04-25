@@ -74,8 +74,8 @@ t_vector	get_object_normal(t_object obj, t_vector hit, t_ray ray, double t)
 		if (offset + ZERO >= obj.height)
 			return (normalize(obj.direct));
 		return (normalize(cross_product(cross_product(obj.direct,
-							sub_vec(at(ray, t), obj.pos)),
-						sub_vec(at(ray, t), obj.pos))));
+						sub_vec(at(ray, t), obj.pos)),
+					sub_vec(at(ray, t), obj.pos))));
 	}
 	return (new_vec(0, 0, 0));
 }
