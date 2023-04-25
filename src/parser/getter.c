@@ -13,7 +13,7 @@ double	get_ratio(char *str, int *exit_code)
 	else
 		str = ft_strdup(str);
 	while (ft_isdigit(str[i]) || (str[i] == '-' && i == 0)
-			|| (str[i] == '.' && !p++))
+		|| (str[i] == '.' && !p++))
 		i++;
 	if (str[i] && !ft_isdigit(str[i]))
 		return (free(str), *exit_code = NO_NUMBER, 0);
@@ -60,4 +60,15 @@ t_vector	get_vector(char *str, int *exit_code, int pos)
 			|| (fabs(x) + fabs(y) + fabs(z) == 0.0)) && !pos)
 		return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
 	return (new_vec(x, y, z));
+}
+
+int	get_err_num(int ecode, char *str, t_count count)
+{
+	if (!ft_strncmp(str, "sp", 2))
+		ecode = ecode + count.sp * 100;
+	if (!ft_strncmp(str, "pl", 2))
+		ecode = ecode + count.pl * 100;
+	if (!ft_strncmp(str, "cy", 2))
+		ecode = ecode + count.cy * 100;
+	return (ecode);
 }

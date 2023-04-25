@@ -42,5 +42,6 @@ int			get_obj_arr(char **file, t_map *map);
 int			set_lighting(char **file, t_map *map);
 int			find_invalid_ids(char **file);
 int			is_object(char *str);
+int			get_err_num(int ecode, char *str, t_count count);
 
 #endif

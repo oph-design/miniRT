@@ -124,15 +124,7 @@ int	get_obj_arr(char **file, t_map *map)
 		if (!is_object(file[j]))
 			map->objects[i++] = parse(file[j], &ecode, &count);
 		if (ecode)
-		{
-			if (!ft_strncmp(file[j], "sp", 2))
-				ecode = ecode + count.sp * 100;
-			if (!ft_strncmp(file[j], "pl", 2))
-				ecode = ecode + count.pl * 100;
-			if (!ft_strncmp(file[j], "cy", 2))
-				ecode = ecode + count.cy * 100;
-			return (ecode);
-		}
+			return (get_err_num(ecode, file[j], count));
 		j++;
 	}
 	return (SUCCESS);
