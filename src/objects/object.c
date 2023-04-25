@@ -47,6 +47,7 @@ t_object	new_cone(t_vector pos, t_vector direct,
 
 	cone = new_cylinder(pos, direct, size, color);
 	cone.type = CONE;
+	cone.pos = pos;
 	return (cone);
 }
 
