@@ -31,7 +31,7 @@ t_vector	color_to_ratio(t_vector color);
 
 int			hit_cylinder(t_object cy, t_ray ray, size_t *pos, double *t);
 void		cylinder_helper(t_object cy, t_ray ray, size_t *pos, double *t);
-int			hit_cube(t_object cn, t_ray ray, size_t *pos, double *t);
+int			hit_cone(t_object cn, t_ray ray, size_t *pos, double *t);
 int			hit_disk(t_object pl, t_ray ray, size_t *pos, double *t);
 
 double		check_root(double *t, t_vector h, size_t *pos);
