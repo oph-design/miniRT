@@ -118,7 +118,7 @@ int	get_obj_arr(char **file, t_map *map)
 	while (file[j] != NULL)
 	{
 		if (!is_object(file[j]))
-			map->objects[i++] = parse(file[j], &ecode);
+			map->objects[i++] = parse_obj(file[j], &ecode);
 		if (ecode)
 			return (ecode);
 		j++;
