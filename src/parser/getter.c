@@ -63,3 +63,22 @@ t_vector	get_vector(char *str, int *exit_code, int pos)
 		return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
 	return (new_vec(x, y, z));
 }
+
+char	*stra_iteri(char **arr, char *set, int id)
+{
+	size_t			j;
+	static size_t	i[3] = {0, 0, 0};
+
+	j = 0;
+	while (arr[i[id]] != NULL)
+	{
+		while (arr[i[id]][j] && ft_iswhitespcs(arr[i[id]][j]))
+			j++;
+		if (!ft_strncmp(arr[i[id]] + j, set, ft_strlen(set))
+			&& ft_iswhitespcs(arr[i[id]][j + ft_strlen(set)]))
+			return (arr[(i[id])++]);
+		j = 0;
+		(i[id])++;
+	}
+	return (NULL);
+}

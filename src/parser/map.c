@@ -46,6 +46,8 @@ static void	check_for_objects(int exit_code, t_map *map, char **file)
 		parse_error(exit_code, "plane: ", map, file);
 	if (exit_code % 100 > 30 && exit_code % 100 < 40)
 		parse_error(exit_code, "cylinder: ", map, file);
+	if (exit_code % 100 > 40 && exit_code % 100 < 50)
+		parse_error(exit_code, "cone: ", map, file);
 	if (exit_code % 100 > 50 && exit_code % 100 < 60)
 		parse_error(exit_code, "lightsource: ", map, file);
 	if (exit_code % 100 > 60 && exit_code % 100 < 70)

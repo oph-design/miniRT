@@ -17,6 +17,7 @@
 # define SP_ERROR	10
 # define PL_ERROR	20
 # define CY_ERROR	30
+# define CN_ERROR	40
 # define L_ERROR	50
 # define A_ERROR	60
 
@@ -32,9 +33,6 @@ char		*stra_iteri(char **arr, char *set, int id);
 double		get_ratio(char *str, int *exit_code);
 t_vector	get_color(char *str, int *exit_code);
 t_vector	get_vector(char *str, int *exit_code, int pos);
-t_object	parse_sphere(char *str, int *ecode);
-t_object	parse_cylinder(char *str, int *ecode);
-t_object	parse_plane(char *str, int *ecode);
 t_object	parse(char *str, int *ecode, t_count *count);
 int			check_overflow(int ecode);
 int			set_camera(char **file, t_map *map);

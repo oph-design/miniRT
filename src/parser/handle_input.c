@@ -67,6 +67,8 @@ int	is_identifier(char *line)
 		return (1);
 	if (!ft_strncmp(line, "cy", 2) && ft_iswhitespcs(*(line + 2)))
 		return (1);
+	if (!ft_strncmp(line, "cn", 2) && ft_iswhitespcs(*(line + 2)))
+		return (1);
 	if (!ft_strncmp(line, "pl", 2) && ft_iswhitespcs(*(line + 2)))
 		return (1);
 	return (0);
@@ -87,4 +89,10 @@ int	find_invalid_ids(char **file)
 		i++;
 	}
 	return (1);
+}
+
+int	is_object(char *str)
+{
+	return (!ft_strncmp(str, "A", 1) || !ft_strncmp(str, "C", 1)
+		|| !ft_strncmp(str, "L", 1));
 }

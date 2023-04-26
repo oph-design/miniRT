@@ -33,7 +33,7 @@ static t_vector	calc_var(t_ray ray, t_object cy)
 	return (var);
 }
 
-int	hit_cylinder(t_object cy, t_ray ray, size_t *pos, double *t)
+static int	hit_cylinder(t_object cy, t_ray ray, size_t *pos, double *t)
 {
 	t_vector	var;
 	double		tmp;
@@ -62,36 +62,32 @@ int	hit_cylinder(t_object cy, t_ray ray, size_t *pos, double *t)
 	return (0);
 }
 
-int	check_radius(double t, t_ray ray, t_object pl)
+static void	check_for_negative(double *t, double *tmp)
 {
-	t_vector	pos;
-	double		len;
-
-	pos = add_vec(ray.origin, mult_double_vec(t, ray.direct));
-	len = sqrt(vec_length_squared(sub_vec(pl.pos, pos)));
-	if (len >= (pl.radius))
-		return (0);
-	return (1);
+	if (*t + ZERO < ZERO)
+		*t = *tmp;
+	*tmp = *t;
 }
 
-int	hit_disk(t_object pl, t_ray ray, size_t *pos, double *t)
+void	cylinder_helper(t_object cy, t_ray ray, size_t *pos, double *t)
 {
-	double		div;
-	double		tt;
+	t_object	pl;
+	double		tmp;
 
-	div = dot(ray.direct, pl.direct);
-	if (div == 0)
-		return (0);
-	tt = dot(sub_vec(pl.pos, ray.origin), pl.direct) / div;
-	if (tt <= 0)
-		return (0);
-	else if ((!t || *t > tt) && check_radius(tt, ray, pl))
-	{
-		if (t)
-			*t = tt;
-		if (pos)
-			pos[INDEX_HIT] = pos[INDEX];
-		return (1);
-	}
-	return (0);
+	tmp = *t;
+	hit_cylinder(cy, ray, pos, t);
+	if (pos == NULL)
+		check_for_negative(t, &tmp);
+	pl = new_plane(cy.pos, cy.direct, cy.color);
+	pl.radius = cy.radius;
+	hit_disk(pl, ray, pos, t);
+	if (pos == NULL)
+		check_for_negative(t, &tmp);
+	pl = new_plane(add_vec(cy.pos,
+				mult_double_vec(cy.height, cy.direct)),
+			cy.direct, cy.color);
+	pl.radius = cy.radius;
+	hit_disk(pl, ray, pos, t);
+	if (pos == NULL)
+		check_for_negative(t, &tmp);
 }
