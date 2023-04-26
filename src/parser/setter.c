@@ -6,7 +6,7 @@
 /*   By: oheinzel <oheinzel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 10:34:08 by luntiet-          #+#    #+#             */
-/*   Updated: 2023/04/26 12:55:42 by oheinzel         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:25:59 by oheinzel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ int	set_camera(char **file, t_map *map)
 	args = ft_split_whitespcs(input);
 	if (ft_stra_len(args) != 4)
 		return (ft_free_stra(args), ARG_NUM);
-	if (ft_atoi(args[3]) > 180 || ft_atoi(args[3]) < 0)
+	if (is_number(args[3]))
+		return (ft_free_stra(args), NO_NUMBER);
+	if (ft_strtod(args[3]) > 180 || ft_atoi(args[3]) < 0)
 		return (ft_free_stra(args), VAL_RANGE);
 	map->camera = new_cam(get_vector(args[1], &ecode, 1),
 			get_vector(args[2], &ecode, 0), ft_atoi(args[3]), wh);

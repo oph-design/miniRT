@@ -6,7 +6,7 @@
 /*   By: oheinzel <oheinzel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 10:33:45 by luntiet-          #+#    #+#             */
-/*   Updated: 2023/04/26 12:55:53 by oheinzel         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:23:56 by oheinzel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,22 @@ int	check_overflow(int ecode)
 	if (ecode == 0)
 		return (NOT_FOUND);
 	return (ecode);
+}
+
+int	is_number(char *str)
+{
+	size_t	i;
+	size_t	p;
+
+	i = 0;
+	p = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]) && (str[i] != '.' || p))
+			return (1);
+		if (str[i] == '.')
+			p++;
+		i++;
+	}
+	return (0);
 }
