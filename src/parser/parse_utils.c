@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "parser.h"
 
 int	get_err_num(int ecode, char *str, t_count count)
 {

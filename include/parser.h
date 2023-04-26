@@ -33,7 +33,7 @@ char		*stra_iteri(char **arr, char *set, int id);
 double		get_ratio(char *str, int *exit_code);
 t_vector	get_color(char *str, int *exit_code);
 t_vector	get_vector(char *str, int *exit_code, int pos);
-t_object	parse(char *str, int *ecode, t_count *count);
+t_object	parse_obj(char *str, int *ecode, t_count *count);
 int			check_overflow(int ecode);
 int			set_camera(char **file, t_map *map);
 int			get_obj_arr(char **file, t_map *map);

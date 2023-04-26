@@ -90,9 +90,3 @@ int	find_invalid_ids(char **file)
 	}
 	return (1);
 }
-
-int	is_object(char *str)
-{
-	return (!ft_strncmp(str, "A", 1) || !ft_strncmp(str, "C", 1)
-		|| !ft_strncmp(str, "L", 1));
-}
