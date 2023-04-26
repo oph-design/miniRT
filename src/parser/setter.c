@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luntiet- <luntiet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oheinzel <oheinzel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 10:34:08 by luntiet-          #+#    #+#             */
-/*   Updated: 2023/04/26 10:34:16 by luntiet-         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:39:39 by oheinzel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ static void	get_amlight(char **file, t_map *map, int *ecode)
 		return ((void)(ft_free_stra(args), *ecode = ARG_NUM + A_ERROR));
 	color = get_color(args[2], ecode);
 	ratio = get_ratio(args[1], ecode);
+	ft_free_stra(args);
 	if (*ecode)
 		*ecode = *ecode + A_ERROR;
 	if (ratio < 0.0 || ratio > 1.0)
 		return ((void)(*ecode = VAL_RANGE + A_ERROR));
 	while (i < map->light_count)
 		set_amblight(&map->lighting[i++], ratio, color);
-	ft_free_stra(args);
 	if (stra_iteri(file, "A", 0) != NULL)
 		*ecode = DUP_ENTITY + A_ERROR;
 }
