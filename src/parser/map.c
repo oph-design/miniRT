@@ -89,6 +89,7 @@ static void	parse_error(int code, char *component, t_map *map, char **file)
 	if (code % 10 == NOT_FOUND)
 		ft_putendl_fd("non existent", 2);
 	free_map(map);
-	ft_free_stra(file);
+	if (file != NULL)
+		ft_free_stra(file);
 	exit(EXIT_FAILURE);
 }

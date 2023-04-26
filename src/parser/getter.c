@@ -8,6 +8,8 @@ double	get_ratio(char *str, int *exit_code)
 
 	i = 0;
 	p = 0;
+	if ((str[0] == '-' || str[0] == '.') && ft_strlen(str) == 1)
+		return (*exit_code = NO_NUMBER, 0);
 	if (str[0] == '.')
 		str = ft_strjoin("0", str);
 	else
@@ -60,32 +62,4 @@ t_vector	get_vector(char *str, int *exit_code, int pos)
 			|| (fabs(x) + fabs(y) + fabs(z) == 0.0)) && !pos)
 		return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
 	return (new_vec(x, y, z));
-}
-
-int	get_err_num(int ecode, char *str, t_count count)
-{
-	if (!ft_strncmp(str, "sp", 2))
-		ecode = ecode + count.sp * 100;
-	if (!ft_strncmp(str, "pl", 2))
-		ecode = ecode + count.pl * 100;
-	if (!ft_strncmp(str, "cy", 2))
-		ecode = ecode + count.cy * 100;
-	return (ecode);
-}
-
-char	*stra_iteri(char **arr, char *set, int id)
-{
-	size_t			j;
-	static size_t	i[3] = {0, 0, 0};
-
-	j = 0;
-	while (arr[i[id]] != NULL)
-	{
-		if (!ft_strncmp(arr[i[id]] + j, set, ft_strlen(set))
-			&& ft_iswhitespcs(arr[i[id]][j + ft_strlen(set)]))
-			return (arr[(i[id])++]);
-		j = 0;
-		(i[id])++;
-	}
-	return (NULL);
 }

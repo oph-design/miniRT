@@ -23,7 +23,7 @@ int	set_lighting(char **file, t_map *map)
 		if (!ft_strncmp(file[j], "L", 1))
 			map->lighting[i++] = get_lighting(file[j], &ecode);
 		if (ecode)
-			return (ecode + i * 100 + L_ERROR);
+			return (check_overflow(ecode + i * 100 + L_ERROR));
 		j++;
 	}
 	get_amlight(file, map, &ecode);
@@ -124,7 +124,7 @@ int	get_obj_arr(char **file, t_map *map)
 		if (!is_object(file[j]))
 			map->objects[i++] = parse(file[j], &ecode, &count);
 		if (ecode)
-			return (get_err_num(ecode, file[j], count));
+			return (check_overflow(get_err_num(ecode, file[j], count)));
 		j++;
 	}
 	return (SUCCESS);

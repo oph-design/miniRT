@@ -65,9 +65,3 @@ t_object	parse(char *str, int *ecode, t_count *count)
 		return (free(set), (count->pl)++, parse_plane(str, ecode));
 	return (free(set), parse_sphere(str, ecode));
 }
-
-int	is_object(char *str)
-{
-	return (!ft_strncmp(str, "A", 1) || !ft_strncmp(str, "C", 1)
-		|| !ft_strncmp(str, "L", 1));
-}

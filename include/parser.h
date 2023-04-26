@@ -36,6 +36,7 @@ t_object	parse_sphere(char *str, int *ecode);
 t_object	parse_cylinder(char *str, int *ecode);
 t_object	parse_plane(char *str, int *ecode);
 t_object	parse(char *str, int *ecode, t_count *count);
+int			check_overflow(int ecode);
 int			set_camera(char **file, t_map *map);
 int			get_obj_arr(char **file, t_map *map);
 int			set_lighting(char **file, t_map *map);
