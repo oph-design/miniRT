@@ -3,14 +3,24 @@
 double	get_ratio(char *str, int *exit_code)
 {
 	size_t	i;
+	int		p;
+	double	res;
 
 	i = 0;
-	(void)(exit_code);
-	while (ft_isdigit(str[i]) || str[i] == '.' || str[i] == '-')
+	p = 0;
+	if ((str[0] == '-' || str[0] == '.') && ft_strlen(str) == 1)
+		return (*exit_code = NO_NUMBER, 0);
+	if (str[0] == '.')
+		str = ft_strjoin("0", str);
+	else
+		str = ft_strdup(str);
+	while (ft_isdigit(str[i]) || (str[i] == '-' && i == 0)
+		|| (str[i] == '.' && !p++))
 		i++;
 	if (str[i] && !ft_isdigit(str[i]))
-		return (*exit_code = NO_NUMBER, 0);
-	return (ft_strtod(str));
+		return (free(str), *exit_code = NO_NUMBER, 0);
+	res = ft_strtod(str);
+	return (free(str), res);
 }
 
 t_vector	get_color(char *str, int *exit_code)
@@ -52,23 +62,4 @@ t_vector	get_vector(char *str, int *exit_code, int pos)
 			|| (fabs(x) + fabs(y) + fabs(z) == 0.0)) && !pos)
 		return (*exit_code = VAL_RANGE, new_vec(0, 0, 0));
 	return (new_vec(x, y, z));
-}
-
-char	*stra_iteri(char **arr, char *set, int id)
-{
-	size_t			j;
-	static size_t	i[3] = {0, 0, 0};
-
-	j = 0;
-	while (arr[i[id]] != NULL)
-	{
-		while (arr[i[id]][j] && ft_iswhitespcs(arr[i[id]][j]))
-			j++;
-		if (!ft_strncmp(arr[i[id]] + j, set, ft_strlen(set))
-			&& ft_iswhitespcs(arr[i[id]][j + ft_strlen(set)]))
-			return (arr[(i[id])++]);
-		j = 0;
-		(i[id])++;
-	}
-	return (NULL);
 }
