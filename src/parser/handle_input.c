@@ -20,7 +20,7 @@ char	*get_first_line(int fd)
 	tmp = get_next_line(fd);
 	res = ft_strtrim(tmp, " \t\v\r\f");
 	free(tmp);
-	while (res && !ft_strncmp(res, "#", 1))
+	while (res && (res[0] == '#' || res[0] == '\n'))
 	{
 		free(res);
 		tmp = get_next_line(fd);
