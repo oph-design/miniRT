@@ -1,6 +1,6 @@
 #include "parser.h"
 
-t_object	parse_sphere(char *str, int *ecode)
+static t_object	parse_sphere(char *str, int *ecode)
 {
 	char		**args;
 	t_object	sphere;
@@ -16,7 +16,7 @@ t_object	parse_sphere(char *str, int *ecode)
 	return (ft_free_stra(args), sphere);
 }
 
-t_object	parse_cylinder(char *str, int *ecode)
+static t_object	parse_cylinder(char *str, int *ecode)
 {
 	char		**args;
 	double		size[2];
@@ -36,7 +36,7 @@ t_object	parse_cylinder(char *str, int *ecode)
 	return (ft_free_stra(args), cylinder);
 }
 
-t_object	parse_plane(char *str, int *ecode)
+static t_object	parse_plane(char *str, int *ecode)
 {
 	char		**args;
 	t_object	plane;
@@ -72,18 +72,18 @@ static t_object	parse_cone(char *str, int *ecode)
 	return (ft_free_stra(args), cone);
 }
 
-t_object	parse_obj(char *str, int *ecode)
+t_object	parse_obj(char *str, int *ecode, t_count *count)
 {
 	char	*set;
 
 	set = ft_substr(str, 0, 2);
 	if (!ft_strncmp(set, "sp", 3))
-		return (free(set), parse_sphere(str, ecode));
+		return (free(set), (count->sp)++, parse_sphere(str, ecode));
 	if (!ft_strncmp(set, "cy", 3))
-		return (free(set), parse_cylinder(str, ecode));
+		return (free(set), (count->cy)++, parse_cylinder(str, ecode));
 	if (!ft_strncmp(set, "cn", 3))
-		return (free(set), parse_cone(str, ecode));
+		return (free(set), (count->cn)++, parse_cone(str, ecode));
 	if (!ft_strncmp(set, "pl", 3))
-		return (free(set), parse_plane(str, ecode));
+		return (free(set), (count->pl)++, parse_plane(str, ecode));
 	return (free(set), parse_sphere(str, ecode));
 }

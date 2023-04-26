@@ -12,32 +12,47 @@ int	check_input(int argc, char **argv)
 	return (0);
 }
 
-char	**get_file(char	*name)
+char	*get_first_line(int fd)
 {
-	int		fd;
+	char	*res;
+	char	*tmp;
+
+	tmp = get_next_line(fd);
+	res = ft_strtrim(tmp, " \t\v\r\f");
+	free(tmp);
+	while (res && !ft_strncmp(res, "#", 1))
+	{
+		free(res);
+		tmp = get_next_line(fd);
+		res = ft_strtrim(tmp, " \t\v\r\f");
+		free(tmp);
+	}
+	if (res && (!res[0] || res[0] == '\n'))
+		return (free(res), NULL);
+	return (res);
+}
+
+char	**get_file(int fd)
+{
 	char	*nl;
+	char	*tmp;
 	char	*file;
 	char	**res;
 
-	fd = open(name, 0);
-	if (fd == -1)
-	{
-		ft_putendl_fd("Error: file: not accessable", 2);
-		exit(EXIT_FAILURE);
-	}
-	file = get_next_line(fd);
+	file = get_first_line(fd);
 	while (file && file[0] && file[ft_strlen(file) - 1] == '\n')
 	{
-		nl = get_next_line(fd);
-		if (nl == NULL)
+		tmp = get_next_line(fd);
+		if (tmp == NULL)
 			break ;
-		file = ft_strjoin_gnl(file, nl);
+		nl = ft_strtrim(tmp, " \t\v\r\f");
+		free(tmp);
+		if (ft_strncmp(nl, "#", 1))
+			file = ft_strjoin_gnl(file, nl);
 		free(nl);
 	}
 	res = ft_split(file, '\n');
-	free(file);
-	close(fd);
-	return (res);
+	return (free(file), close(fd), res);
 }
 
 int	is_identifier(char *line)
@@ -68,18 +83,10 @@ int	find_invalid_ids(char **file)
 	j = 0;
 	while (file[i] != NULL)
 	{
-		while (file[i][j] && ft_iswhitespcs(file[i][j]))
-			j++;
 		if (!is_identifier(file[i] + j))
 			return (0);
 		j = 0;
 		i++;
 	}
 	return (1);
-}
-
-int	is_object(char *str)
-{
-	return (!ft_strncmp(str, "A", 1) || !ft_strncmp(str, "C", 1)
-		|| !ft_strncmp(str, "L", 1));
 }
