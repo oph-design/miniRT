@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luntiet- <luntiet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oheinzel <oheinzel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 10:33:45 by luntiet-          #+#    #+#             */
-/*   Updated: 2023/04/26 10:33:46 by luntiet-         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:55:53 by oheinzel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*stra_iteri(char **arr, char *set, int id)
 int	is_object(char *str)
 {
 	return (!ft_strncmp(str, "A", 1) || !ft_strncmp(str, "C", 1)
-		|| !ft_strncmp(str, "L", 1));
+		|| !ft_strncmp(str, "l", 1));
 }
 
 int	check_overflow(int ecode)
