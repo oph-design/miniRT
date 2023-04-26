@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setter.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luntiet- <luntiet-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 10:34:08 by luntiet-          #+#    #+#             */
+/*   Updated: 2023/04/26 10:34:16 by luntiet-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static t_lighting	get_lighting(char *line, int *ecode);
@@ -34,9 +46,7 @@ static t_lighting	get_lighting(char *line, int *ecode)
 {
 	t_lighting	res;
 	char		**args;
-	size_t		i;
 
-	i = 0;
 	args = ft_split_whitespcs(line);
 	if (ft_stra_len(args) != 4)
 		return (ft_free_stra(args), *ecode = ARG_NUM,
