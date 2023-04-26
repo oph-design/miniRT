@@ -6,7 +6,7 @@
 /*   By: oheinzel <oheinzel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 10:34:08 by luntiet-          #+#    #+#             */
-/*   Updated: 2023/04/26 12:39:39 by oheinzel         ###   ########.fr       */
+/*   Updated: 2023/04/26 12:55:42 by oheinzel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ int	set_lighting(char **file, t_map *map)
 	j = 0;
 	map->light_count = 0;
 	ecode = SUCCESS;
-	while (stra_iteri(file, "L", 1))
+	while (stra_iteri(file, "l", 1))
 		map->light_count += 1;
 	if (map->light_count < 1)
 		return (NOT_FOUND + L_ERROR);
 	map->lighting = malloc(sizeof(t_lighting) * map->light_count);
 	while (file[j] != NULL)
 	{
-		if (!ft_strncmp(file[j], "L", 1))
+		if (!ft_strncmp(file[j], "l", 1))
 			map->lighting[i++] = get_lighting(file[j], &ecode);
 		if (ecode)
 			return (check_overflow(ecode + i * 100 + L_ERROR));
