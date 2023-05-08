@@ -28,24 +28,26 @@ pl	0,0,50		0,0,1				230,230,250
 pl	0,-15,0		0,1,0				230,230,250
 pl	0,20,0		0,1,0				230,230,250
 ```
-First we need to set the Camera, Light and Ambilight. Otherwise the scene will not be accepted.
+First we need to set the camera, light and ambilight. Otherwise the scene will not be accepted.
 ### Ambilight
 ```
 A	0.1                                             255,255,255
 ```
-__A__ is the identifier. Capital letter identifiers can only be defined once. 
+__A__ is the identifier.
+>Capital letter identifiers can only be defined once. \
 > If you try to set 2 Ambilights, it wont accept the scene.
 
-The __0.1__ is the intensety of the Ambilight, which can be set in a range from 0 to 1. \
-And at the end is the __Color__ of the Ambilight in RGB values from 0 to 255.
+__0.1__ is the intensety of the ambilight, which can be set in a range from 0 to 1. \
+All values above 0 will keep nothing in the dark and setting it to 1 means no shadows at all. \
+__255,255,255__ is the __Color__ of the ambilight in [RGB](https://en.wikipedia.org/wiki/RGB_color_model) values from 0 to 255.
 ### Camera
 ```
 C	0,0,0		0,0,1		90
 ```
 __C__ is the identifier.
 
-The __0,0,0__ is the positon of the Camera as a Vector with x,y,z. \
-The next __0,0,1__ is the orientation Vector of the Camera. In other words, the directon you are looking at in the 3D space.
+__0,0,0__ is the positon of the camera as a vector of x,y,z. \
+__0,0,1__ is the orientation vector of the camera. In other words, the directon you are looking at in the 3D space.
 > All values for the orientation, have to be in the range of 0 to 1.
 
 And the last number, represents the [FOV](https://en.wikipedia.org/wiki/Field_of_view) of the Camera in a range form 0 to 180.
@@ -54,3 +56,32 @@ And the last number, represents the [FOV](https://en.wikipedia.org/wiki/Field_of
 ```
 L	5,5,0		    	        0.7             255,255,255
 ```
+__L__ is the identifier.
+> This is the only Captial letter identifer, that can be declared multiple times.
+
+__5,5,0__ gives the position of the lightsource as a vector of x,y,z. \
+__0.7__ is the light intensety in a range from 0 to 1. \
+__255,255,255__ is again the __Color__ of the light.
+
+## Objects
+Now a list of Objects you can add to your scene.
+### Sphere
+```
+sp	0,0,20                          20              255,0,225
+```
+__sp__ is the identifier. 
+
+First comes the position __0,0,20__, which is the centerpoint of the sphere. \
+Second value __20__ is the diameter of the sphere, which can not be less then 0. \
+Last is the __Color__ of the object. Same as for light and ambilight.
+### Plane
+```
+pl	0,0,50		0,0,1				230,230,250
+```
+__pl__ is the identifier. 
+
+The planes are infinite so the are descriped with a single point on the plan, here it is __0,0,50__, and the orientation from that point on __0,0,1__. \
+So here its a plane standing upwards on the __z__ coordinate. \
+And last again the __Color__ of the object.
+
+### Cylinder
