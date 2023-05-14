@@ -13,6 +13,10 @@ make
 ./miniRT  scenes/default.rt
 ```
 > You can also create your own .rt files.
+
+## Example pictures
+
+
 ## How to create your own scene
 We will explain it on an example file from our scenes.
 ```
@@ -90,3 +94,19 @@ And last value is the __Color__ of the object.
 cy	0,0,40		0,1,0	6		40			50,40,20
 ```
 __cy__ is the identifier.
+
+For cylinder we have the center point with __0,0,40__. \
+Then we have the orientation of the middle axis __0,0,1__. \
+After that we have the diameter and the height of the cylinder __6__ and __40__. \
+And at the end the color with __50,40,20__.
+
+### Cone
+
+```
+cn	5,0,40		0,1,-1	6		10			255,255,0
+```
+
+__cn__ it the identifier.
+
+Cones are almost identical to Cylinders. \
+The only difference is that the first coordinates now describe the bottom of the Cone and not the center.
