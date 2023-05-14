@@ -1,7 +1,7 @@
 # miniRT
 This project is about implementing a basic Raytracer for ecole 42 by students [luntiet-](https://github.com/LaurinUB) and [oheinzel](https://github.com/oph-design)
 ## How to use
-1. You will have to download and install the [glfw](https://github.com/glfw/glfw) libary.
+1. You have to download and install the [glfw](https://github.com/glfw/glfw) libary.
 2. clone the repo and build miniRT
 ```bash
 git clone https://github.com/oph-design/miniRT.git
@@ -80,8 +80,13 @@ pl	0,0,50		0,0,1				230,230,250
 ```
 __pl__ is the identifier. 
 
-The planes are infinite so the are descriped with a single point on the plan, here it is __0,0,50__, and the orientation from that point on __0,0,1__. \
-So here its a plane standing upwards on the __z__ coordinate. \
-And last again the __Color__ of the object.
+The planes are infinite. So the are descriped with a single point on the plan, here it is __0,0,50__, and the orientation from that point to __0,0,1__. \
+In the example its a plane standing upwards on the __z__ coordinate. \
+And last value is the __Color__ of the object.
 
 ### Cylinder
+
+```
+cy	0,0,40		0,1,0	6		40			50,40,20
+```
+__cy__ is the identifier.
