@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luntiet- <luntiet-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 10:34:19 by luntiet-          #+#    #+#             */
+/*   Updated: 2023/04/26 10:34:20 by luntiet-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 #include <stdio.h>
 
@@ -16,7 +28,6 @@ int	main(int argc, char **argv)
 		return (ft_putendl_fd("Error: file: not accessable", 2), 1);
 	file = get_file(fd);
 	map = get_map(file);
-	print_stuff(map);
 	setup_window(map);
 	free_map(map);
 	return (EXIT_SUCCESS);

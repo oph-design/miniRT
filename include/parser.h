@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oheinzel <oheinzel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 10:35:06 by luntiet-          #+#    #+#             */
+/*   Updated: 2023/04/26 13:09:09 by oheinzel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 
@@ -40,6 +52,7 @@ int			get_obj_arr(char **file, t_map *map);
 int			set_lighting(char **file, t_map *map);
 int			find_invalid_ids(char **file);
 int			is_object(char *str);
+int			is_number(char *str);
 int			get_err_num(int ecode, char *str, t_count count);
 
 #endif

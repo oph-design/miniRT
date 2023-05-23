@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_input.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oheinzel <oheinzel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 10:33:26 by luntiet-          #+#    #+#             */
+/*   Updated: 2023/04/26 12:55:13 by oheinzel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 int	check_input(int argc, char **argv)
@@ -61,7 +73,7 @@ int	is_identifier(char *line)
 		return (1);
 	if (!ft_strncmp(line, "C", 1) && ft_iswhitespcs(*(line + 1)))
 		return (1);
-	if (!ft_strncmp(line, "L", 1) && ft_iswhitespcs(*(line + 1)))
+	if (!ft_strncmp(line, "l", 1) && ft_iswhitespcs(*(line + 1)))
 		return (1);
 	if (!ft_strncmp(line, "sp", 2) && ft_iswhitespcs(*(line + 2)))
 		return (1);

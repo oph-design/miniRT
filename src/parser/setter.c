@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setter.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oheinzel <oheinzel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 10:34:08 by luntiet-          #+#    #+#             */
+/*   Updated: 2023/04/26 13:25:59 by oheinzel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static t_lighting	get_lighting(char *line, int *ecode);
@@ -13,14 +25,14 @@ int	set_lighting(char **file, t_map *map)
 	j = 0;
 	map->light_count = 0;
 	ecode = SUCCESS;
-	while (stra_iteri(file, "L", 1))
+	while (stra_iteri(file, "l", 1))
 		map->light_count += 1;
 	if (map->light_count < 1)
 		return (NOT_FOUND + L_ERROR);
 	map->lighting = malloc(sizeof(t_lighting) * map->light_count);
 	while (file[j] != NULL)
 	{
-		if (!ft_strncmp(file[j], "L", 1))
+		if (!ft_strncmp(file[j], "l", 1))
 			map->lighting[i++] = get_lighting(file[j], &ecode);
 		if (ecode)
 			return (check_overflow(ecode + i * 100 + L_ERROR));
@@ -34,9 +46,7 @@ static t_lighting	get_lighting(char *line, int *ecode)
 {
 	t_lighting	res;
 	char		**args;
-	size_t		i;
 
-	i = 0;
 	args = ft_split_whitespcs(line);
 	if (ft_stra_len(args) != 4)
 		return (ft_free_stra(args), *ecode = ARG_NUM,
@@ -66,13 +76,13 @@ static void	get_amlight(char **file, t_map *map, int *ecode)
 		return ((void)(ft_free_stra(args), *ecode = ARG_NUM + A_ERROR));
 	color = get_color(args[2], ecode);
 	ratio = get_ratio(args[1], ecode);
+	ft_free_stra(args);
 	if (*ecode)
 		*ecode = *ecode + A_ERROR;
 	if (ratio < 0.0 || ratio > 1.0)
 		return ((void)(*ecode = VAL_RANGE + A_ERROR));
 	while (i < map->light_count)
 		set_amblight(&map->lighting[i++], ratio, color);
-	ft_free_stra(args);
 	if (stra_iteri(file, "A", 0) != NULL)
 		*ecode = DUP_ENTITY + A_ERROR;
 }
@@ -91,7 +101,9 @@ int	set_camera(char **file, t_map *map)
 	args = ft_split_whitespcs(input);
 	if (ft_stra_len(args) != 4)
 		return (ft_free_stra(args), ARG_NUM);
-	if (ft_atoi(args[3]) > 180 || ft_atoi(args[3]) < 0)
+	if (is_number(args[3]))
+		return (ft_free_stra(args), NO_NUMBER);
+	if (ft_strtod(args[3]) > 180 || ft_atoi(args[3]) < 0)
 		return (ft_free_stra(args), VAL_RANGE);
 	map->camera = new_cam(get_vector(args[1], &ecode, 1),
 			get_vector(args[2], &ecode, 0), ft_atoi(args[3]), wh);

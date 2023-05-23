@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: oheinzel <oheinzel@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/04/26 10:35:37 by luntiet-          #+#    #+#              #
+#    Updated: 2023/04/26 10:43:24 by oheinzel         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME		= miniRT
 CC			= cc
@@ -19,11 +30,14 @@ CYAN		= \033[0;36m
 WHITE		= \033[0m
 
 MATH_DIR	= src/math/
-MATH_SRC	= ray vec_util vec_operations vec_double_operations util vec_clamp double_clamp
+MATH_SRC	=	ray vec_util vec_operations vec_double_operations util \
+				vec_clamp double_clamp
 MATH		= $(addprefix $(MATH_DIR), $(addsuffix .c, $(MATH_SRC)))
 
 GRAPHICS_DIR	= src/graphics/
-GRAPHICS_SRC	= window draw hit cast_light cast_shadow hit_sphere hit_cylinder key_input hit_plane hit_cone hit_utils light_movement
+GRAPHICS_SRC	= 	window draw hit cast_light cast_shadow hit_sphere \
+					hit_cylinder key_input hit_plane hit_cone hit_utils \
+					light_movement
 GRAPHICS		= $(addprefix $(GRAPHICS_DIR), $(addsuffix .c, $(GRAPHICS_SRC)))
 
 PARSER_DIR		= src/parser/
@@ -55,8 +69,10 @@ lsan: LINK_FLAGS += -LLeakSanitizer -llsan -lc++
 lsan: fclean $(LSANLIB)
 lsan: all
 
+LSANREP = https://github.com/mhahnFr/LeakSanitizer.git
+
 $(LSANLIB):
-	@if [ ! -d "LeakSanitizer" ]; then git clone https://github.com/mhahnFr/LeakSanitizer.git; fi
+	@if [ ! -d "LeakSanitizer" ]; then git clone $(LSANREP); fi
 	@$(MAKE) -C LeakSanitizer
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c

@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graphics.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luntiet- <luntiet-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 10:34:35 by luntiet-          #+#    #+#             */
+/*   Updated: 2023/04/26 10:34:37 by luntiet-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
 # include "MLX42.h"
 # include "objects.h"
 
-# define WIDTH 400
-# define HEIGHT	300
+# define WIDTH 800
+# define HEIGHT	500
 
 typedef struct s_vector	t_vector;
 typedef struct s_ray	t_ray;
