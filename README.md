@@ -15,7 +15,27 @@ make
 > You can also create your own .rt files.
 
 ## Example pictures
+Snowman.rt
+<img width="2560" alt="Screenshot 2023-05-23 at 10 58 24" src="https://github.com/oph-design/miniRT/assets/44403262/7b697a9d-13e7-4a77-9300-9ec1ea6f2f18">
+turtle.rt
+<img width="2560" alt="Screenshot 2023-05-23 at 11 01 04" src="https://github.com/oph-design/miniRT/assets/44403262/f3d3f912-554a-4bfe-8d30-6f0bd4bbbe08">
+multi_color.rt
+<img width="2560" alt="Screenshot 2023-05-23 at 11 01 46" src="https://github.com/oph-design/miniRT/assets/44403262/8c5f7e86-9e08-4291-83e9-2c5d88dec586">
+morphed.rt
+<img width="2560" alt="Screenshot 2023-05-23 at 11 03 47" src="https://github.com/oph-design/miniRT/assets/44403262/2f65fef1-b6ca-437b-a20c-c5e4aa116e96">
+cyandsp.rt
+<img width="2560" alt="Screenshot 2023-05-23 at 11 04 31" src="https://github.com/oph-design/miniRT/assets/44403262/037eecff-5758-4b0a-86a0-635f1b3b5203">
 
+## Controls
+You can move the Camera, zoom and even move the light source. But keep in mind its rerendering with every movment and is therfore not fluent, depending on the complexity and size of the scene.
+
+`ESC` - Closes the Window. \
+`W` `A` `S` `D` - for Camera movment. \
+`Q` `E` - for Camera zoom. 
+
+For the light sources you first have to select the source you want to move, ranging from `1` to `0` on the Keyboard. \
+Holding that key, you can move with the `Arrow keys` on the x and y dimension. \
+For the z dimension u use `J` and `K`.
 
 ## How to create your own scene
 We will explain it on an example file from our scenes.
